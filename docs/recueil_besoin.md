@@ -2,7 +2,7 @@
 
 <img height="95" width="400" src="img/IUT_Velizy_Villacoublay_logo_2020_ecran.png" title="logo uvsq vélizy"/>
 
-# SAÉ S3 - Recueil des besoins
+# SAÉ S5 - Recueil des besoins
 
 <br><br>
 Ce document rassemble toutes les informations importantes que nous devrons respecter pour mener à bien ce projet.
