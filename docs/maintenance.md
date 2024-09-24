@@ -2,7 +2,7 @@
 <div align="center">
 <img height="95" width="400" src="img/IUT_Velizy_Villacoublay_logo_2020_ecran.png" title="logo uvsq vélizy"/>
 
-# SAÉ S3  - Fichier de maintenance
+# SAÉ S5  - Fichier de maintenance
 
 <br><br>
 Ce document permet de récapituler l'avancée du projet dans sa globalité.<br>
@@ -16,11 +16,11 @@ Chaque semaine, un bilan de ce qui a été produit et réaliser sera délivré.
 
 #### Travail effectué
 
-- Cahier des charges 
-- Recueil des besoins 
-- Diagramme de déploiement 
-- Dossier de conception
-- Récupérer le matériel
+- Rédaction du cahier des charges 
+- Commencement du recueil des besoins 
+- Réalisation du diagramme de déploiement 
+- Commencement du dossier de conception
+- Récupération du matériel
 
 
 
