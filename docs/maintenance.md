@@ -22,7 +22,35 @@ Chaque semaine, un bilan de ce qui a été produit et réaliser sera délivré.
 - Commencement du dossier de conception
 - Récupération du matériel
 
+<br><br><br>
 
+---
+
+## Bilan de travail du 01/10/2024 au 04/10/2024
+
+#### Travail effectué
+
+- Installation des images et réalisation de la connexion ssh
+
+<br><br><br>
+
+---
+
+## Bilan de travail du 08/10/2024 au 11/10/2024
+
+#### Travail effectué
+
+- Réflexion et envoie de questions aux clients (Mr Hoguin et Mr Dufaud) 
+- Réflexion et conception du logo du site web
+- Commencement du rapport d'installation
+
+<br><br><br>
+
+---
+
+## Bilan de travail du 15/10/2024 au 18/10/2024
+
+#### Travail effectué
 
 <br><br><br>
 
