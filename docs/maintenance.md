@@ -42,7 +42,7 @@ Chaque semaine, un bilan de ce qui a été produit et réaliser sera délivré.
 
 - Réflexion et envoie de questions aux clients (Mr Hoguin et Mr Dufaud) 
 - Réflexion et conception du logo du site web
-- Commencement du rapport d'installation
+- Commencement du rapport d'installation sur un brouillon
 
 <br><br><br>
 
@@ -51,6 +51,10 @@ Chaque semaine, un bilan de ce qui a été produit et réaliser sera délivré.
 ## Bilan de travail du 15/10/2024 au 18/10/2024
 
 #### Travail effectué
+
+- Rédaction du rapport d'installation
+- Installation de python et ses modules 
+- Rédaction de la charte logo
 
 <br><br><br>
 
