@@ -29,15 +29,17 @@ Il explore les différentes perspectives de la structure du projet et les compor
 
 ### Conception Architecturale
 
-<img height="400" width="700" src="../img/diagramme_deploiement.png" title="Diagramme"/>
+<img height="458" width="592" src="../img/diagramme_deploiement.png" title="Diagramme"/>
 
 <i><a name="fg1"></a>Figure 1 : Diagramme de déploiement.</i>
 
 ### Explication :
 
+Nous avons choisi de créer un diagramme de déploiement pour cette architecture, car il met en lumière la structure physique et les interactions entre les nœuds. Cela est essentiel pour appréhender le fonctionnement d'une architecture inconnue et jamais utilisée auparavant.
+<br><br>
 Nous avons 6 noeuds représentant les 6 composants que l'on possède : Les 4 PI Zero, le cluster et le RPI4. 
 <br>
-Les Pi zero communiquent entre eux pour échanger des informations ou des données. Cette communication est représenté par le trait continu. Ces PI Zero dépendent du cluster hat car c'est lui qui établit la connexion et fournit l'interface pour communiquer avec le RPI4. Cette dépendance est représentée par une flèche discontinue. <br>
+Les PI Zero dépendent du cluster hat car c'est lui qui établit la connexion et fournit l'interface pour communiquer avec le RPI4. Cette dépendance est représentée par une flèche discontinue. <br>
 Le cluster hat quant à lui communique directement avec les PI Zero et le RPI4. <br>
 Le RPI4 communique avec les PI Zero indirectement par l'intermédiaire du cluster, c'est pour cela que le cluster est caractérisé comme étant la source de communication et que le RPI4 dépend de lui.
 ------------------------------------------------------------------------------------------------------------------------
