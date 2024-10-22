@@ -80,7 +80,6 @@ Ce document décrit en détail les étapes d'installation<br>
 ## <a name="p2"></a> II - Préparatif
 
 - ### <a name="p2a"></a> a) Matériels nécessaires
-- 
 <img height="600" width="500" src="../img/cluster2.jpg" title="cluster"/>
 
 Le matériel nécessaire nous a été fourni par Monsieur Hoguin et est constitué des éléments suivants : 
