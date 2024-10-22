@@ -18,16 +18,17 @@ Ce document décrit en détail les étapes d'installation<br>
 - ### [I – Présentation](#p1)
     - [**a) Présentation du Cluster**](#p1a)
     - [**b) Présentation du RaspberryPi 4**](#p1b)
-    - [**c) Présentation des RaspberryPi Zero**](#p1b)
+    - [**c) Présentation des RaspberryPi Zero**](#p1c)
     
 
 - ### [II – Préparatif](#p2)
     - [**a) Matériels nécessaires**](#p2a)
 
 - ### [III - Installation ](#p3)
-    - [**a) Présentation des différents OS installés**](#p1c)
-    - [**a) Mise en place de SSH**](#p1c)
-    - [**a) Installation de python et ses modules**](#p1c)
+    - [**a) Flash des images**](#p3a)
+    - [**b) Activation et Connexion au SSH**](#p3b)
+    - [**c) Installation de python et ses modules**](#p3c)
+    - [**d) Test du module "Nombre premier"**](#p3d)
 
   <br><br><br>
 
@@ -35,45 +36,37 @@ Ce document décrit en détail les étapes d'installation<br>
 
 ## <a name="p1"></a> I - Présentation
 
-- ### <a name="p1b"></a> b) Présentation du RaspberryPi 4
-  Le RaspberryPi est un micro-ordinateur monocarte apparu en février 2012. Excepté l'alimentation et un support de stockage,
-  nous y retrouvons tout le nécessaire pour le faire fonctionner comme un processeur et de la mémoire vive.<br>
-  Comme pour la majorité des ordinateurs, celui-ci propose des ports pour y brancher un écran, des périphériques, une alimentation, une caméra ou encore un câble ethernet.<br>
-  <br>
-  Cependant, le RPi 4 comporte des différences avec les anciens modèles de RPi.<br>
-  En termes de processeur, son CPU possède des cœurs plus récents (les Cortex-A72) et son GPU est 25% plus rapide que les précédents modèles :
-  désormais sa résolution d'écran maximal est de la 4K UltraHD. Son port HDMI/Mini-HDMI a laissé place à deux ports micro HDMI.<br>
-  Concernant la mémoire vive passant de LPDDR2 à LPDDR4 d'ailleurs, il y a quatre versions du RPi4 : une 1Go, une 2Go, 8Go et une à 4Go, la nôtre.<br>
-  Deux de ses ports USB 2 ont laissé place à deux ports USB 3, et en termes de connectique réseau, le RPi4 possède un meilleur port LAN, un meilleur Wi-Fi et un meilleur Bluetooth.<br>
-  <br>
-  Nous pouvons en apprendre plus sur les caractéristiques de notre Raspberry Pi 4 en exécutant la commande Raspberry OS : `pinout`<br>
-  <br>
-  <div align="center">
-  <img width=350px src="img/I_presentation/pinout.png" title="résultat de la commande pinout avec les différents ports, un dessin de la carte et une descriptions des pins"/><br>
-  <i>résultat de la commande pinout</i>
-  </div>
-  <br>
-  <br>
-  Comme précédemment dit, Le RPi 4 possède un processeur ARM Cortex-A72. Même si c'est un processeur 64bits, c'est un processeur faisant partie de la famille ARMv8 et non des x86 comme on le retrouve souvent sur nos PC.<br>
-  Les processeurs ARM sont principalement utilisé pour "les appareils compacts et tendent à optimiser l'autonomie, la taille, le refroidissement et surtout, les coûts" selon RedHat. Ce qui correspond aux critères du RPi 4 : être un micro-ordinateur abordable<br>
-  On remarque cependant que selon RedHat, l'architecture x86 est plutôt utilisé pour les serveurs pour leur vitesse. Ainsi, en dehors du cadre de cette SAÉ, utiliser RaspberryPi comme serveur n'est pas le mieux.<br>
-  <br>
-  On remarque aussi le préfixe "LP" de "LPDDR4" comme type de mémoire vive du RPi4. "LP" pour "Low Power" est une version plus petite et moins consommatrice en termes de ressources que le simple DDR "Double Data Rate".<br>
-  La DDR a remplacé la SDRAM au début des années 2000 par sa rapidité : "La DDR transfère les données au processeur à la fois dans la phase montante et descendante des signaux d’horloge" selon Crucial.<br>
-  Encore une fois, c'est un composant adapté pour les appareils compacts comme le RaspberryPi.<br>
+- ### <a name="p1a"></a> a) Présentation du Clusterhat
 
+  Le cluster informatique est un ensemble d'ordinateurs qui forme des nœuds (chaque machine est un nœud) connectés et travaillant ensemble pour accomplir des tâches telles que des calculs plus efficacement qu'un seul ordinateur. 
+  Ces nœuds sont capables de travailler les uns indépendamment des autres également. 
+
+  Un clusterhat est un dispositif matériel qui permet de créer un mini-cluster en connectant plusieurs Raspberry Pi Zero à un Raspberry PI principal. 
+  
+  Dans le clusterhat, un Raspberry Pi principal gère les quatres autres Raspberry Pi Zero. Cela forme un petit réseau de machines travaillant de manière coordonnée. 
+  
   <br><br>
   **Sources :**
-    - https://www.jmdoudoux.fr/raspberry/raspberry_pi_4_modele_B.htm
-    - https://www.conrad.fr/fr/guides/materiel-educatif-kits-de-developpement/raspberry-pi.html
-    - https://fr.wikipedia.org/wiki/Raspberry_Pi
-    - https://www.raspberrypi.com/products/raspberry-pi-4-model-b/
-    - https://fr.wikipedia.org/wiki/ARM_Cortex-A72
-    - https://www.redhat.com/fr/topics/linux/ARM-vs-x86
-    - https://www.hardware.fr/news/13047/quelques-details-lpddr4-ddr4-wide-i-o.html
-    - https://fr.msi.com/blog/ultra-thin-business-and-productivity-laptop-with-lpddr4x-memory
-    - https://www.crucial.fr/articles/about-memory/difference-among-ddr2-ddr3-ddr4-and-ddr5-memory
-    - https://fr.wikipedia.org/wiki/LPDDR
+    - https://www.gestionprojet.org/quel-est-le-principe-d-un-cluster-informatique/ 
+    - https://www.minimachines.net/actu/clusterhat-raspberry-pi-80208 
+
+- ### <a name="p1b"></a> b) Présentation du RaspberryPi 4
+  Le Raspberry Pi 4 est un nano-ordinateur puissant permettant de réaliser des projets informatiques variés.
+  
+  Informations : 
+- Processeur : Quad-core ARM Cortex-A72 (1.5 GHz) => Rapide
+- Mémoire RAM : dépend du modèle, mais peut-être 2,4 ou 8 GO
+- Ports USB : 2 ports USB 3.0 et 2 ports USB 2.0
+- Nombre de cœurs : 4 cœurs 
+
+- ### <a name="p1c"></a> c) Présentation des RaspberryPi Zero
+  Le Raspberry Pi Zero est un modèle plus petit et plus léger du Raspberry PI. Il est beaucoup moins puissant que le Raspberry PI Zero mais moins coûteux. 
+
+  Informations : 
+- Processeur : Single-core ARM1176JZF-S (1 GHz) → Plus lent que le RPI4
+- Mémoire RAM : 512 MO
+- Ports USB : 1 port micro-USB 
+- Nombre de cœurs : 1
 
 ---
 
@@ -125,9 +118,82 @@ Dans l'icône *operating system,* on a sélectionné l'image du système d'explo
 
 Une fois cette étape réalisée, les cartes SD ont été inséré dans le Cluster pour poursuivre le déploiement.
 
-### <a name="p3b"></a> a) Activation et Connexion au SSH 
+### <a name="p3b"></a> b) Activation et Connexion au SSH 
 
+Pour s'authentifier au Raspberry Pi on a comme information : 
 
+Nom d'utilisateur : pi <br>
+Mot de passe : clusterctrl
 
+Pour mettre en marche les Pi Zeros : ```sudo clusterhate on```
 
----
+Pour les éteindre : ```sudo clusterhate off```
+
+Dans un fichier /.ssh/config, nous allons configurer les 4 Raspberry Pi Zero : 
+
+```
+  Host p1
+  HostName 172.19.181.1
+  User pi
+
+Host p2
+  HostName 172.19.181.2
+  User pi
+
+Host p3
+  HostName 172.19.181.3
+  User pi
+
+Host p4
+  HostName 172.19.181.4
+  User pi
+````
+Pour chaque Pi zero, on définit un nom d'alias qui sera utilisé lors de la connexion SSH (p1,p2,p3,p4). On spécifie l'adresse IP de l'hôte distant et enfin, on indique à SSH quel nom d'utilisateur est utilisé lors de la connexion.  
+
+On génère la clé SSH avec la commande suivante : 
+
+`` ssh-keygen -t rsa -b 4093``
+
+Pour copier la clé publique SSH sur chaque Pi Zero : 
+
+````
+cat ~/.ssh/id_rsa.pub | ssh pi@p1 -T "mkdir ~/.ssh && cat > ~/.ssh/authorized_keys"
+cat ~/.ssh/id_rsa.pub | ssh pi@p2 -T "mkdir ~/.ssh && cat > ~/.ssh/authorized_keys"
+cat ~/.ssh/id_rsa.pub | ssh pi@p3 -T "mkdir ~/.ssh && cat > ~/.ssh/authorized_keys"
+cat ~/.ssh/id_rsa.pub | ssh pi@p4 -T "mkdir ~/.ssh && cat > ~/.ssh/authorized_keys"
+````
+
+Pour se connecter au premier Raspberry Pi Zero, on peut utiliser maintenant simplement : ``ssh pi@p1``
+
+### <a name="p3c"></a> c) Installation de python et ses modules 
+
+Tout au long des installations, nous avons mis à jour tous les paquets installés : 
+
+``sudo apt update`` puis ``sudo apt upgrade`` pour mettre les nouvelles versions des paquets
+
+Python étant déjà installé par défaut, nous avons par la suite installé pip le gestionnaire de paquets pour python : 
+
+``sudo apt install python3-pip``
+
+Après avoir consulté le module pour obtenir le nombre de nombres premier d'un nombre, nous avons installé les deux logiciels très utilisés dans le cadre du calcul parallèle en Python : MPICH et mpi4py avec la commande : 
+
+``sudo apt install mpich python3-mpi4py``
+
+MPICH est une implémentation du MPI qui est une interface permettant la communication de plusieurs processus entre eux dans un environnement de calcul parallèle et distribué. 
+
+La bibliothèque mpi4py permet d'utiliser MPI dans le script Python
+
+### <a name="p3d"></a> d) Test du module "Nombre premier"
+
+Nous avons commencé par créer sur notre Github un répertoire /src qui contient le fichier zip envoyé par notre client Mr Hoguin pour pouvoir le récupérer plus facilement sur notre architecture et pouvoir le tester. 
+
+Un répertoire *test* a été créé sur notre architecture : ``mkdir test``
+
+Ensuite, une copie du répertoire /src contenant le fichier zip a été effectué dans le répertoire /test sur notre architecture : 
+
+``cp -r /src/cluster-prime-master/ /test/``
+
+Une fois la copie effectuée, nous avons testé le script prime-blinkt.py avec la commande : ``python3 prime-blinkt.py 20``
+
+On obtient le nombre de nombres premiers inférieur à 20. Il y en a 8 (2,3,5,7,11,13,17,19)
+
