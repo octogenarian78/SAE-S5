@@ -50,10 +50,6 @@ Ce cahier des charges servira à aligner les attentes entre les développeurs, l
 
 ## <a name="p2"></a> II - Enoncé
 
-Voici une version modifiée de l'énoncé dans le cadre d'un projet scolaire, avec un accent sur la mise en place de programmes permettant de réaliser du calcul distribué ou parallèle à partir d’un kit cluster.
-
----
-
 ### <a name="p2a"></a> a) Description détaillée du problème à résoudre et du contexte
 
 Dans le cadre de ce projet scolaire, l'objectif est de mettre en place une infrastructure simple mais efficace de **calcul distribué ou parallèle** en utilisant un **Cluster HAT** et des **Raspberry Pi Zero**. Ce type de calcul est utilisé dans des contextes nécessitant un traitement rapide de grandes quantités de données ou de calculs intensifs, comme la simulation scientifique ou la modélisation mathématique.
