@@ -110,12 +110,36 @@ tbody tr:nth-child(even) {
   background-color: lightgray;
 }
 
-.ten_last_calcul{
+.ten_last_calcul, .calcul-result{
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
 }
+
+.calcul-result table {
+  width: 90%;
+}
+
+.calcul-result table td {
+  text-align: left;
+}
+
+.calcul-result{
+  width: 80%;
+  height: 60%;
+}
+
+.centered_content {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  margin-top: 50px;
+}
+
 /* Vidéo et la description */
 .content {
   display: flex;
@@ -155,12 +179,12 @@ tbody tr:nth-child(even) {
   margin-top: 0;
 }
 /* Bouton inscription sur la page accueil */
-.signup-button {
+.signup-button, .manual-button, .module-select-button {
   text-align: center;
   margin-top: 20px;
 }
 
-.btn-inscription {
+.btn-inscription, .btn-manual, .btn-module-select {
   text-decoration: none;
   color: white;
   font-size: 24px;
@@ -173,27 +197,7 @@ tbody tr:nth-child(even) {
   transition: background-color 0.3s ease;
 }
 
-.btn-inscription:hover {
-  color: yellow;
-}
-/* Bouton manuel utilisateur */
-.manual-button {
-  text-align: center;
-  margin-top: 30px;
-}
-
-.btn-manual {
-  text-decoration: none;
-  color: white;
-  font-size: 24px;
-  background-color: #284843;
-  padding: 15px;
-  border-radius: 15px;
-  display: inline-block;
-  transition: background-color 0.3s ease;
-}
-
-.btn-manual:hover {
+.btn-inscription:hover, .btn-manual:hover, .btn-module-select:hover {
   color: yellow;
 }
 
