@@ -3,8 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="../ressources/style.css">
 </head>
 <body>
-
+    <header>
+        <nav class="nav">
+            <a href="../index.html">
+                <div name="logo" class="logo">
+                    <img src="../ressources/img/logo.png" alt="logo du site">
+                </div>
+            </a>
+            <div name="menu" class="menu">
+                <a href="../index.html">Accueil</a>
+                <a href="../modules/index.html">Modules</a>
+            </div>
+            <div name="login" class="login">
+                <a href="./login/index.html">Connexion</a>
+                <a href="../profil/index.html">Profil</a>
+            </div>
+        </nav>
+    </header>
+    <div name="connexion-state" class="connexion-state">
+        <h3>Status de connexion</h3>
+        <div class="table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Architecture</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>RPI Zero 1</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>RPI Zero 2</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>RPI Zero 3</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>RPI Zero 4</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div name="stockage-restant" class="stockage">
+        <h3 class="stockage">Stockage disponible</h3>
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <a href="#">Supprimer</a>
+    </div>
 </body>
 </html>

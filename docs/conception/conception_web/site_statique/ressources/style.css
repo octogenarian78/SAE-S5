@@ -459,3 +459,62 @@ h1 {
 .profile-item button:hover {
   color: yellow;
 }
+
+/* Administration */
+
+.connexion-state{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  margin-bottom: 100px ;
+}
+
+.connexion-state h3{
+  margin: 10px 0;
+}
+
+.connexion-state td{
+  padding: 10px 250px
+}
+
+.stockage {
+  display: flex;
+  flex-direction: column; /* Aligne les éléments verticalement */
+  justify-content: center; /* Centre le contenu verticalement */
+  align-items: center; /* Centre le contenu horizontalement */
+  text-align: center; /* Centre le texte du h3 */
+}
+
+/* Conteneur de la barre de progression */
+.progress-container {
+  width: 50%; /* Ajustez la largeur de la barre de progression */
+  background-color: #f3f3f3;
+  border-radius: 20px;
+  margin: 20px 0; /* Espace autour de la barre */
+}
+
+/* Style de la barre de progression */
+.progress-bar {
+  width: 0%; /* Commence avec 0% de largeur (à ajuster avec le script ou autre logique) */
+  height: 30px;
+  border-radius: 20px;
+  background-color: #4caf50;
+  text-align: center;
+  line-height: 30px;
+  color: white;
+  font-weight: bold;
+}
+
+.stockage a{
+  text-decoration: none;
+  color: white;
+  background-color: #284843;
+  padding: 20px;
+  border-radius: 10px;
+
+  font-size: 20px
+}
+
