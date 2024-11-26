@@ -296,17 +296,23 @@ body.connexion .login-form-container {
 body.inscription {
   display: flex;
   justify-content: center;
-  align-items: center;
+  margin-top: 100px;
+  /*align-items: center;*/
   height: 100vh;
 }
 
-body.inscription .signup-form-container {
+.signup-form-container {
   background-color: #fff;
   padding: 40px;
   border-radius: 15px;
-  width: 100%;
+  width: 80%;
   max-width: 800px;
+  max-height: 750px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.signup-form-container form{
+  max-height: 500px;
 }
 
 .signup-form h2 {
