@@ -30,6 +30,8 @@ Ce document décrit en détail les étapes d'installation<br>
     - [**c) Installation de python et ses modules**](#p3c)
     - [**d) Test du module "Nombre premier"**](#p3d)
 
+- ### [IV - Mise en place d'une pile LAMP](#p4)
+
   <br><br><br>
 
 ---
@@ -197,3 +199,40 @@ Une fois la copie effectuée, nous avons testé le script prime-blinkt.py avec l
 
 On obtient le nombre de nombres premiers inférieur à 20. Il y en a 8 (2,3,5,7,11,13,17,19)
 
+<br>
+
+## <a name="p4"></a> IV - Mise en place d'une pile LAMP 
+
+Cette partie est dédiée à l'installation d'une pile LAMP sur le Raspberry PI.
+Une pile LAMP a besoin de Linux, Apache, MariaDB et PHP. Dans notre cas il nous faudra installer Apache, MariaDB et Php, le rpi fonctionnant déjà avec Linux, on va aussi installer PhpMyAdmin.
+
+### <a name="p4a"></a> a) installation et test de Apache2
+
+On commence par installer Apache2 avec la commande suivante : `sudo apt install apache2`. Apache2 va nous permettre de créer un serveur Apache, le serveur est lancé automatiquement une fois l'installation faite.<br>
+Pour verifier si le serveur est bien installé, il suffit de s'y connecter en passant par l'adresse IP que l'on obtient avec la commande `ifconfig`. <br>
+
+### <a name="p4b"></a> b) installation de MariaDB
+
+On va maintenant installé MariaDB qui sera notre Système de Gestion de Base de Donnée (ou SGBD), on utilise la commande suivante `sudo apt install mariadb`.
+
+### <a name="p4c"></a> c) installation de PHP
+
+Pour installer PHP on utilise la commande `sudo apt install php`.
+On peut afficher une page phpinfo avec le code suivant 
+```php
+<?php
+infophp();
+?>
+```
+
+on obtient ensuit la page suivante : 
+<div align="center">
+<img height="372" width="500" src="../img/page_phpinfo.png" title="page phpinfo"/>
+</div>
+
+### <a name="p4d"></a> d) installation et test de PhpMyAdmin
+
+PhpMyAdmin est une interface pour gérer les SGBD MariaDB ou MySQL.
+Pour installer PhpMyAdmin, on va utiliser la commande `sudo apt install phpmyadmin`.<br>
+Ensuite on va tester le bon fonctionement de PhpMyAdmin en se connectant au rpi via l'adresse ip et en rajoutant derriere l'adresse ip `/phpmyadmin` (l'adresse internet à rentrer dans notre navigateur est `<adresse ip du rpi>/phpmyadmin`), si tout fonctionne bien on devrait se trouver sur la pagede connection de PhpMyAdmin <br>
+*capture d'écran de la page de connection de PhpMyAdmin*
