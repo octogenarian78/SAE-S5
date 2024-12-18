@@ -1,0 +1,520 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body{
+  background-color: #b0a881;
+}
+/* Accueil */
+
+.nav{
+  display: flex;
+  /*background-color: #DAD8BF;*/
+  justify-content: space-between;
+  padding: 15px 0;
+  background-color: #ddd3a2;
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+
+    background-color: #DAD8BF;
+    margin-left: 20px;
+    padding: 0 20px;
+    border-radius: 30px;
+  }
+  
+  .logo img{
+    width: 75px;
+  }
+
+.menu{
+  display: flex;
+  margin: 10px;
+  align-items: center;
+
+  background-color: white;
+  border-radius: 30px;
+  border: 1px solid black;
+  padding: 10px;
+}
+
+.menu a {
+  text-decoration: none;
+  color: black;
+  font-size: 28px;
+
+  margin: 0 30px;
+}
+
+.menu a:hover{
+  color: gray;
+}
+
+.login{
+  display: flex;
+  align-items: center;
+  text-align: right;
+
+  margin: 10px;
+}
+
+.login a {
+  text-decoration: none;
+  color: white;
+  font-size: 24px;
+
+  background-color: #284843;
+  padding: 15px;
+  border-radius: 15px;
+
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.login a:hover{
+  color: yellow;
+}
+
+
+
+table, th, td{
+  border: 2px solid black;
+  border-collapse: collapse;
+  
+}
+
+table{
+  border-radius: 15px;
+}
+
+td, th{
+  padding: 10px;
+  width: 45%;
+}
+
+th{
+  background-color: #284843;
+  color: white;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #ECECEC;
+}
+
+tbody tr:nth-child(even) {
+  background-color: lightgray;
+}
+
+.ten_last_calcul, .calcul-result{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.calcul-result table {
+  width: 90%;
+}
+
+.calcul-result table td {
+  text-align: left;
+}
+
+.calcul-result{
+  width: 80%;
+  height: 60%;
+}
+
+.centered_content {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  margin-top: 50px;
+}
+
+/* Vidéo et la description */
+.content {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  margin-top: 50px;
+}
+
+.video-description {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.description {
+  width: 45%;
+  padding: 20px;
+  background-color: #ececec;
+  border-radius: 15px;
+  margin-right: 10px;
+  margin-left: 50px;
+  height: 100%;
+}
+
+.video {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  margin: 0 50px;
+}
+.video iframe {
+  width: 90%;
+  height: 400px;
+  border-radius: 15px;
+  margin-top: 0;
+}
+/* Bouton inscription sur la page accueil */
+.signup-button, .manual-button, .module-select-button {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.btn-inscription, .btn-manual, .btn-module-select {
+  text-decoration: none;
+  color: white;
+  font-size: 24px;
+  background-color: #284843;
+  padding: 15px;
+  border-radius: 15px;
+  margin-left: 10px;
+  margin-right: 10px;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+}
+
+.btn-inscription:hover, .btn-manual:hover, .btn-module-select:hover {
+  color: yellow;
+}
+
+/* La page de connexion */
+body.connexion {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+body.connexion .login-form-container {
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 15px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-form h2 {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 30px;
+  color: #284843;
+}
+
+.input-group {
+  margin-bottom: 25px;
+}
+
+.input-group label {
+  display: block;
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 15px;
+  font-size: 18px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: #284843;
+}
+
+/* Style du bouton de connexion agrandi */
+.btn-login {
+  width: 100%;
+  padding: 18px;
+  background-color: #284843;
+  color: white;
+  font-size: 20px;
+  border-radius: 15px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-login:hover {
+  color : yellow;
+}
+/* "Mot de passe oublié ?" */
+.forgot-password {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.forgot-password a {
+  text-decoration: none;
+  color: #284843;
+  font-size: 20px;
+}
+
+.forgot-password a:hover {
+  color: #45a049;
+}
+/* " Pas de compte ?" */
+.sign-up-link {
+  text-align: center;  /* Centre le texte */
+  margin-top: 10px;
+  font-size: 20px;
+}
+
+.sign-up-link a {
+  color: #284843;  /* Couleur du lien */
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.sign-up-link a:hover {
+  color: #45a049;
+}
+/* Page d'inscription */
+body.inscription {
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+  /*align-items: center;*/
+  height: 100vh;
+}
+
+.signup-form-container {
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 15px;
+  width: 80%;
+  max-width: 800px;
+  max-height: 750px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.signup-form-container form{
+  max-height: 500px;
+}
+
+.signup-form h2 {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 30px;
+  color: #284843;
+}
+
+/* Organisation du formulaire en 2 colonnes */
+.form-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.left-column,
+.right-column {
+  width: 48%;
+}
+
+.input-group {
+  margin-bottom: 25px;
+}
+
+.input-group label {
+  display: block;
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 15px;
+  font-size: 18px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: #284843;
+}
+
+.captcha-group {
+  margin-top: 25px;
+}
+
+.captcha-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.captcha-image {
+  margin-right: 10px;
+  width: 120px;
+  height: 40px;
+}
+
+.btn-signup {
+  width: 100%;
+  padding: 18px;
+  background-color: #284843;
+  color: white;
+  font-size: 23px;
+  border-radius: 15px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-signup:hover {
+  color : yellow;
+}
+
+.login-link {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 20px;
+}
+
+.login-link a {
+  color: #284843;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.login-link a:hover {
+  color: #45a049;
+}
+/* Page profil */
+.container-profil {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 30px;
+  color: #284843;
+}
+
+.profile-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
+  margin: 15px 0;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.profile-item .label {
+  font-weight: bold;
+  color: #284843;
+}
+
+.profile-item span {
+  font-size: 18px;
+  color: #333;
+}
+
+.profile-item button {
+  background-color: #284843;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.profile-item button:hover {
+  color: yellow;
+}
+
+/* Administration */
+
+.connexion-state{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  margin-bottom: 100px ;
+}
+
+.connexion-state h3{
+  margin: 10px 0;
+}
+
+.connexion-state td{
+  padding: 10px 250px
+}
+
+.stockage {
+  display: flex;
+  flex-direction: column; /* Aligne les éléments verticalement */
+  justify-content: center; /* Centre le contenu verticalement */
+  align-items: center; /* Centre le contenu horizontalement */
+  text-align: center; /* Centre le texte du h3 */
+}
+
+/* Conteneur de la barre de progression */
+.progress-container {
+  width: 50%; /* Ajustez la largeur de la barre de progression */
+  background-color: #f3f3f3;
+  border-radius: 20px;
+  margin: 20px 0; /* Espace autour de la barre */
+}
+
+/* Style de la barre de progression */
+.progress-bar {
+  width: 0%; /* Commence avec 0% de largeur (à ajuster avec le script ou autre logique) */
+  height: 30px;
+  border-radius: 20px;
+  background-color: #4caf50;
+  text-align: center;
+  line-height: 30px;
+  color: white;
+  font-weight: bold;
+}
+
+.stockage a{
+  text-decoration: none;
+  color: white;
+  background-color: #284843;
+  padding: 20px;
+  border-radius: 10px;
+
+  font-size: 20px
+}
+
