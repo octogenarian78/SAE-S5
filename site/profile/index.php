@@ -47,7 +47,7 @@ $login = htmlspecialchars($user["login"]); // Le login de l'utilisateur
 <body class="profil">
 <header>
     <nav class="nav">
-        <a href="../index.html">
+        <a href="../index.php">
             <div name="logo" class="logo">
                 <img src="../ressources/img/logo.png" alt="logo du site">
             </div>
@@ -57,7 +57,7 @@ $login = htmlspecialchars($user["login"]); // Le login de l'utilisateur
             <a href="../modules/index.html">Modules</a>
         </div>
         <div name="login" class="login">
-            <a href="../index.html">Accueil</a>
+            <a href="../index.php">Accueil</a>
         </div>
     </nav>
 </header>
