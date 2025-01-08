@@ -6,7 +6,7 @@ session_start();
 $host = "localhost";
 $dbname = "GestionCalculs";
 $username = "root"; // Remplace par ton utilisateur MySQL si nécessaire
-$password = ""; // Remplace par ton mot de passe MySQL
+$password = "Fuse_271"; // Remplace par ton mot de passe MySQL
 
 // Connexion à la base de données
 try {
