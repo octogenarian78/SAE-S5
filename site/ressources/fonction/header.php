@@ -1,17 +1,22 @@
 <?php
 
-function genererHeader($menuButtons, $menuLinks, $loginButtons, $loginLinks) {
+function genererHeader($img, $menuButtons, $menuLinks, $loginButtons, $loginLinks) {
+
     // Vérification que les tableaux ont le même nombre d'éléments
     if (count($menuButtons) !== count($menuLinks) || count($loginButtons) !== count($loginLinks)) {
         return "Erreur : Les titres et les liens doivent avoir le même nombre d'éléments.";
     }
 
     // Génération du menu
-    $menuHtml = '<div name="menu" class="menu">';
-    foreach ($menuButtons as $index => $title) {
-        $menuHtml .= '<a href="' . htmlspecialchars($menuLinks[$index]) . '">' . htmlspecialchars($title) . '</a>';
+    if (count($menuButtons) == 0){
+        $menuHtml = '';
+    } else {
+        $menuHtml = '<div name="menu" class="menu">';
+        foreach ($menuButtons as $index => $title) {
+            $menuHtml .= '<a href="' . htmlspecialchars($menuLinks[$index]) . '">' . htmlspecialchars($title) . '</a>';
+        }
+        $menuHtml .= '</div>';
     }
-    $menuHtml .= '</div>';
 
     // Génération du login
     $loginHtml = '<div name="login" class="login">';
@@ -26,7 +31,7 @@ function genererHeader($menuButtons, $menuLinks, $loginButtons, $loginLinks) {
     <nav class="nav">
         <a href="../index.html">
             <div name="logo" class="logo">
-                <img src="../ressources/img/logo.png" alt="logo du site">
+                <img src="'. $img .'" alt="logo du site">
             </div>
         </a>
         ' . $menuHtml . '

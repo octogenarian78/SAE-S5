@@ -1,4 +1,7 @@
 <?php
+include "../ressources/fonction/header.php";
+
+
 session_start();
 
 // Vérification si l'utilisateur est connecté
@@ -23,7 +26,7 @@ try {
 
 // Récupération des informations utilisateur depuis la base de données
 $util_id = $_SESSION["util_id"];
-$stmt = $conn->prepare("SELECT login, mdp FROM Utilisateurs WHERE util_id = :util_id");
+$stmt = $conn->prepare("SELECT login, mdp, admin FROM Utilisateurs WHERE util_id = :util_id");
 $stmt->bindParam(":util_id", $util_id, PDO::PARAM_INT);
 $stmt->execute();
 
@@ -45,22 +48,28 @@ $login = htmlspecialchars($user["login"]); // Le login de l'utilisateur
     <link rel="stylesheet" href="../ressources/style.css">
 </head>
 <body class="profil">
-<header>
-    <nav class="nav">
-        <a href="../index.php">
-            <div name="logo" class="logo">
-                <img src="../ressources/img/logo.png" alt="logo du site">
-            </div>
-        </a>
-        <div name="menu" class="menu">
-            <a href="../administration/index.html">Administration</a>
-            <a href="../modules/index.html">Modules</a>
-        </div>
-        <div name="login" class="login">
-            <a href="../index.php">Accueil</a>
-        </div>
-    </nav>
-</header>
+<?php 
+
+$menuButtons = [];
+$menuLinks = [];
+
+if (isset($_SESSION["util_id"])){
+    $menuButtons[] = "Modules";
+    $menuLinks[] = "../index.php";
+    $loginButtons = ["Accueil"];
+    $loginLinks = ["../index.php"];
+}else{
+    $loginButtons = ["Connexion"];
+    $loginLinks = ["../signin/index.html"];
+}
+
+if (isset($_SESSION["util_id"]) && $user['admin']){
+    $menuButtons[] = "Administration";
+    $menuLinks[] = "../administration/index.php";
+}
+
+echo genererHeader('../ressources/img/logo.png', $menuButtons, $menuLinks, $loginButtons, $loginLinks);
+?>
 <div class="container-profil">
     <div class="profile-item">
         <span class="label">Nom d'utilisateur:</span>

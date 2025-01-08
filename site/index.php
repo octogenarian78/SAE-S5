@@ -1,20 +1,21 @@
 <?php
-include "site/ressources/fonction/header.php";
+include "ressources/fonction/header.php";
 
 session_start();
-if (isset($_SESSION["util_id"])) {
-    // Connexion à la base de données
-    $host = "localhost";
-    $dbname = "GestionCalculs";
-    $username = "root"; // Remplace par ton utilisateur MySQL si nécessaire
-    $password = "Fuse_271"; // Remplace par ton mot de passe MySQL
+// Connexion à la base de données
+$host = "localhost";
+$dbname = "GestionCalculs";
+$username = "root"; // Remplace par ton utilisateur MySQL si nécessaire
+$password = "Fuse_271"; // Remplace par ton mot de passe MySQL
 
-    try {
-        $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    } catch (PDOException $e) {
-        die("Erreur de connexion : " . $e->getMessage());
-    }
+try {
+   $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Erreur de connexion : " . $e->getMessage());
+}
+
+if (isset($_SESSION["util_id"])) {
     $util_id = $_SESSION["util_id"];
     $stmt = $conn->prepare("SELECT admin FROM Utilisateurs WHERE util_id = :util_id");
     $stmt->bindParam(":util_id", $util_id, PDO::PARAM_INT);
@@ -39,23 +40,26 @@ if (isset($_SESSION["util_id"])) {
 </head>
 <body>
 <?php 
-$menuButtons = ["Modules"];
-$menuLinks = ["../index.php"];
 
-if ($user){
+$menuButtons = [];
+$menuLinks = [];
+
+if (isset($_SESSION["util_id"])){
+    $menuButtons[] = "Modules";
+    $menuLinks[] = "../index.php";
     $loginButtons = ["Profil"];
-    $loginLinks = ["../profile/index.php"];
+    $loginLinks = ["profile/index.php"];
 }else{
     $loginButtons = ["Connexion"];
     $loginLinks = ["../signin/index.html"];
 }
 
-if ($user['admin']){
+if (isset($_SESSION["util_id"]) && $user['admin']){
     $menuButtons[] = "Administration";
     $menuLinks[] = "../administration/index.php";
 }
 
-echo genererHeader($menuButtons, $menuLinks, $loginButtons, $loginLinks);
+echo genererHeader('ressources/img/logo.png',$menuButtons, $menuLinks, $loginButtons, $loginLinks);
 ?>
 <div class="content">
     <div class="video-description">
