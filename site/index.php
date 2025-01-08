@@ -1,4 +1,5 @@
 <?php
+include "../ressources/header.php";
 
 session_start();
 if (isset($_SESSION["util_id"])) {
@@ -37,35 +38,26 @@ if (isset($_SESSION["util_id"])) {
     <link rel="stylesheet" href="ressources/style.css">
 </head>
 <body>
-<header>
-    <nav class="nav">
-        <a href="#">
-            <div name="logo" class="logo">
-                <img src="ressources/img/logo.png" alt="logo du site">
-            </div>
-        </a>
-        <div name="menu" class="menu">
-            <a href="#">Accueil</a>
-            <a href="modules/index.html">Modules</a>
-            <?php
-            if ($user && isset($user["admin"]) && $user["admin"] == 1) {
-                echo ('<a href="administration/index.html">Administration</a>');
-            }
-            
-            ?>
-        </div>
-        <div name="login" class="login">
-            <?php
-            if (isset($_SESSION["util_id"])) {
-                echo ('<a href="./profile/index.php">Profil</a>');
-            }else{
-                echo ('<a href="signup/index.html">Connexion</a>');
-            }
-            ?>
-        </div>
-    </nav>
-</header>
+<?php 
+$menuButtons = ["Modules"];
+$menuLinks = ["../index.php"];
 
+if ($user){
+    $loginButtons = ["Profil"];
+    $loginLinks = ["../profile/index.php"];
+}else{
+    $loginButtons = ["Connexion"];
+    $loginLinks = ["../signin/index.html"];
+}
+
+if ($user['admin']){
+    array_push($menuButtons, "Administration");
+    array_push($menuLinks, "../administration/index.php");
+}
+
+
+echo genererHeader($menuButtons, $menuLinks, $loginButtons, $loginLinks);
+?>
 <div class="content">
     <div class="video-description">
         <div class="description">
