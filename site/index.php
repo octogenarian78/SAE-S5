@@ -55,6 +55,7 @@ if ($user['admin']){
     $menuLinks[] = "../administration/index.php";
 }
 
+echo "Test0";
 
 echo genererHeader($menuButtons, $menuLinks, $loginButtons, $loginLinks);
 ?>

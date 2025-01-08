@@ -1,6 +1,7 @@
 <?php
 
 function genererHeader($menuButtons, $menuLinks, $loginButtons, $loginLinks) {
+    echo "Test1";
     // Vérification que les tableaux ont le même nombre d'éléments
     if (count($menuButtons) !== count($menuLinks) || count($loginButtons) !== count($loginLinks)) {
         return "Erreur : Les titres et les liens doivent avoir le même nombre d'éléments.";
@@ -33,6 +34,8 @@ function genererHeader($menuButtons, $menuLinks, $loginButtons, $loginLinks) {
         ' . $loginHtml . '
     </nav>
 </header>';
+
+    echo "Test2";
 
     return $headerHtml;
 }
