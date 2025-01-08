@@ -19,7 +19,7 @@ def call_python(folder: str, file: str, args: Optional[List[str]] = None) -> Opt
         print(f"Fichier Python non trouvé : {script_path}")
         return None
 
-    command = ["python3", script_path]
+    command = ["mpirun", "-np", "4", "python3", script_path]
     if args:
         command.extend(args)
 
@@ -74,13 +74,14 @@ def write_to_file(output_file: str, output_lines: List[str]):
 
 
 def main():
-    script_output = call_python("MPI_MC", "MonteCarlo.py", ["1000000"])
+    for i in range(5):
+        script_output = call_python("MPI_MC", "MonteCarlo.py", ["1000000"])
 
-    if script_output:
-        output_lines = script_output.splitlines()
-        write_to_file("Monte_Carlo.csv", output_lines)
-    else:
-        print("Aucune sortie à écrire.")
+        if script_output:
+            output_lines = script_output.splitlines()
+            write_to_file("Monte_Carlo.csv", output_lines)
+        else:
+            print("Aucune sortie à écrire.")
 
 
 if __name__ == "__main__":
