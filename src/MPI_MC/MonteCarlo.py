@@ -31,6 +31,8 @@ else:  # Collecte des résultats par le processus maître (rang 0)
 
     pi = 4 * total_cpt / total_points
 
-    print(f"nombre de processus: {size} \n nombre de points: {total_points} \n valeur approchee de Pi: {pi} \n erreur: {math.pi - pi}")
-
+    print(f"nombre de processus: {size}")
+    print(f"nombre de points: {total_points}")
+    print(f"valeur approchee de Pi: {pi}")
+    print(f"erreur: {math.pi - pi}")
 
