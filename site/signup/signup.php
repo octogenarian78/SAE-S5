@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $_SESSION["login"] = $login;
 
         // Redirection vers la page profil
-        header("Location: ../profil/index.php");
+        header("Location: ../profile/index.php");
         exit;
 
     } catch (PDOException $e) {
