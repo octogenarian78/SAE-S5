@@ -108,7 +108,7 @@ La portée de l'utilisation de l'application s'arrête au réseau internet de l'
 
 - - <a name="p1biiii"></a>iiii) Le diagramme des cas d'utilisation
 
-<img src="img/diagramme_cas_utilisation.png" title="diagramme des cas d'utilisation"/>
+<img src="img/Diagramme_cas_utilisation.png" title="diagramme des cas d'utilisation"/>
 
 
 <br><br><br><br><br><br><br>
