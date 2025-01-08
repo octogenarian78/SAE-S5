@@ -75,14 +75,15 @@ def write_to_file(output_file: str, output_lines: List[str]):
 
 
 def main():
-    if len(sys.argv) != 5:
-        print("Usage : script.py <folder> <file> <args> <iterations>")
+    if len(sys.argv) != 6:
+        print("Usage : script.py <folder> <file> <args> <iterations> <output_file>")
         sys.exit(1)
 
     folder = sys.argv[1]
     file = sys.argv[2]
     args = sys.argv[3].split(",")
     iterations = int(sys.argv[4])
+    output_file = sys.argv[5]
 
     for i in range(1, iterations + 1):
         print(f"Exécution de l'itération {i}...")
@@ -90,7 +91,7 @@ def main():
 
         if script_output:
             output_lines = script_output.splitlines()
-            output_file = f"Monte_Carlo.csv"
+            output_file = f"{output_file}.csv"
             write_to_file(output_file, output_lines)
         else:
             print("Aucune sortie à écrire.")
