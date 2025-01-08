@@ -2,6 +2,7 @@ from mpi4py import MPI
 import random
 import sys
 import math
+import time
 
 
 numIter = int(sys.argv[1])
@@ -23,6 +24,9 @@ if rank != 0:
     comm.send(cpt, dest=0, tag=rank) # Chaque processus envoie son résultat partiel au processus maître
 
 else:  # Collecte des résultats par le processus maître (rang 0)
+
+    start = time.time()
+
     total_cpt = 0  # Compteur total
     total_points = numIter * (size - 1)
     for i in range(1, size):  # Récupération des résultats des processus esclaves
@@ -30,9 +34,11 @@ else:  # Collecte des résultats par le processus maître (rang 0)
         total_cpt += partial_cpt
 
     pi = 4 * total_cpt / total_points
+    end = time.time()
 
-    print(f"nombre de processus: {size}")
-    print(f"nombre de points: {total_points}")
-    print(f"valeur approchee de Pi: {pi}")
-    print(f"erreur: {math.pi - pi}")
+    print(f"Processus: {size}")
+    print(f"Points: {total_points}")
+    print(f"Pi: {pi}")
+    print(f"Erreur: {math.pi - pi}")
+    print(f"Temps : {end - start}")
 
