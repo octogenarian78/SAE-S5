@@ -67,7 +67,7 @@ Ce document rassemble toutes les informations importantes que nous devrons respe
 
 - <b><a name="p1a"></a>a) Quels sont la portée et les objectifs généraux ?</b><br>
 
-La portée de l'utilisation de l'application s'arrête au réseau internet de l'IUT. Aucun utilisateur ne peut l'utiliser en dehors de ce réseau.
+La portée de l'utilisation de l'application s'arrête au réseau internet de l'IUT. Aucun utilisateur ne peut l'utiliser en dehors de ce réseau. Le projet vise à concevoir et développer une application web permettant de réaliser des calculs des décimales du nombre Pi grâce à la méthode de Monte-Carlo en calcul partagé et distribué. Cette application sera hébergée sur un Raspberry Pi 4, connecté à un Kit Cluster Hat, permettant d'utiliser 4 Raspberry Pi Zero pour les calculs de Pi.
 
 - <b><a name="p1b"></a>b) La lecture du cahier des charges </b>
 
@@ -108,6 +108,8 @@ La portée de l'utilisation de l'application s'arrête au réseau internet de l'
 
 - - <a name="p1biiii"></a>iiii) Le diagramme des cas d'utilisation
 
+<img src="img/diagramme_cas_utilisation.png" title="diagramme des cas d'utilisation"/>
+
 
 <br><br><br><br><br><br><br>
 ------------------------------------------------------------------------------------------------------------------------
@@ -141,6 +143,140 @@ Par ordre alphabétique.
 
 
 - <b>d) <a name="p3d"></a> Les cas d’utilisation utilisateur et système.</b>
+
+
+<br><br><br><br><br><br><br>
+------------------------------------------------------------------------------------------------------------------------
+
+### <a name="p4"></a>IV – La technologie employée
+- <b><a name="p4a"></a>a) Quelles sont les exigences technologiques pour ce système ?</b>
+<br><br>
+  Pour mettre en place le système les différentes exigences sont l'utilisation d'un OS linux, Apache, MariaDB, PHP, Python, R, Java, C
+<br><br>
+    Le matériel mis à disposition : 
+- RPI 4 : 1
+- Câble HDMI
+- Alimentation 
+- RPI0 : 4
+- Câble de connexion 
+- Carte SD 5
+<br><br>
+- <b><a name="p4b"></a>b) Avec quels systèmes ce système s’interfacera-t-il et avec quelles exigences ?</b>
+
+
+<br><br><br><br><br><br><br>
+------------------------------------------------------------------------------------------------------------------------
+
+### <a name="p5"></a>V – Autres exigences
+
+
+- <b><a name="p5a"></a>a) Processus de développement</b>
+
+    - <u><a name="p5ai"></a>i. Qui sont les participants au projet ?</u><br>
+
+      Les membres de notre équipe sont les principaux participants au projet.
+      Notre équipe est constituée de Maaz NORAT, Assia GOUABI, Pierre JAUFFRES, Enzo GUIGNOLLE, Teddy DEGAT et Loan QUILLET.<br>
+      <br>
+    - <u><a name="p5aii"></a>ii. Quelles valeurs devront être privilégiées ? (exemple : simplicité, disponibilité,    rapidité, souplesse etc... )</u><br>
+
+      Nous privilégierons l'efficacité de nos algorithmes. Un point d'honneur sera également mis sur la disponibilité de notre application web et, plus généralement, sur sa simplicité de prise en main. Nous favoriserons au mieux la compréhension et la communication entre les utilisateurs, techniciens et administrateurs.<br>
+      <br>
+      Enfin, la plateforme se doit être accessible peu importe le handicape. 
+      <br>
+      La plateforme se doit être simple d'utilisation, disponible à tout moment, accessible et sécurisé.
+
+      <br>
+    - <u><a name="p5aiii"></a>iii. Quels retours ou quelle visibilité sur le projet les utilisateurs et commanditaires
+      souhaitent-ils ?</u><br>
+
+      Ce projet représentant un travail universitaire évalué, les commanditaires de ce projet sont nos enseignants. Ces derniers ont une grande visibilité sur l'avancée du projet et recevront à certaines dates des documents concernant le projet et son avancée. La communication entre les membres de l'équipe et les enseignants est recommandée afin d'assurer le rendu d'un projet fidèle aux attentes de ces derniers.<br>
+      La communication avec nos professeurs (les clients du projet) se fera principalement à l'oral durant les heures d'SAE mais pourra se prolonger par email.<br>
+      Nos clients, M. HOGUIN et M. DUFAUD doivent avoir un accès général sur l'avancé du projet notamment par le recours de GitHub.<br>
+      <br>
+    - <u><a name="p5aiv"></a>iv. Que peut-on acheter ? Que doit-on construire ? Qui sont nos concurrents ?</u><br>
+
+      Le projet consiste à mettre en réseau une architecture. Aucun achat n'est nécessaire puisque l'ensemble du matériel nous a été fourni par M.hoguin.
+      <br><br>
+
+    - <u><a name="p5av"></a>v. Quels sont les autres exigences du processus ? (exemple : tests, installation, etc...)</u><br>
+
+      Nous pouvons noter en exigences sur le projet, l'exécution d'une phase de test assurant le bon fonctionnement de l'application et de la communication entre les composants architecturaux. <br>
+      Les clients doivent avoir accès au dépôt Git afin de juger de l'évolution du projet et faire des critiques si nécessaire.
+      <br>
+    - <u><a name="p5avi"></a>vi. À quelle dépendance le projet est-il soumis ?</u><br>
+      
+<br>
+
+- <b><a name="p5c"></a>c) Performances</b><br>
+
+
+<br>
+
+- <b><a name="p5d"></a>d) Opérations, sécurité, documentation</b><br>
+
+
+
+<br>
+
+- <b><a name="p5e"></a>e) Utilisation et utilisabilité</b><br>
+
+<br>
+
+- <b><a name="p5f"></a>f) Maintenance et portabilité</b><br>
+
+<br>
+
+- <b><a name="p5g"></a>g) Questions non résolues ou reportées à plus tard</b><br>
+
+ 
+  <br><br><br><br><br><br><br>
+------------------------------------------------------------------------------------------------------------------------
+
+### <a name="p6"></a>VI – Recours humain, questions juridiques, politiques, organisationnelles.
+- <b><a name="p6a"></a>a) Quel est le recours humain au fonctionnement du système ?</b><br>
+  <br>
+- <b><a name="p6b"></a>b) Quelles sont les exigences juridiques et politiques ?</b><br>
+  <br>
+- <b><a name="p6c"></a>c) Quelles sont les conséquences humaines de la réalisation du système ?</b><br>
+  <br>
+
+- <b><a name="p6d"></a>d) Quels sont les besoins en formation ?</b><br>
+<br>
+
+- <b><a name="p6e"></a>e) Quelles sont les hypothèses et les dépendances affectant l’environnement humain ?</b><br>
+  <br>
+### <a name="p7"></a>VII - Gestion et organisation du projet.
+- <b><a name="p7a"></a>a) Rôles de chacun</b><br>
+  L'équipe est composé de :
+    - **Maaz Norat**
+      Chef de projet
+    - **Assia Gouabi**
+    - **Enzo Guignolle**
+    - **Pierre Jauffres**
+      <br><br>
+
+
+- <b><a name="p7b"></a>b) Cycles de vie</b><br>
+  Dans le cadre du projet, nous suivions un cycle en V itératif.<br>
+  Entre autre, nous suivions le schéma : Conception -> Développement -> Tests. Cependant, nous pouvons revenir à des tâches antérieures et elles peuvent être développées et testées à plusieurs reprises.<br>
+  <br>
+  
+  Voici les différents cycles de vie du projet. 
+  <br><br><br>
+  **Cycle de vie V0.1 : Mise en place du système 24/09/2024 -> **
+
+  | Tâche                    | Temps | Attribution               |
+  |--------------------------|-------|---------------------------|
+  | Cahier des charges       |       | Maaz                      |
+  | Recueil de besoins       |       | Assia, Maaz, Pierre, Enzo |
+  | Système                  |       |                           |
+  | Dossier conception       |       | Assia                     |
+  | Diagramme de déploiement |       | Enzo, Assia, Pierre       |
+
+  <br><br>
+
+### <a name="a1"></a>Annexe 1 – Cas d'utilisation
+
 
 | **Inscrire un utilisateur**                                                                                                                   |
 |------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -340,136 +476,3 @@ Par ordre alphabétique.
 | **Échec 1** : Aucun calcul n’a été réalisé par l’utilisateur. Le système affiche un message : "Aucun calcul disponible pour le moment."      |
 | **Échec 2** : Une erreur survient lors de la récupération des calculs. Le système affiche un message : "Erreur lors du chargement des calculs. Veuillez réessayer plus tard."|
 | **Postcondition** : L’utilisateur visualise les calculs qu’il a réalisés.                                                                     |
-
-
-<br><br><br><br><br><br><br>
-------------------------------------------------------------------------------------------------------------------------
-
-### <a name="p4"></a>IV – La technologie employée
-- <b><a name="p4a"></a>a) Quelles sont les exigences technologiques pour ce système ?</b>
-<br><br>
-  Pour mettre en place le système les différentes exigences sont l'utilisation d'un OS linux, Apache, MariaDB, PHP, Python, R, Java, C
-<br><br>
-    Le matériel mis à disposition : 
-- RPI 4 : 1
-- Câble HDMI
-- Alimentation 
-- RPI0 : 4
-- Câble de connexion 
-- Carte SD 5
-<br><br>
-- <b><a name="p4b"></a>b) Avec quels systèmes ce système s’interfacera-t-il et avec quelles exigences ?</b>
-
-
-<br><br><br><br><br><br><br>
-------------------------------------------------------------------------------------------------------------------------
-
-### <a name="p5"></a>V – Autres exigences
-
-
-- <b><a name="p5a"></a>a) Processus de développement</b>
-
-    - <u><a name="p5ai"></a>i. Qui sont les participants au projet ?</u><br>
-
-      Les membres de notre équipe sont les principaux participants au projet.
-      Notre équipe est constituée de Maaz NORAT, Assia GOUABI, Pierre JAUFFRES et Enzo GUIGNOLLE.<br>
-      <br>
-    - <u><a name="p5aii"></a>ii. Quelles valeurs devront être privilégiées ? (exemple : simplicité, disponibilité,    rapidité, souplesse etc... )</u><br>
-
-      Nous privilégierons l'efficacité de nos algorithmes. Un point d'honneur sera également mis sur la disponibilité de notre application web et, plus généralement, sur sa simplicité de prise en main. Nous favoriserons au mieux la compréhension et la communication entre les utilisateurs, techniciens et administrateurs.<br>
-      <br>
-      Enfin, la plateforme se doit être accessible peu importe le handicape. 
-      <br>
-      La plateforme se doit être simple d'utilisation, disponible à tout moment, accessible et sécurisé.
-
-      <br>
-    - <u><a name="p5aiii"></a>iii. Quels retours ou quelle visibilité sur le projet les utilisateurs et commanditaires
-      souhaitent-ils ?</u><br>
-
-      Ce projet représentant un travail universitaire évalué, les commanditaires de ce projet sont nos enseignants. Ces derniers ont une grande visibilité sur l'avancée du projet et recevront à certaines dates des documents concernant le projet et son avancée. La communication entre les membres de l'équipe et les enseignants est recommandée afin d'assurer le rendu d'un projet fidèle aux attentes de ces derniers.<br>
-      La communication avec nos professeurs (les clients du projet) se fera principalement à l'oral durant les heures d'SAE mais pourra se prolonger par email.<br>
-      Nos clients, M. HOGUIN et M. DUFAUD doivent avoir un accès général sur l'avancé du projet notamment par le recours de GitHub.<br>
-      <br>
-    - <u><a name="p5aiv"></a>iv. Que peut-on acheter ? Que doit-on construire ? Qui sont nos concurrents ?</u><br>
-
-      Le projet consiste à mettre en réseau une architecture. Aucun achat n'est nécessaire puisque l'ensemble du matériel nous a été fourni par M.hoguin.
-      <br><br>
-
-    - <u><a name="p5av"></a>v. Quels sont les autres exigences du processus ? (exemple : tests, installation, etc...)</u><br>
-
-      Nous pouvons noter en exigences sur le projet, l'exécution d'une phase de test assurant le bon fonctionnement de l'application et de la communication entre les composants architecturaux. <br>
-      Les clients doivent avoir accès au dépôt Git afin de juger de l'évolution du projet et faire des critiques si nécessaire.
-      <br>
-    - <u><a name="p5avi"></a>vi. À quelle dépendance le projet est-il soumis ?</u><br>
-      
-<br>
-
-- <b><a name="p5c"></a>c) Performances</b><br>
-
-
-<br>
-
-- <b><a name="p5d"></a>d) Opérations, sécurité, documentation</b><br>
-
-
-
-<br>
-
-- <b><a name="p5e"></a>e) Utilisation et utilisabilité</b><br>
-
-<br>
-
-- <b><a name="p5f"></a>f) Maintenance et portabilité</b><br>
-
-<br>
-
-- <b><a name="p5g"></a>g) Questions non résolues ou reportées à plus tard</b><br>
-
- 
-  <br><br><br><br><br><br><br>
-------------------------------------------------------------------------------------------------------------------------
-
-### <a name="p6"></a>VI – Recours humain, questions juridiques, politiques, organisationnelles.
-- <b><a name="p6a"></a>a) Quel est le recours humain au fonctionnement du système ?</b><br>
-  <br>
-- <b><a name="p6b"></a>b) Quelles sont les exigences juridiques et politiques ?</b><br>
-  <br>
-- <b><a name="p6c"></a>c) Quelles sont les conséquences humaines de la réalisation du système ?</b><br>
-  <br>
-
-- <b><a name="p6d"></a>d) Quels sont les besoins en formation ?</b><br>
-<br>
-
-- <b><a name="p6e"></a>e) Quelles sont les hypothèses et les dépendances affectant l’environnement humain ?</b><br>
-  <br>
-### <a name="p7"></a>VII - Gestion et organisation du projet.
-- <b><a name="p7a"></a>a) Rôles de chacun</b><br>
-  L'équipe est composé de :
-    - **Maaz Norat**
-      Chef de projet
-    - **Assia Gouabi**
-    - **Enzo Guignolle**
-    - **Pierre Jauffres**
-      <br><br>
-
-
-- <b><a name="p7b"></a>b) Cycles de vie</b><br>
-  Dans le cadre du projet, nous suivions un cycle en V itératif.<br>
-  Entre autre, nous suivions le schéma : Conception -> Développement -> Tests. Cependant, nous pouvons revenir à des tâches antérieures et elles peuvent être développées et testées à plusieurs reprises.<br>
-  <br>
-  
-  Voici les différents cycles de vie du projet. 
-  <br><br><br>
-  **Cycle de vie V0.1 : Mise en place du système 24/09/2024 -> **
-
-  | Tâche                    | Temps | Attribution               |
-  |--------------------------|-------|---------------------------|
-  | Cahier des charges       |       | Maaz                      |
-  | Recueil de besoins       |       | Assia, Maaz, Pierre, Enzo |
-  | Système                  |       |                           |
-  | Dossier conception       |       | Assia                     |
-  | Diagramme de déploiement |       | Enzo, Assia, Pierre       |
-
-  <br><br>
-
-### <a name="a1"></a>Annexe 1 – Cas d'utilisation
