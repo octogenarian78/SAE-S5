@@ -1,5 +1,5 @@
 <?php
-include "../ressources/header.php";
+include "site/ressources/fonction/header.php";
 
 session_start();
 if (isset($_SESSION["util_id"])) {
@@ -54,8 +54,6 @@ if ($user['admin']){
     $menuButtons[] = "Administration";
     $menuLinks[] = "../administration/index.php";
 }
-
-echo "Test0";
 
 echo genererHeader($menuButtons, $menuLinks, $loginButtons, $loginLinks);
 ?>
