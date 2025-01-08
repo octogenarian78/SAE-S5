@@ -51,8 +51,8 @@ if ($user){
 }
 
 if ($user['admin']){
-    array_push($menuButtons, "Administration");
-    array_push($menuLinks, "../administration/index.php");
+    $menuButtons[] = "Administration";
+    $menuLinks[] = "../administration/index.php";
 }
 
 
