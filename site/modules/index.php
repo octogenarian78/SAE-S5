@@ -133,7 +133,6 @@ foreach ($programmes as $programme) {
 
                 // Bouton OK : envoyer la requête AJAX
                 btnOk.addEventListener('click', () => {
-                    alert('coucou')
                     popup.style.display = 'none';
                     popupOverlay.style.display = 'none';
                     const row_result = document.getElementById("result")
