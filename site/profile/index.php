@@ -43,7 +43,7 @@ $menuLinks = [];
 
 if (isset($_SESSION["util_id"])){
     $menuButtons[] = "Modules";
-    $menuLinks[] = "../module/index.php";
+    $menuLinks[] = "../modules/index.php";
     $loginButtons = ["Accueil"];
     $loginLinks = ["../index.php"];
 }else{
