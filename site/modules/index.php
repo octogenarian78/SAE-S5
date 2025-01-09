@@ -152,7 +152,7 @@ foreach ($programmes as $programme) {
                         })
                         .then(data => {
                             if (data.success) {
-                                row_result.textContent = data.output;
+                                row_result.textContent = data;
                             } else {
                                 row_result.textContent = data.message;
                             }
