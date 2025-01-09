@@ -1,5 +1,6 @@
 <?php
 include "../ressources/fonction/header.php";
+include "ressources/fonction/db_connect.php";
 
 session_start();
 $conn = connectDB();
