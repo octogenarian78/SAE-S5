@@ -5,6 +5,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $conn = connectDB();
     $programme = $_POST['programme'];
+    $number = $_POST['number'];
 
     // Préparer une requête pour récupérer le chemin d'accès du programme
     $stmt = $conn->prepare("SELECT chemin_acces FROM Programmes WHERE prog_id = :programme");
@@ -17,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $cheminAcces = $result['chemin_acces'];
 
         // Exécution de la commande Bash
-        $output = shell_exec("bash " . escapeshellcmd($cheminAcces) . " 2>&1");
+        $output = shell_exec("mpiexec -n 4 " . escapeshellcmd($programme1) . " " . escapeshellarg($number) . "wait 2>&1");
 
         // Retourner la sortie pour affichage ou traitement
         echo json_encode(['success' => true, 'output' => $output]);

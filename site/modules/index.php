@@ -137,12 +137,15 @@ foreach ($programmes as $programme) {
                     popupOverlay.style.display = 'none';
                     const row_result = document.getElementById("result")
                     row_result.textContent = "Calcul en cours..."
+
+                    const number = document.getElementById('number')
+
                     fetch('../ressources/fonction/exec_module.php', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/x-www-form-urlencoded',
                         },
-                        body: `programme=${encodeURIComponent(button.getAttribute("id"))}`
+                        body: `programme=${encodeURIComponent(button.getAttribute("id"))}&number=${encodeURIComponent(number.value)}`
                     })
                         .then(response => {
                             return response.json();
