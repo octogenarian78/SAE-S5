@@ -144,7 +144,10 @@ foreach ($programmes as $programme) {
                         },
                         body: `programme=${encodeURIComponent(programme)}`
                     })
-                        .then(response => response.json())
+                        .then(response => {
+                            console.log(response.json())
+                            response.json()
+                        })
                         .then(data => {
                             if (data.success) {
                                 row_result.textContent = data.output;
