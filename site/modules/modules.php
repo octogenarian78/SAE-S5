@@ -1,7 +1,7 @@
 <?php
 function popupNombresPremiers() {
     return '
-        <div class="popup" id="popup-programmeA">
+        <div class="popup" id="popup-NombresPremiers">
             <div class="popup-title">Entrée(s) du programme</div>
             <p>Entrez un nombre sous lequel calculer tous les nombres premiers :</p>
             <input type="number" placeholder="Exemple : 42069">
@@ -15,7 +15,7 @@ function popupNombresPremiers() {
 
 function popupMonteCarlo() {
     return '
-        <div class="popup" id="popup-programmeB">
+        <div class="popup" id="popup-MonteCarlo">
             <div class="popup-title">Entrée(s) du programme</div>
             <p>Entrez un texte :</p>
             <input type="text" placeholder="Exemple : Hello">
