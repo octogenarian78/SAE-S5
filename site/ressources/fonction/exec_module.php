@@ -20,6 +20,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Exécution de la commande Bash
         $output = shell_exec("mpiexec -n 4 python3" . escapeshellcmd($programme1) . " " . escapeshellarg($number) . "2>&1");
 
+        echo "<script>console.log('".$output."');</script>";
+
         $data = json_decode($output, true);
 
         // Retourner la sortie pour affichage ou traitement
