@@ -1,3 +1,4 @@
+import json
 from mpi4py import MPI
 import time
 import sys
@@ -60,3 +61,8 @@ if my_rank == 0:
     print('Primes discovered: ' + str(len(merged_primes)))
     # Uncomment the next line to see all the prime numbers
     # print(merged_primes)
+
+
+
+data = {"message": "Hello from Python", "value": merged_primes}
+print(json.dumps(data))
