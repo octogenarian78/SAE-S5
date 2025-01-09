@@ -15,18 +15,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($result) {
+        // Le chemin d'accès est bien récupéré
         $cheminAcces = "../../../" . $result['chemin_acces'];
 
-        // Exécution de la commande Bash
-        $output = shell_exec("mpiexec -n 4 python3" . escapeshellcmd($programme1) . " " . escapeshellarg($number) . "2>&1");    
+        // Construire la commande avec un espace entre python3 et le chemin du programme
+        $command = "mpiexec -n 4 python3 " . escapeshellcmd($cheminAcces) . " " . escapeshellarg($number) . " 2>&1";
 
-        if ($output != null){
+        // Exécuter la commande
+        $output = shell_exec($command);    
+
+        // Vérifier si la commande a retourné quelque chose
+        if ($output !== null) {
+            // Vérifier si la sortie est un JSON valide
             $data = json_decode($output, true);
 
-            // Retourner la sortie pour affichage ou traitement
-            echo json_encode(['success' => true, 'output' => $data["value"]]);
-        }else{
-            echo json_encode(['success' => false, 'message' => "Le JSON est vide"]);
+            if ($data !== null) {
+                // Retourner la sortie pour affichage ou traitement
+                echo json_encode(['success' => true, 'output' => $data["value"]]);
+            } else {
+                echo json_encode(['success' => false, 'message' => "Le JSON retourné est invalide."]);
+            }
+        } else {
+            echo json_encode(['success' => false, 'message' => "Aucune sortie n'a été générée par la commande."]);
         }
     } else {
         echo json_encode(['success' => false, 'message' => "Programme introuvable."]);
@@ -34,4 +44,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 } else {
     echo json_encode(['success' => false, 'message' => "Requête invalide."]);
 }
-
