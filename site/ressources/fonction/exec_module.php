@@ -20,8 +20,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Exécution de la commande Bash
         $output = shell_exec("mpiexec -n 4 python3" . escapeshellcmd($programme1) . " " . escapeshellarg($number) . "2>&1");
 
+        $data = json_decode($output, true);
+
         // Retourner la sortie pour affichage ou traitement
-        echo json_encode(['success' => true, 'output' => json_decode($output)]);
+        echo json_encode(['success' => true, 'output' => $data]);
     } else {
         echo json_encode(['success' => false, 'message' => "Programme introuvable."]);
     }
