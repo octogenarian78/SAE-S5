@@ -145,8 +145,10 @@ foreach ($programmes as $programme) {
                         body: `programme=${encodeURIComponent(programme)}`
                     })
                         .then(response => {
-                            console.log(response.json())
-                            response.json()
+                            if (!response.ok) {
+                                throw new Error('Erreur réseau ou serveur');
+                            }
+                            return response.json();
                         })
                         .then(data => {
                             if (data.success) {

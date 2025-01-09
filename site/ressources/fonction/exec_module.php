@@ -1,6 +1,6 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    var_dump($_POST);
+    error_log(print_r($_POST, true));
     include "db_connect.php";
 
     $conn = connectDB();
