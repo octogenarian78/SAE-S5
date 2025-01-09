@@ -64,7 +64,7 @@ $stmt->execute();
 
 $programmes = $stmt->fetch(PDO::FETCH_ASSOC);
 
-foreach ($programme as $programmes) {
+foreach ($programmes as $programme) {
     echo '<a class="btn-module-select">'. $programme["nom_programme"] .'</a>';
 }
 
