@@ -72,7 +72,7 @@ echo genererHeader('../ressources/img/logo.png',$menuButtons, $menuLinks, $login
 <div class="module-select-button">
 <?php
 
-$stmt = $conn->prepare("SELECT nom_programme FROM Programmes");
+$stmt = $conn->prepare("SELECT id_prog, nom_programme FROM Programmes");
 $stmt->execute();
 
 // Récupérer toutes les lignes sous forme de tableau associatif
