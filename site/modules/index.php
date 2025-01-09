@@ -35,7 +35,7 @@ if (isset($_SESSION["util_id"]) && $user['admin']){
     $menuLinks[] = "../administration/index.php";
 }
 
-echo genererHeader('ressources/img/logo.png',$menuButtons, $menuLinks, $loginButtons, $loginLinks);
+echo genererHeader('../ressources/img/logo.png',$menuButtons, $menuLinks, $loginButtons, $loginLinks);
 ?>
 <div class="centered_content">
     <div name="calcul-result" class="calcul-result">
@@ -58,9 +58,12 @@ $stmt->execute();
 $programmes = $stmt->fetch(PDO::FETCH_ASSOC);
 
 foreach ($programme as $programmes) {
-    echo '<a href="#" class="btn-module-select">Module 1</a>';
+    echo '<a href="#" class="btn-module-select">'. $programme["nom_programme"] .'</a>';
 }
 
+if (empty($programme)) {
+    echo '<a class="btn-module-select">Aucun modules n\'est disponible</a>';
+}
 
 ?>
 </div>
