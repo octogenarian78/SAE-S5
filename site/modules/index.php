@@ -84,7 +84,7 @@ if (empty($programmes)) {
 } else {
     foreach ($programmes as $programme) {
         $nomProgramme = str_replace(' ', '', $programme['nom_programme']);
-        echo '<a class="btn-module-select" data-programme="' . htmlspecialchars($nomProgramme) . '" id="' . htmlspecialchars($programme["prog_id"]) . '">' . htmlspecialchars($programme['nom_programme']) . '</a>';
+        echo '<a class="btn-module-select" data-programme="' . htmlspecialchars($nomProgramme) . '" id="' . htmlspecialchars($programme["id_prog"]) . '">' . htmlspecialchars($programme['nom_programme']) . '</a>';
     }
 }
 ?>
