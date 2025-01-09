@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $programme = $_POST['programme'];
 
     // Préparer une requête pour récupérer le chemin d'accès du programme
-    $stmt = $conn->prepare("SELECT chemin_acces FROM Programmes WHERE nom_programme = :programme");
+    $stmt = $conn->prepare("SELECT chemin_acces FROM Programmes WHERE prog_id = :programme");
     $stmt->bindParam(':programme', $programme, PDO::PARAM_STR);
     $stmt->execute();
 

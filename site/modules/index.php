@@ -72,7 +72,7 @@ echo genererHeader('../ressources/img/logo.png',$menuButtons, $menuLinks, $login
 <div class="module-select-button">
 <?php
 
-$stmt = $conn->prepare("SELECT nom_programme FROM Programmes");
+$stmt = $conn->prepare("SELECT id_prog, nom_programme FROM Programmes");
 $stmt->execute();
 
 // Récupérer toutes les lignes sous forme de tableau associatif
@@ -84,7 +84,7 @@ if (empty($programmes)) {
 } else {
     foreach ($programmes as $programme) {
         $nomProgramme = str_replace(' ', '', $programme['nom_programme']);
-        echo '<a class="btn-module-select" data-programme="' . htmlspecialchars($nomProgramme) . '">' . htmlspecialchars($programme['nom_programme']) . '</a>';
+        echo '<a class="btn-module-select" data-programme="' . htmlspecialchars($nomProgramme) . '" id="' . htmlspecialchars($programme["prog_id"]) . '">' . htmlspecialchars($programme['nom_programme']) . '</a>';
     }
 }
 ?>
@@ -142,10 +142,9 @@ foreach ($programmes as $programme) {
                         headers: {
                             'Content-Type': 'application/x-www-form-urlencoded',
                         },
-                        body: `programme=${encodeURIComponent(programme)}`
+                        body: `programme=${encodeURIComponent(button.getAttribute('id'))}`
                     })
                         .then(response => {
-                            console.log("Test")
                             return response.json();
                         })
                         .then(data => {
