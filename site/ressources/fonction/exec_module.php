@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($result) {
-        $cheminAcces = $result['chemin_acces'];
+        $cheminAcces = "../../../" . $result['chemin_acces'];
 
         // Exécution de la commande Bash
         $output = shell_exec("mpiexec -n 4 " . escapeshellcmd($programme1) . " " . escapeshellarg($number) . "wait 2>&1");
