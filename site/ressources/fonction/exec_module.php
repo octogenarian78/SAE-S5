@@ -18,20 +18,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $cheminAcces = "../../../" . $result['chemin_acces'];
 
         // Exécution de la commande Bash
-        $output = shell_exec("mpiexec -n 4 python3" . escapeshellcmd($programme1) . " " . escapeshellarg($number) . "2>&1");
+        $output = shell_exec("mpiexec -n 4 python3" . escapeshellcmd($programme1) . " " . escapeshellarg($number) . "2>&1");    
 
-        if ($output !== null) {
-            // Si la sortie contient des données, les encoder en JSON pour les afficher dans la console JavaScript
-            echo "<script>console.log(" . json_encode($output) . ");</script>";
-        } else {
-            // Si la sortie est vide, afficher un message d'erreur dans la console
-            echo "<script>console.error('Erreur d\'exécution du programme PHP ou de la commande shell.');</script>";
+        if ($output != null){
+            $data = json_decode($output, true);
+
+            // Retourner la sortie pour affichage ou traitement
+            echo json_encode(['success' => true, 'output' => $data["value"]]);
+        }else{
+            echo json_encode(['success' => false, 'message' => "Le JSON est vide"]);
         }
-
-        $data = json_decode($output, true);
-
-        // Retourner la sortie pour affichage ou traitement
-        echo json_encode(['success' => true, 'output' => $data["value"]]);
     } else {
         echo json_encode(['success' => false, 'message' => "Programme introuvable."]);
     }
