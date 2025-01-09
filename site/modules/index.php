@@ -89,6 +89,7 @@ if (empty($programmes)) {
 }
 ?>
 </div>
+<div class="popup-overlay"></div>
 <?php
 // Génération des popups
 foreach ($programmes as $programme) {
