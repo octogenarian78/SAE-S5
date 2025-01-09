@@ -3,6 +3,13 @@ include "../ressources/fonction/header.php";
 include "../ressources/fonction/db_connect.php";
 
 session_start();
+// Vérification si l'utilisateur est connecté
+if (!isset($_SESSION["util_id"])) {
+    // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
+    header("Location: ../login/index.html");
+    exit;
+}
+
 $conn = connectDB();
 
 ?>
@@ -58,7 +65,11 @@ $stmt->execute();
 $programmes = $stmt->fetch(PDO::FETCH_ASSOC);
 
 foreach ($programme as $programmes) {
-    echo '<a href="#" class="btn-module-select">'. $programme["nom_programme"] .'</a>';
+    echo '<a class="btn-module-select">'. $programme["nom_programme"] .'</a>';
+}
+
+if (empty($programmes)) {
+    echo '<a class="btn-module-select">Aucun modules n\'est disponible</a>';
 }
 
 ?>
