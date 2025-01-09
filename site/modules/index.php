@@ -61,6 +61,10 @@ foreach ($programme as $programmes) {
     echo '<a href="#" class="btn-module-select">'. $programme["nom_programme"] .'</a>';
 }
 
+if (empty($programme)) {
+    echo '<a class="btn-module-select">Aucun modules n\'est disponible</a>';
+}
+
 ?>
 </div>
 
