@@ -133,7 +133,6 @@ foreach ($programmes as $programme) {
 
                 // Bouton OK : envoyer la requête AJAX
                 btnOk.addEventListener('click', () => {
-                    alert("Test")
                     popup.style.display = 'none';
                     popupOverlay.style.display = 'none';
                     const row_result = document.getElementById("result")
@@ -146,7 +145,7 @@ foreach ($programmes as $programme) {
                         body: `programme=${encodeURIComponent(programme)}`
                     })
                         .then(response => {
-                            console.log(response.json())
+                            console.log("Test")
                             return response.json();
                         })
                         .then(data => {
