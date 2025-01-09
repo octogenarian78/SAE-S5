@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $output = shell_exec("mpiexec -n 4 python3" . escapeshellcmd($programme1) . " " . escapeshellarg($number) . "2>&1");
 
         // Retourner la sortie pour affichage ou traitement
-        echo json_encode(['success' => true, 'output' => $output]);
+        echo json_encode(['success' => true, 'output' => json_decode($output)]);
     } else {
         echo json_encode(['success' => false, 'message' => "Programme introuvable."]);
     }

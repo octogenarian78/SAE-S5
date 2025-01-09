@@ -64,5 +64,5 @@ if my_rank == 0:
 
 
 
-data = {"message": "Hello from Python", "value": merged_primes}
+data = {"message": "Hello from Python", "value": len(merged_primes)}
 print(json.dumps(data))
