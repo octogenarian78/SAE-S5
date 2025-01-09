@@ -72,10 +72,6 @@ if (empty($programmes)) {
     echo '<a class="btn-module-select">Aucun modules n\'est disponible</a>';
 }
 
-if (empty($programme)) {
-    echo '<a class="btn-module-select">Aucun modules n\'est disponible</a>';
-}
-
 ?>
 </div>
 
