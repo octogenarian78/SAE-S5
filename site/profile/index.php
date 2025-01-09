@@ -1,27 +1,14 @@
 <?php
 include "../ressources/fonction/header.php";
 
-
 session_start();
+$conn = connectDB();
 
 // Vérification si l'utilisateur est connecté
 if (!isset($_SESSION["util_id"])) {
     // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
     header("Location: ../login/index.html");
     exit;
-}
-
-// Connexion à la base de données
-$host = "localhost";
-$dbname = "GestionCalculs";
-$username = "root"; // Remplace par ton utilisateur MySQL si nécessaire
-$password = "Fuse_271"; // Remplace par ton mot de passe MySQL
-
-try {
-    $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Erreur de connexion : " . $e->getMessage());
 }
 
 // Récupération des informations utilisateur depuis la base de données
