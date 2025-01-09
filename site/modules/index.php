@@ -152,7 +152,7 @@ foreach ($programmes as $programme) {
                         })
                         .then(data => {
                             if (data.success) {
-                                row_result.textContent = JSON.stringify(data.output["value"], null, 2);
+                                row_result.textContent = JSON.stringify((data.output)["value"], null, 2);
                             } else {
                                 row_result.textContent = data.message;
                             }
