@@ -1,6 +1,7 @@
 <?php
 include "../ressources/fonction/header.php";
 include "../ressources/fonction/db_connect.php";
+include "modules.php";
 
 session_start();
 // Vérification si l'utilisateur est connecté
@@ -81,62 +82,59 @@ $programmes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 if (empty($programmes)) {
     echo '<a class="btn-module-select">Aucun modules n\'est disponible</a>';
 } else {
-    // Parcourez toutes les lignes et affichez-les
     foreach ($programmes as $programme) {
-        // Accédez aux valeurs spécifiques de chaque ligne
-        echo '<a class="btn-module-select">' . $programme['nom_programme'] . '</a>';
+        $nomProgramme = str_replace(' ', '', $programme['nom_programme']);
+        echo '<a class="btn-module-select" data-programme="' . htmlspecialchars($nomProgramme) . '">' . htmlspecialchars($nomProgramme) . '</a>';
+    }
+}
+?>
+</div>
+<?php
+// Génération des popups
+foreach ($programmes as $programme) {
+    $nomProgramme = str_replace(' ', '', $programme['nom_programme']);
+    if (function_exists("popup{$nomProgramme}")) {
+        echo call_user_func("popup{$nomProgramme}");
     }
 }
 
 ?>
-</div>
-
-<!-- Popup et overlay -->
-<div class="popup-overlay"></div>
-<div class="popup">
-    <div class="popup-title">Entrée(s) du programme</div>
-    <p>Entrez un chiffre :</p>
-    <input type="number" placeholder="Exemple : 42">
-    <div class="popup-buttons">
-        <a href="#" class="btn-ok">OK</a>
-        <a href="#" class="btn-cancel">Annuler</a>
-    </div>
-</div>
-
 <script>
-    // Sélection des éléments
     const moduleButtons = document.querySelectorAll('.btn-module-select');
-    const popup = document.querySelector('.popup');
-    const popupOverlay = document.querySelector('.popup-overlay');
-    const btnOk = document.querySelector('.btn-ok');
-    const btnCancel = document.querySelector('.btn-cancel');
 
-    // Fonction pour ouvrir le popup
-    const openPopup = () => {
-        popup.style.display = 'block';
-        popupOverlay.style.display = 'block';
-    };
-
-    // Fonction pour fermer le popup
-    const closePopup = () => {
-        popup.style.display = 'none';
-        popupOverlay.style.display = 'none';
-    };
-
-    // Attacher les événements d'ouverture aux boutons module
     moduleButtons.forEach(button => {
         button.addEventListener('click', (e) => {
-            e.preventDefault(); // Empêche la redirection
-            openPopup();
+            e.preventDefault();
+            const programme = button.getAttribute('data-programme');
+            const popup = document.getElementById(`popup-${programme}`);
+            const popupOverlay = document.querySelector('.popup-overlay');
+
+            if (popup) {
+                popup.style.display = 'block';
+                popupOverlay.style.display = 'block';
+            }
+
+            // Fermer les popups au clic sur l'overlay
+            popupOverlay.addEventListener('click', () => {
+                popup.style.display = 'none';
+                popupOverlay.style.display = 'none';
+            });
+
+            // Attacher les événements pour les boutons OK et Annuler
+            const btnOk = popup.querySelector('.btn-ok');
+            const btnCancel = popup.querySelector('.btn-cancel');
+            if (btnOk && btnCancel) {
+                btnOk.addEventListener('click', () => {
+                    popup.style.display = 'none';
+                    popupOverlay.style.display = 'none';
+                });
+                btnCancel.addEventListener('click', () => {
+                    popup.style.display = 'none';
+                    popupOverlay.style.display = 'none';
+                });
+            }
         });
     });
-
-    // Attacher les événements de fermeture aux boutons OK et Annuler
-    btnOk.addEventListener('click', closePopup);
-    btnCancel.addEventListener('click', closePopup);
-
-    // Fermer le popup si on clique en dehors
-    popupOverlay.addEventListener('click', closePopup);
 </script>
 
 </body>
