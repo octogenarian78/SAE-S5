@@ -1,5 +1,5 @@
 <?php
-include "ressources/fonction/db_connect.php";
+include "../ressources/fonction/db_connect.php";
 
 session_start();
 $conn = connectDB();
