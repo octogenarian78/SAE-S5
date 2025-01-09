@@ -64,7 +64,7 @@ echo genererHeader('../ressources/img/logo.png',$menuButtons, $menuLinks, $login
             <tr><th>Résultat du Calcul</th></tr>
             </thead>
             <tbody>
-            <tr><td>123456.789</td></tr>
+            <tr><td id="result">123456.789</td></tr>
             </tbody>
         </table>
     </div>
@@ -72,7 +72,7 @@ echo genererHeader('../ressources/img/logo.png',$menuButtons, $menuLinks, $login
 <div class="module-select-button">
 <?php
 
-$stmt = $conn->prepare("SELECT nom_programme, chemin_acces FROM Programmes");
+$stmt = $conn->prepare("SELECT nom_programme FROM Programmes");
 $stmt->execute();
 
 // Récupérer toutes les lignes sous forme de tableau associatif
@@ -125,17 +125,42 @@ foreach ($programmes as $programme) {
             const btnOk = popup.querySelector('.btn-ok');
             const btnCancel = popup.querySelector('.btn-cancel');
             if (btnOk && btnCancel) {
-                btnOk.addEventListener('click', () => {
-                    popup.style.display = 'none';
-                    popupOverlay.style.display = 'none';
-                });
+                // Bouton Annuler : fermer le popup
                 btnCancel.addEventListener('click', () => {
                     popup.style.display = 'none';
                     popupOverlay.style.display = 'none';
                 });
+
+                // Bouton OK : envoyer la requête AJAX
+                btnOk.addEventListener('click', () => {
+                    popup.style.display = 'none';
+                    popupOverlay.style.display = 'none';
+                    const row_result = document.getElementById("result")
+                    row_result.textContent = "Calcul en cours..."
+                    fetch('../ressources/fonction/exec_module.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: `programme=${encodeURIComponent(programme)}`
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                row_result.textContent = data.output;
+                            } else {
+                                row_result.textContent = data.message;
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Erreur lors de l\'exécution :', error);
+                            alert('Une erreur est survenue.');
+                        });
+                });
             }
         });
     });
+
 </script>
 
 </body>
