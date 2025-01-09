@@ -81,7 +81,7 @@ echo genererHeader('../ressources/img/logo.png', $menuButtons, $menuLinks, $logi
         <tbody>
         <?php
         // Récupérer les 10 derniers calculs de l'utilisateur
-        $stmt = $conn->prepare("SELECT programme, entree, sortie FROM Calculs WHERE util_id = :util_id ORDER BY calc_id DESC LIMIT 10");
+        $stmt = $conn->prepare("SELECT entree, sortie FROM Calculs WHERE util_id = :util_id ORDER BY calc_id DESC LIMIT 10");
         $stmt->bindParam(":util_id", $util_id, PDO::PARAM_INT);
         $stmt->execute();
 

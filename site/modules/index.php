@@ -12,6 +12,18 @@ if (!isset($_SESSION["util_id"])) {
 
 $conn = connectDB();
 
+$util_id = $_SESSION["util_id"];
+$stmt = $conn->prepare("SELECT admin FROM Utilisateurs WHERE util_id = :util_id");
+$stmt->bindParam(":util_id", $util_id, PDO::PARAM_INT);
+$stmt->execute();
+
+$user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if (!$user) {
+    echo "Erreur : utilisateur introuvable.";
+    exit;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -62,14 +74,18 @@ echo genererHeader('../ressources/img/logo.png',$menuButtons, $menuLinks, $login
 $stmt = $conn->prepare("SELECT nom_programme, chemin_acces FROM Programmes");
 $stmt->execute();
 
-$programmes = $stmt->fetch(PDO::FETCH_ASSOC);
+// Récupérer toutes les lignes sous forme de tableau associatif
+$programmes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-foreach ($programmes as $programme) {
-    echo '<a class="btn-module-select">'. $programme["nom_programme"] .'</a>';
-}
-
+// Vérifiez si le tableau est vide
 if (empty($programmes)) {
     echo '<a class="btn-module-select">Aucun modules n\'est disponible</a>';
+} else {
+    // Parcourez toutes les lignes et affichez-les
+    foreach ($programmes as $programme) {
+        // Accédez aux valeurs spécifiques de chaque ligne
+        echo '<a class="btn-module-select">' . $programme['nom_programme'] . '</a>';
+    }
 }
 
 ?>
