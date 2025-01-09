@@ -59,7 +59,7 @@ echo genererHeader('../ressources/img/logo.png',$menuButtons, $menuLinks, $login
 <div class="module-select-button">
 <?php
 
-$stmt = $conn->prepare("SELECT nom_programme FROM Programmes");
+$stmt = $conn->prepare("SELECT nom_programme, chemin_acces FROM Programmes");
 $stmt->execute();
 
 $programmes = $stmt->fetch(PDO::FETCH_ASSOC);
