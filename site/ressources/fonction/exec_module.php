@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $data = json_decode($output, true);
 
         // Retourner la sortie pour affichage ou traitement
-        echo json_encode(['success' => true, 'output' => $data]);
+        echo json_encode(['success' => true, 'output' => $data["value"]]);
     } else {
         echo json_encode(['success' => false, 'message' => "Programme introuvable."]);
     }
