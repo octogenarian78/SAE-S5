@@ -49,16 +49,16 @@ results = comm.gather(primes, root=0)
 if my_rank == 0:
 
     # How long did it take?
-    end = round(time.time() - start, 2)
+    # end = round(time.time() - start, 2)
 
-    print('Find all primes up to: ' + str(end_number))
-    print('Nodes: ' + str(cluster_size))
-    print('Time elasped: ' + str(end) + ' seconds')
+    # print('Find all primes up to: ' + str(end_number))
+    # print('Nodes: ' + str(cluster_size))
+    # print('Time elasped: ' + str(end) + ' seconds')
 
     # Each process returned an array, so lets merge them
     merged_primes = [item for sublist in results for item in sublist]
     merged_primes.sort()
-    print('Primes discovered: ' + str(len(merged_primes)))
+    # print('Primes discovered: ' + str(len(merged_primes)))
     # Uncomment the next line to see all the prime numbers
     # print(merged_primes)
     data = {"message": "Hello from Python", "value": len(merged_primes)}
