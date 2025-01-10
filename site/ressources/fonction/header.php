@@ -29,7 +29,7 @@ function genererHeader($img, $menuButtons, $menuLinks, $loginButtons, $loginLink
     $headerHtml = '
 <header>
     <nav class="nav">
-        <a href="../index.html">
+        <a href="../index.php">
             <div name="logo" class="logo">
                 <img src="'. $img .'" alt="logo du site">
             </div>

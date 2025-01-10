@@ -41,7 +41,7 @@ if (isset($_SESSION["util_id"])){
     $loginLinks = ["profile/index.php"];
 }else{
     $loginButtons = ["Connexion"];
-    $loginLinks = ["../signin/index.html"];
+    $loginLinks = ["signin/index.html"];
 }
 
 if (isset($_SESSION["util_id"]) && $user['admin']){
@@ -82,7 +82,7 @@ if (!isset($_SESSION["util_id"])){
         <tbody>
         <?php
         // Récupérer les 10 derniers calculs de l'utilisateur
-        $stmt = $conn->prepare("SELECT programme, entree, sortie FROM Calculs ORDER BY calc_id DESC LIMIT 10");
+        $stmt = $conn->prepare("SELECT entree, sortie FROM Calculs ORDER BY calc_id DESC LIMIT 10");
         $stmt->execute();
 
         $calculs = $stmt->fetchAll(PDO::FETCH_ASSOC);
