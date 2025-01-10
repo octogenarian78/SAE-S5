@@ -8,17 +8,7 @@ $conn = connectDB();
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $login = htmlspecialchars($_POST["username"]);
     $mdp = $_POST["password"];
-    $confirm_mdp = $_POST["confirm-password"];
-    $prenom = htmlspecialchars($_POST["first-name"]);
-    $nom = htmlspecialchars($_POST["last-name"]);
-    $email = htmlspecialchars($_POST["email"]);
-
-    // Vérification des champs
-    if ($mdp !== $confirm_mdp) {
-        echo "Les mots de passe ne correspondent pas.";
-        exit;
-    }
-
+   
     // Vérification si le login existe déjà
     $stmt = $conn->prepare("SELECT util_id, mdp FROM Utilisateurs WHERE login = :login");
     $stmt->bindParam(":login", $login);
