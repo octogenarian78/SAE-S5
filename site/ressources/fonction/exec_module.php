@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Retourner la sortie pour affichage ou traitement
                 echo json_encode(['success' => true, 'output' => $data["value"]]);
             } else {
-                echo json_encode(['success' => false, 'message' => "Le JSON retourné est invalide." . $output]);
+                echo json_encode(['success' => false, 'message' => "Le JSON retourné est invalide."]);
             }
         } else {
             echo json_encode(['success' => false, 'message' => "Aucune sortie n'a été générée par la commande."]);

@@ -44,7 +44,7 @@ if (isset($_SESSION["util_id"])){
     $menuButtons[] = "Accueil";
     $menuLinks[] = "../index.php";
     $loginButtons = ["Profil"];
-    $loginLinks = ["profile/index.php"];
+    $loginLinks = ["../profile/index.php"];
 }else{
     $loginButtons = ["Connexion"];
     $loginLinks = ["../signin/index.html"];
