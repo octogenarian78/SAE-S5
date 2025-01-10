@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             if ($data !== null) {
                 // Retourner la sortie pour affichage ou traitement
-                echo json_encode(['success' => true, 'output' => $data["value"]]);
+                echo json_encode(['success' => true, 'message' => $data]);
             } else {
                 echo json_encode(['success' => false, 'message' => "Le JSON retourné est invalide." . $data]);
             }
