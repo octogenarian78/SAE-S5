@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $hashed_password = password_hash($mdp, PASSWORD_BCRYPT);
 
     // Récupération de l'ID de l'utilisateur nouvellement créé
-    if($user["mdp"]==password_hash){
+    if($user["mdp"]==$hashed_password){
         // Stockage des informations utilisateur dans la session
         $_SESSION["util_id"] = $user["util_id"];
         $_SESSION["login"] = $login;
