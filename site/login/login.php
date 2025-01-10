@@ -27,10 +27,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
     // Hachage du mot de passe
-    $hashed_password = password_hash($mdp, PASSWORD_BCRYPT);
+    //$hashed_password = password_hash($mdp, PASSWORD_BCRYPT);
 
     // Récupération de l'ID de l'utilisateur nouvellement créé
-    if($user["mdp"]==$hashed_password){
+    if($user["mdp"]==$mdp){
         // Stockage des informations utilisateur dans la session
         $_SESSION["util_id"] = $user["util_id"];
         $_SESSION["login"] = $login;
