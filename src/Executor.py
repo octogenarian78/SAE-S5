@@ -99,20 +99,20 @@ def measure_scalability(folder, file, args_list, processors_list, iterations, ou
     # Executer la scalabilité forte en premier
     for processors in processors_list:
         for iteration in range(1, iterations + 1):
-            args = args_list[0]  # Args pour la scalabilité forte
+            args = args_list[-1]
             process_scalability(processors, args, iteration, "Forte")
 
     # Ensuite, executer la scalabilité faible
     for processors in processors_list:
         for iteration in range(1, iterations + 1):
             args_index = processors_list.index(processors)
-            args = args_list[args_index]  # Args pour la scalabilité faible
+            args = args_list[args_index]
             process_scalability(processors, args, iteration, "Faible")
 
 
 def main():
-    if len(sys.argv) != 8:
-        print("Usage : script.py <folder> <file> <args> <processors> <iterations> <output_file> <mode>")
+    if len(sys.argv) != 7:
+        print("Usage : Executor.py <folder> <file> <args> <processors> <iterations> <output_file>")
         sys.exit(1)
 
     folder = sys.argv[1]
@@ -121,11 +121,6 @@ def main():
     processors_list = [int(p) for p in sys.argv[4].split(";")]
     iterations = int(sys.argv[5])
     output_file = sys.argv[6]
-    mode = sys.argv[7].lower()
-
-    if mode not in ["strong", "weak"]:
-        print("Le mode doit être 'strong' ou 'weak'.")
-        sys.exit(1)
 
     measure_scalability(folder, file, args_list, processors_list, iterations, output_file)
 
