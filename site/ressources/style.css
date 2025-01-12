@@ -490,10 +490,14 @@ h1 {
 
 /* Conteneur de la barre de progression */
 .progress-container {
-  width: 50%; /* Ajustez la largeur de la barre de progression */
+  width: 75%; /* Ajuste la largeur du conteneur (vous pouvez réduire ou augmenter selon le besoin) */
   background-color: #f3f3f3;
   border-radius: 20px;
   margin: 20px 0; /* Espace autour de la barre */
+  display: flex;
+  justify-content: space-between; /* Sépare la barre et le texte */
+  align-items: center;
+  padding: 5px; /* Pour éviter que le texte touche les bords du conteneur */
 }
 
 /* Style de la barre de progression */
@@ -501,12 +505,17 @@ h1 {
   width: 0%; /* Commence avec 0% de largeur (à ajuster avec le script ou autre logique) */
   height: 30px;
   border-radius: 20px;
-  background-color: #4caf50;
   text-align: center;
   line-height: 30px;
-  color: white;
   font-weight: bold;
 }
+
+/* Style du texte */
+.progress-text {
+  font-size: 14px; /* Ajustez la taille du texte si nécessaire */
+  padding: 0 10px; /* Un peu d'espace à gauche du texte */
+}
+
 
 .stockage a{
   text-decoration: none;
