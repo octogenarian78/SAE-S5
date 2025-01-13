@@ -26,9 +26,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
     // Hachage du mot de passe
-    //$hashed_password = password_hash($mdp, PASSWORD_BCRYPT);
+    $hashed_password = sha1($mdp);
 
-    if($user["mdp"]!=$mdp){
+    if($user["mdp"]!=$hashed_password){
         header("Location: index.html?error=2");
         exit;
     }

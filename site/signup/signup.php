@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     // Hachage du mot de passe
-    $hashed_password = password_hash($mdp, PASSWORD_BCRYPT);
+    $hashed_password = sha1($mdp);
 
     // Insertion dans la base de données
     $stmt = $conn->prepare("INSERT INTO Utilisateurs (login, mdp) VALUES (:login, :mdp)");
