@@ -46,7 +46,7 @@ if (isset($_SESSION["util_id"])){
 
 if (isset($_SESSION["util_id"]) && $user['admin']){
     $menuButtons[] = "Administration";
-    $menuLinks[] = "../administration/index.php";
+    $menuLinks[] = "administration/index.php";
 }
 
 echo genererHeader('ressources/img/logo.png',$menuButtons, $menuLinks, $loginButtons, $loginLinks);
