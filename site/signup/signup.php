@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     // Vérification des champs
     if ($mdp !== $confirm_mdp) {
-        echo "Les mots de passe ne correspondent pas.";
+        header("Location: index.html?id=1");
         exit;
     }
 
@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt->execute();
 
     if ($stmt->rowCount() > 0) {
-        echo "Ce login est déjà utilisé. Veuillez en choisir un autre.";
+        header("Location: index.html?id=2");
         exit;
     }
 
@@ -52,6 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit;
 
     } catch (PDOException $e) {
-        echo "Erreur lors de l'inscription : " . $e->getMessage();
+        header("Location: index.html?id=4");
+        exit;
     }
 }
