@@ -29,6 +29,9 @@ function getRpiStatus() {
             $cpuUsageOutput = [];
             exec($cpuUsageCommand, $cpuUsageOutput, $cpuUsageResult);
 
+            echo "<script>console.log('" . addslashes($cpuUsageResult) . "')</script>";
+            echo "<script>console.log('" . addslashes($cpuUsageOutput[0]) . "')</script>";
+
             if ($cpuUsageResult === 0 && isset($cpuUsageOutput[0])) {
                 $cpuUsage = floatval($cpuUsageOutput[0]);
 
