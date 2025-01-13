@@ -27,10 +27,13 @@ function getRpiStatus() {
             //    - 'END {print sum}' : Affiche la somme totale des utilisations CPU.
             $cpuUsageCommand = "ssh pi@$rpi";
             $cpuUsageOutput = [];
-            exec($cpuUsageCommand, $cpuUsageOutput, $cpuUsageResult);
+            $output = shell_exec($cpuUsageCommand);
 
-            echo "<script>console.log('" . addslashes($cpuUsageResult) . "')</script>";
-            echo "<script>console.log('" . addslashes($cpuUsageOutput[0]) . "')</script>";
+            $data = json_decode($output, true);
+
+            echo "<script>console.log('" . addslashes($data) . "')</script>";
+
+            
 
             if ($cpuUsageResult === 0 && isset($cpuUsageOutput[0])) {
                 $cpuUsage = floatval($cpuUsageOutput[0]);
