@@ -28,6 +28,8 @@ function getRpiStatus() {
             $cpuUsageCommand = "ssh pi@$rpiIP[$i] 'top -bn1 | awk \"/%CPU/ {getline; sum += \$9} END {print sum}\" 2>/dev/null'";
             $cpuUsageOutput = [];
             exec($cpuUsageCommand, $cpuUsageOutput, $cpuUsageResult);
+            echo "<script>console.log('" . addslashes($cpuUsageResult) . "')</script>";
+            echo "<script>console.log('" . addslashes($cpuUsageOutput[0]) . "')</script>";
 
             if ($cpuUsageResult === 0 && isset($cpuUsageOutput[0])) {
                 $cpuUsage = floatval($cpuUsageOutput[0]);
