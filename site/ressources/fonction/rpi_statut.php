@@ -1,12 +1,19 @@
 <?php
 function getRpiStatus() {
     $rpiAliases = ["p1", "p2", "p3", "p4"];
+    $rpiIP = [
+        "172.19.181.1",
+        "172.19.181.2",
+        "172.19.181.3",
+        "172.19.181.4"
+    ];
     $statuses = [];
 
-    foreach ($rpiAliases as $rpi) {
+    for ($i = 1 ; $i <= count($rpiAliases) ; $i++) {
         // Vérifie si le RPI est joignable via ping
+        $rpi = $rpiAliases[$i];
         $pingOutput = [];
-        exec("ping -c 1 -W 1 $rpi 2>&1", $pingOutput, $pingResult);
+        exec("ping -c 1 -W 1 $rpiIP[$i] 2>&1", $pingOutput, $pingResult);
 
         if ($pingResult === 0) {
             // Si le ping réussit, récupère l'utilisation CPU via SSH
