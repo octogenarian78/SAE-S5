@@ -9,7 +9,7 @@ function getRpiStatus() {
     ];
     $statuses = [];
 
-    for ($i = 1 ; $i <= count($rpiAliases) ; $i++) {
+    for ($i = 0 ; $i < count($rpiAliases) ; $i++) {
         // Vérifie si le RPI est joignable via ping
         $rpi = $rpiAliases[$i];
         $pingOutput = [];
