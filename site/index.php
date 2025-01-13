@@ -65,7 +65,7 @@ echo genererHeader('ressources/img/logo.png',$menuButtons, $menuLinks, $loginBut
 if (!isset($_SESSION["util_id"])){
     echo ('
         <div class="signup-button">
-            <a href="signup/index.html" class="btn-inscription">S\'inscrire</a>
+            <a href="signup/index.php" class="btn-inscription">S\'inscrire</a>
         </div>'
     );
 }

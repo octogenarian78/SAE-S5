@@ -9,6 +9,20 @@
 <div class="signup-form-container">
     <form class="signup-form" action="signup.php" method="POST">
         <h2>Inscription</h2>
+
+        <?php
+        if(isset($_GET['id'])) {
+            echo '<div class="erreur">';
+            echo '<p>';
+            if ($_GET['id'] == "1") { echo "ERREUR : Les champs mot de passe et confirmation du mot de passe sont différents"; }
+            else if ($_GET['id'] == "2") { echo "ERREUR : L'utilisateur est déjà présent dans la base de données'"; }
+            else if ($_GET['id'] == "4") { echo "ERREUR : Une erreur est survenue dans la base de données"; }
+            else { echo "ERREUR : Une erreur est survenue"; }
+            echo '</p>';
+            echo '</div>';
+        }
+        ?>
+        
         <div class="form-content">
             <div class="left-column">
                 <div class="input-group">
@@ -57,7 +71,7 @@
 
         <br><br>
         <div class="login-link">
-            <p>Déjà un compte ? <a href="../login/index.html">Connectez-vous ici</a></p>
+            <p>Déjà un compte ? <a href="../login/index.php">Connectez-vous ici</a></p>
         </div>
     </form>
 </div>

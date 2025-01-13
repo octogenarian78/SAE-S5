@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     // Vérification des champs
     if ($mdp !== $confirm_mdp) {
-        header("Location: index.html?id=1");
+        header("Location: index.php?id=1");
         exit;
     }
 
@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt->execute();
 
     if ($stmt->rowCount() > 0) {
-        header("Location: index.html?id=2");
+        header("Location: index.php?id=2");
         exit;
     }
 
@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit;
 
     } catch (PDOException $e) {
-        header("Location: index.html?id=4");
+        header("Location: index.php?id=4");
         exit;
     }
 }
