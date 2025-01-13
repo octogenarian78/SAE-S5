@@ -41,7 +41,7 @@ if (isset($_SESSION["util_id"])){
     $loginLinks = ["profile/index.php"];
 }else{
     $loginButtons = ["Connexion"];
-    $loginLinks = ["login/index.html"];
+    $loginLinks = ["login/index.php"];
 }
 
 if (isset($_SESSION["util_id"]) && $user['admin']){
