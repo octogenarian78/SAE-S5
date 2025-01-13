@@ -7,7 +7,16 @@ $conn = connectDB();
 // Traitement du formulaire
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $login = htmlspecialchars($_POST["username"]);
-    $mdp = $_POST["password"];
+    $mdp = htmlspecialchars($_POST["password"]);
+
+    if (empty($login)){
+        header("Location: index.html?error=1a");
+        exit;
+    }
+    if (empty($mdp)){
+        header("Location: index.html?error=1b");
+        exit;
+    }
    
     // Vérification si le login existe déjà
     $stmt = $conn->prepare("SELECT util_id, mdp FROM Utilisateurs WHERE login = :login");
@@ -19,14 +28,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Hachage du mot de passe
     //$hashed_password = password_hash($mdp, PASSWORD_BCRYPT);
 
-    // Récupération de l'ID de l'utilisateur nouvellement créé
-    if($user["mdp"]==$mdp){
-        // Stockage des informations utilisateur dans la session
-        $_SESSION["util_id"] = $user["util_id"];
-        $_SESSION["login"] = $login;
+    if($user["mdp"]!=$mdp){
+        header("Location: index.html?error=2");
+        exit;
+    }
 
-    // Redirection vers la page profil
+    $_SESSION["util_id"] = $user["util_id"];
+    $_SESSION["login"] = $login;
+
     header("Location: ../profile/index.php");
     exit;
-    }
 }
