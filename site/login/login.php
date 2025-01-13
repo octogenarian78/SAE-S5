@@ -10,11 +10,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $mdp = htmlspecialchars($_POST["password"]);
 
     if (empty($login)){
-        header("Location: index.php?error=1a");
+        header("Location: index.php?id=1a");
         exit;
     }
     if (empty($mdp)){
-        header("Location: index.php?error=1b");
+        header("Location: index.php?id=1b");
         exit;
     }
    
@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $hashed_password = sha1($mdp);
 
     if($user["mdp"]!=$hashed_password){
-        header("Location: index.php?error=2");
+        header("Location: index.php?id=2");
         exit;
     }
 
