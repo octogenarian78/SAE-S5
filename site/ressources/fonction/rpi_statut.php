@@ -25,15 +25,9 @@ function getRpiStatus() {
             //    - 'getline' : Passe à la ligne suivante où commencent les données.
             //    - 'sum += $9' : Ajoute les valeurs de la 9ème colonne (%CPU de chaque processus).
             //    - 'END {print sum}' : Affiche la somme totale des utilisations CPU.
-            $cpuUsageCommand = "ssh pi@$rpi";
+            $cpuUsageCommand = "ssh pi@$rpiIP[$i] 'top -bn1 | awk \"/%CPU/ {getline; sum += \$9} END {print sum}\" 2>/dev/null'";
             $cpuUsageOutput = [];
-            $output = shell_exec($cpuUsageCommand);
-
-            $data = json_decode($output, true);
-
-            echo "<script>console.log('" . addslashes($data) . "')</script>";
-
-            
+            exec($cpuUsageCommand, $cpuUsageOutput, $cpuUsageResult);
 
             if ($cpuUsageResult === 0 && isset($cpuUsageOutput[0])) {
                 $cpuUsage = floatval($cpuUsageOutput[0]);
