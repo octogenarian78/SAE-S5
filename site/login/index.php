@@ -41,7 +41,7 @@
 
         <br><br>
         <div class="sign-up-link">
-            <p>Pas de compte ? <a href="../signup/index.html">Inscrivez-vous ici</a></p>
+            <p>Pas de compte ? <a href="../signup/index.php">Inscrivez-vous ici</a></p>
         </div>
 
     </form>
