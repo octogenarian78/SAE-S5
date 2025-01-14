@@ -30,13 +30,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Vérifier si la sortie est un JSON valide
             $data = json_decode($output, true);
 
-            echo "<script>console.log('" . $data . "')</script>";
-
             if ($data !== null) {
                 // Retourner la sortie pour affichage ou traitement
                 echo json_encode(['success' => true, 'output' => $data["value"]]);
             } else {
-                echo json_encode(['success' => false, 'message' => "Le JSON retourné est invalide."]);
+                echo json_encode(['success' => false, 'message' => "Le JSON retourné est invalide. ". $output]);
             }
         } else {
             echo json_encode(['success' => false, 'message' => "Aucune sortie n'a été générée par la commande."]);
