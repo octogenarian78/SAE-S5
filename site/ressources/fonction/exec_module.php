@@ -23,12 +23,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $command = "mpiexec -n" . escapeshellcmd($nbRPI) . "python3 " . escapeshellcmd($cheminAcces) . " " . escapeshellarg($number) . " 2>&1";
 
         // Exécuter la commande
-        $output = shell_exec($command);    
+        $output = shell_exec($command);     
 
         // Vérifier si la commande a retourné quelque chose
         if ($output !== null) {
             // Vérifier si la sortie est un JSON valide
             $data = json_decode($output, true);
+
+            echo "<script>console.log('" . $data . "')</script>";
 
             if ($data !== null) {
                 // Retourner la sortie pour affichage ou traitement
