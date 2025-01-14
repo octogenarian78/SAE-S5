@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $cheminAcces = "../../../" . $result['chemin_acces'];
 
         // Construire la commande avec un espace entre python3 et le chemin du programme
-        $command = "mpiexec -n" . $nbRPI . "python3 " . escapeshellcmd($cheminAcces) . " " . escapeshellarg($number) . " 2>&1";
+        $command = "mpiexec -n" . escapeshellcmd($nbRPI) . "python3 " . escapeshellcmd($cheminAcces) . " " . escapeshellarg($number) . " 2>&1";
 
         // Exécuter la commande
         $output = shell_exec($command);    
