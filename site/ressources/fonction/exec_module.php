@@ -6,6 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $conn = connectDB();
     $programme = $_POST['programme'];
     $number = $_POST['number'];
+    $nbRPI = $_POST['nbRPI'];
 
     // Préparer une requête pour récupérer le chemin d'accès du programme
     $stmt = $conn->prepare("SELECT chemin_acces FROM Programmes WHERE prog_id = :programme");
@@ -19,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $cheminAcces = "../../../" . $result['chemin_acces'];
 
         // Construire la commande avec un espace entre python3 et le chemin du programme
-        $command = "mpiexec -n 4 python3 " . escapeshellcmd($cheminAcces) . " " . escapeshellarg($number) . " 2>&1";
+        $command = "mpiexec -n" . $nbRPI . "python3 " . escapeshellcmd($cheminAcces) . " " . escapeshellarg($number) . " 2>&1";
 
         // Exécuter la commande
         $output = shell_exec($command);    

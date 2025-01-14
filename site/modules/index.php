@@ -80,7 +80,7 @@ $programmes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 // Vérifiez si le tableau est vide
 if (empty($programmes)) {
-    echo '<a class="btn-module-select">Aucun modules n\'est disponible</a>';
+    echo '<p class="btn-module-select">Aucun modules n\'est disponible</p>';
 } else {
     foreach ($programmes as $programme) {
         $nomProgramme = str_replace(' ', '', $programme['nom_programme']);
@@ -139,13 +139,14 @@ foreach ($programmes as $programme) {
                     row_result.textContent = "Calcul en cours..."
 
                     const number = document.getElementById('number')
+                    const nbRPI = document.getElementById('nbRPI')
 
                     fetch('../ressources/fonction/exec_module.php', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/x-www-form-urlencoded',
                         },
-                        body: `programme=${encodeURIComponent(button.getAttribute("id"))}&number=${encodeURIComponent(number.value)}`
+                        body: `programme=${encodeURIComponent(button.getAttribute("id"))}&number=${encodeURIComponent(number.value)}&nbRPI=${encodeURIComponent(nbRPI.value)}`
                     })
                         .then(response => {
                             return response.json();
