@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $cheminAcces = "../../../" . $result['chemin_acces'];
 
         // Construire la commande avec un espace entre python3 et le chemin du programme
-        $command = "mpiexec -n" . escapeshellcmd($nbRPI) . "python3 " . escapeshellcmd($cheminAcces) . " " . escapeshellarg($number) . " 2>&1";
+        $command = "mpiexec -n " . escapeshellarg($nbRPI) . " python3 " . escapeshellcmd($cheminAcces) . " " . escapeshellarg($number) . " 2>&1";
 
         // Exécuter la commande
         $output = shell_exec($command);     
@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Retourner la sortie pour affichage ou traitement
                 echo json_encode(['success' => true, 'output' => $data["value"]]);
             } else {
-                echo json_encode(['success' => false, 'message' => "Le JSON retourné est invalide. ". $output]);
+                echo json_encode(['success' => false, 'message' => "Le JSON retourné est invalide. "]);
             }
         } else {
             echo json_encode(['success' => false, 'message' => "Aucune sortie n'a été générée par la commande."]);
