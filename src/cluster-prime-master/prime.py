@@ -50,13 +50,13 @@ if my_rank == 0:
     # How long did it take?
     end = round((time.time() * 1000) - start, 2)
 
-    print('Argument: ' + str(end_number))
-    print('Nodes: ' + str(cluster_size))
-    print('Time: ' + str(end))
+    print(f"Argument: {end_number}")
+    print(f"Nodes: {cluster_size}")
+    print(f"Time: {end}")
 
     # Each process returned an array, so lets merge them
     merged_primes = [item for sublist in results for item in sublist]
     merged_primes.sort()
-    print('Primes: ' + str(len(merged_primes)))
+    print(f"Primes: {merged_primes}")
     # Uncomment the next line to see all the prime numbers
     # print(merged_primes)
