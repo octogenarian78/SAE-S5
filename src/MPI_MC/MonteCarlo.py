@@ -25,7 +25,7 @@ if rank != 0:
 
 else:  # Collecte des résultats par le processus maître (rang 0)
 
-    start = time.time()
+    start = time.time_ns()
 
     total_cpt = 0  # Compteur total
     total_points = numIter * (size - 1)
@@ -34,7 +34,7 @@ else:  # Collecte des résultats par le processus maître (rang 0)
         total_cpt += partial_cpt
 
     pi = 4 * total_cpt / total_points
-    end = time.time()
+    end = time.time_ns()
 
     print(f"Processus: {size}")
     print(f"Points: {total_points}")

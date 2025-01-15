@@ -14,7 +14,7 @@ start_number = (my_rank * 2) + 1
 end_number = int(sys.argv[1])
 
 # Make a note of the start time
-start = time.time()
+start = time.time_ns()
 
 # List of discovered primes for this node
 primes = []
@@ -48,11 +48,11 @@ results = comm.gather(primes, root=0)
 if my_rank == 0:
 
     # How long did it take?
-    end = round(time.time() - start, 2)
+    end = round(time.time_ns() - start, 2)
 
     print('Argument: ' + str(end_number))
     print('Nodes: ' + str(cluster_size))
-    print('Time: ' + str(end) + ' seconds')
+    print('Time: ' + str(end))
 
     # Each process returned an array, so lets merge them
     merged_primes = [item for sublist in results for item in sublist]
