@@ -61,6 +61,6 @@ if my_rank == 0:
     # print('Primes discovered: ' + str(len(merged_primes)))
     # Uncomment the next line to see all the prime numbers
     # print(merged_primes)
-    data = {"message": "Hello from Python", "value": len(merged_primes)}
+    data = {"message": "Résultat du lancement de prime.py", "value": len(merged_primes), "liste" : merged_primes }
     print(json.dumps(data))
 
