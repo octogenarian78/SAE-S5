@@ -26,7 +26,7 @@ else:  # Collecte des résultats par le processus maître (rang 0)
     start = time.time() * 1000
 
     total_cpt = 0  # Compteur total
-    total_points = numIter * (size - 1)
+    total_points = numIter * size
     for i in range(1, size):  # Récupération des résultats des processus esclaves
         partial_cpt = comm.recv(source=i, tag=i)
         total_cpt += partial_cpt
