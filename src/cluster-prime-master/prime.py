@@ -57,6 +57,6 @@ if my_rank == 0:
     # Each process returned an array, so lets merge them
     merged_primes = [item for sublist in results for item in sublist]
     merged_primes.sort()
-    print(f"Primes: {merged_primes}")
+    print(f"Primes: {len(merged_primes)}")
     # Uncomment the next line to see all the prime numbers
     # print(merged_primes)
