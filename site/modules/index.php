@@ -115,60 +115,59 @@ foreach ($programmes as $programme) {
             if (popup) {
                 popup.style.display = 'block';
                 popupOverlay.style.display = 'block';
-            }
+                const btnOk = popup.querySelector('.btn-ok');
 
-            // Fermer les popups au clic sur l'overlay
-            popupOverlay.addEventListener('click', () => {
-                popup.style.display = 'none';
-                popupOverlay.style.display = 'none';
-            });
+                // Ajouter un gestionnaire d'événements pour la touche "Entrée"
+                document.addEventListener('keydown', function enterHandler(event) {
+                    if (event.keyCode === 13) { // 13 est le code pour "Entrée"
+                        event.preventDefault();
+                        if (popup.style.display === 'block') {
+                            btnOk.click();
+                        }
+                    }
+                });
 
-            // Attacher les événements pour les boutons OK et Annuler
-            const btnOk = popup.querySelector('.btn-ok');
-            const btnCancel = popup.querySelector('.btn-cancel');
-            if (btnOk && btnCancel) {
-                // Bouton Annuler : fermer le popup
-                btnCancel.addEventListener('click', () => {
+                // Fermer les popups au clic sur l'overlay
+                popupOverlay.addEventListener('click', () => {
                     popup.style.display = 'none';
                     popupOverlay.style.display = 'none';
                 });
 
-                // Bouton OK : envoyer la requête AJAX
-                btnOk.addEventListener('click', () => {
-                    popup.style.display = 'none';
-                    popupOverlay.style.display = 'none';
-                    const row_result = document.getElementById("result")
-                    row_result.textContent = "Calcul en cours..."
+                if (btnOk) {
+                    // Bouton OK : envoyer la requête AJAX
+                    btnOk.addEventListener('click', () => {
+                        popup.style.display = 'none';
+                        popupOverlay.style.display = 'none';
+                        const row_result = document.getElementById("result")
+                        row_result.textContent = "Calcul en cours...";
 
-                    const number = document.getElementById('number')
-                    const nbRPI = document.getElementById('nbRPI')
+                        const number = document.getElementById('number');
+                        const nbRPI = document.getElementById('nbRPI');
 
-                    fetch('../ressources/fonction/exec_module.php', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded',
-                        },
-                        body: `programme=${encodeURIComponent(button.getAttribute("id"))}&number=${encodeURIComponent(number.value)}&nbRPI=${encodeURIComponent(nbRPI.value)}`
-                    })
-                        .then(response => {
-                            return response.json();
+                        fetch('../ressources/fonction/exec_module.php', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded',
+                            },
+                            body: `programme=${encodeURIComponent(button.getAttribute("id"))}&number=${encodeURIComponent(number.value)}&nbRPI=${encodeURIComponent(nbRPI.value)}`
                         })
-                        .then(data => {
-                            if (data.success) {
-                                row_result.textContent = JSON.stringify(data.output, null, 2);
-                            } else {
-                                row_result.textContent = data.message;
-                            }
-                        })
-                        .catch(error => {
-                            console.error('Erreur lors de l\'exécution :', error);
-                            alert('Une erreur est survenue.');
-                        });
-                });
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    row_result.textContent = JSON.stringify(data.output, null, 2);
+                                } else {
+                                    row_result.textContent = data.message;
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Erreur lors de l\'exécution :', error);
+                                alert('Une erreur est survenue.');
+                            });
+                    });
+                }
             }
         });
     });
-
 </script>
 
 </body>
