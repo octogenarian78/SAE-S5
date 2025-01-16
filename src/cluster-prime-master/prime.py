@@ -49,7 +49,7 @@ results = comm.gather(primes, root=0)
 if my_rank == 0:
 
     # How long did it take?
-    # end = round(time.time() - start, 2)
+    end = round(time.time() - start, 2)
 
     # print('Find all primes up to: ' + str(end_number))
     # print('Nodes: ' + str(cluster_size))
@@ -61,6 +61,9 @@ if my_rank == 0:
     # print('Primes discovered: ' + str(len(merged_primes)))
     # Uncomment the next line to see all the prime numbers
     # print(merged_primes)
-    data = {"message": "Résultat du lancement de prime.py", "value": len(merged_primes), "liste" : merged_primes }
+    data = {"message": "Résultat du lancement de prime.py", 
+            "value": len(merged_primes), 
+            "liste" : merged_primes, 
+            "temps": end }
     print(json.dumps(data))
 
