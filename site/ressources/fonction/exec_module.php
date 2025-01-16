@@ -44,6 +44,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $stmt->bindParam(':util_id', $util_id, PDO::PARAM_INT);
                     $stmt->execute();
 
+                    $conn->commit();
+
                     echo json_encode(['success' => true, 'output' => $data["value"]]);
                 } else {
                     echo json_encode(['success' => false, 'message' => "Le JSON retourné est invalide."]);
