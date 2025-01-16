@@ -32,11 +32,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $data = json_decode($output, true);
 
                 if (is_array($data) && isset($data["value"], $data["temps"])) {
+
                     $stmt = $conn->prepare("INSERT INTO Calculs (prog_id, entree, sortie, tps_calcul) VALUES (:programme, :entree, :sortie, :tps_calcul)");
                     $stmt->bindParam(':programme', $programme, PDO::PARAM_STR);
                     $stmt->bindParam(':entree', $number, PDO::PARAM_INT);
                     $stmt->bindParam(':sortie', $data["value"], PDO::PARAM_INT);
-                    $stmt->bindParam(':tps_calcul', $data["temps"], PDO::PARAM_INT);
+                    $stmt->bindParam(':tps_calcul', $data["temps"], PDO::PARAM_STR);
                     $stmt->execute();
 
                     echo json_encode(['success' => true, 'output' => $data["value"]]);
