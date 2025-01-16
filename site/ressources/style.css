@@ -591,3 +591,16 @@ h1 {
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 999;
 }
+
+/*
+
+Graphique
+
+*/ 
+
+
+.chartContainer{
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0 0 0; 
+}
