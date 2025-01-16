@@ -3,12 +3,14 @@ import random
 import sys
 import math
 import time
+import json
 
-numIter = int(sys.argv[1])
+
 
 comm = MPI.COMM_WORLD  # Communicateur global
 rank = comm.Get_rank()  # Rang du processus
 size = comm.Get_size()  # Nombre total de processus
+numIter = int(sys.argv[1]) // size
 
 start = time.time() * 1000
 cpt = 0  # Compteur pour les points en dehors du cercle
@@ -33,8 +35,16 @@ if rank == 0:  # Collecte des résultats par le processus maître (rang 0)
     pi = 4 * total_cpt / total_points
     end = time.time() * 1000
 
-    print(f"Processus: {size}")
-    print(f"Points: {total_points}")
-    print(f"Pi: {pi}")
-    print(f"Erreur: {math.pi - pi}")
-    print(f"Temps: {round(end - start, 2)}")
+    time = round(end - start, 2)
+    error = math.pi - pi
+    
+
+    data = {"message" : "Résultat du lancement de MonteCarlo.py", "value" : error, "pi" : round(pi,5), "temps" : time}
+
+    #print(f"Processus: {size}")
+    #print(f"Points: {total_points}")
+    #print(f"Pi: {pi}")
+    #print(f"Erreur: {math.pi - pi}")
+    #print(f"Temps: {round(end - start, 2)}")
+
+    print(json.dumps(data))
