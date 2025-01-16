@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     error_log(print_r($_POST, true));
     include "db_connect.php";
@@ -7,6 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $programme = $_POST['programme'] ?? '';
     $number = $_POST['number'] ?? '';
     $nbRPI = $_POST['nbRPI'] ?? '';
+    $util_id = $_SESSION['util_id'] ?? '';
 
     if (empty($programme) || empty($number) || empty($nbRPI)) {
         echo json_encode(['success' => false, 'message' => "Données manquantes ou invalides."]);
@@ -33,11 +36,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 if (is_array($data) && isset($data["value"], $data["temps"])) {
 
-                    $stmt = $conn->prepare("INSERT INTO Calculs (prog_id, entree, sortie, tps_calcul) VALUES (:programme, :entree, :sortie, :tps_calcul)");
+                    $stmt = $conn->prepare("INSERT INTO Calculs (util_id, prog_id, entree, sortie, tps_calcul) VALUES (:util_id, :programme, :entree, :sortie, :tps_calcul)");
                     $stmt->bindParam(':programme', $programme, PDO::PARAM_INT);
                     $stmt->bindParam(':entree', $number, PDO::PARAM_INT);
                     $stmt->bindParam(':sortie', $data["value"], PDO::PARAM_INT);
                     $stmt->bindParam(':tps_calcul', $data["temps"], PDO::PARAM_STR);
+                    $stmt->bindParam(':util_id', $util_id, PDO::PARAM_INT);
                     $stmt->execute();
 
                     echo json_encode(['success' => true, 'output' => $data["value"]]);
