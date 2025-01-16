@@ -40,6 +40,8 @@ if (!$user) {
 $menuButtons = [];
 $menuLinks = [];
 
+$logoLink = "../";
+
 if (isset($_SESSION["util_id"])){
     $menuButtons[] = "Accueil";
     $menuLinks[] = "../index.php";
@@ -55,7 +57,7 @@ if (isset($_SESSION["util_id"]) && $user['admin']){
     $menuLinks[] = "../administration/index.php";
 }
 
-echo genererHeader('../ressources/img/logo.png',$menuButtons, $menuLinks, $loginButtons, $loginLinks);
+echo genererHeader('../ressources/img/logo.png',$menuButtons, $menuLinks, $loginButtons, $loginLinks, $logoLink);
 ?>
 <div class="centered_content">
     <div name="calcul-result" class="calcul-result">

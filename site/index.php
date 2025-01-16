@@ -34,6 +34,8 @@ if (isset($_SESSION["util_id"])) {
 $menuButtons = [];
 $menuLinks = [];
 
+$logoLink = "#";
+
 if (isset($_SESSION["util_id"])){
     $menuButtons[] = "Modules";
     $menuLinks[] = "modules/index.php";
@@ -49,7 +51,7 @@ if (isset($_SESSION["util_id"]) && $user['admin']){
     $menuLinks[] = "administration/index.php";
 }
 
-echo genererHeader('ressources/img/logo.png',$menuButtons, $menuLinks, $loginButtons, $loginLinks);
+echo genererHeader('ressources/img/logo.png',$menuButtons, $menuLinks, $loginButtons, $loginLinks, $logoLink);
 ?>
 <div class="content">
     <div class="video-description">

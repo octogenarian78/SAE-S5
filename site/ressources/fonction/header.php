@@ -1,6 +1,6 @@
 <?php
 
-function genererHeader($img, $menuButtons, $menuLinks, $loginButtons, $loginLinks) {
+function genererHeader($img, $menuButtons, $menuLinks, $loginButtons, $loginLinks, $logoLink) {
 
     // Vérification que les tableaux ont le même nombre d'éléments
     if (count($menuButtons) !== count($menuLinks) || count($loginButtons) !== count($loginLinks)) {
@@ -29,7 +29,7 @@ function genererHeader($img, $menuButtons, $menuLinks, $loginButtons, $loginLink
     $headerHtml = '
 <header>
     <nav class="nav">
-        <a href="../index.php">
+        <a href="'.$logoLink.'">
             <div name="logo" class="logo">
                 <img src="'. $img .'" alt="logo du site">
             </div>

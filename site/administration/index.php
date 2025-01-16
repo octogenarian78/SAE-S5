@@ -34,10 +34,13 @@ $statuses = getRpiStatus();
 
 $menuButtons = ["Accueil", "Modules"];
 $menuLinks = ["../index.php", "../modules/index.php"];
+
+$logoLink = "../";
+
 $loginButtons = ["Profil"];
 $loginLinks = ["../profile/index.php"];
 
-echo genererHeader('../ressources/img/logo.png', $menuButtons, $menuLinks, $loginButtons, $loginLinks);
+echo genererHeader('../ressources/img/logo.png', $menuButtons, $menuLinks, $loginButtons, $loginLinks, $logoLink);
 ?>
 <div name="connexion-state" class="connexion-state">
     <h3>Statut de connexion</h3>
