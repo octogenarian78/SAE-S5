@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $finalCount = $countStmt->fetchColumn();
 
                     if ($finalCount - $initialCount > 1) {
-                        $deleteStmt = $conn->prepare("DELETE FROM Calculs WHERE prog_id = :programme AND util_id = :util_id ORDER BY id DESC LIMIT :limit");
+                        $deleteStmt = $conn->prepare("DELETE FROM Calculs WHERE prog_id = :programme AND util_id = :util_id ORDER BY calc_id DESC LIMIT :limit");
                         $deleteStmt->bindParam(':programme', $programme, PDO::PARAM_INT);
                         $deleteStmt->bindParam(':util_id', $util_id, PDO::PARAM_INT);
                         $deleteStmt->bindValue(':limit', $finalCount - $initialCount - 1, PDO::PARAM_INT);
