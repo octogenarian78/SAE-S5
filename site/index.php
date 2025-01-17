@@ -56,7 +56,7 @@ echo genererHeader('ressources/img/logo.png',$menuButtons, $menuLinks, $loginBut
 <div class="content">
     <div class="video-description">
         <div class="description">
-            Description du site
+            <p>Ce site offre une solution rapide et efficace pour le calcul de certains modules mathématiques, notamment la détermination des nombres premiers d'un nombre donné. <br><br> Grâce à une infrastructure distribuée reposant sur un réseau de plusieurs Raspberry Pi (RPI), le site permet de répartir les calculs entre différents nœuds, optimisant ainsi la vitesse et la précision des résultats. <br><br> Lorsqu'une requête est soumise, les calculs sont divisés et traités simultanément par plusieurs Raspberry Pi, offrant ainsi des réponses en un temps réduit, même pour des nombres de grande taille. Cette approche garantit des performances exceptionnelles tout en simplifiant l'accès à des résultats mathématiques complexes.</p>
         </div>
         <div class="video">
             <iframe width="560" height="315" src="https://www.youtube.com/embed/UKRYHQALlAI?si=RteuZWQKMDy-d63F" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
