@@ -60,7 +60,7 @@ Nous allons tester tous les cas d'erreurs possibles lors de la connexion ainsi q
 
 Afin de se connecter à la plateforme l'utilisateur a besoin de renseigner son login et son mot de passe. S'il parvient à se connecter le résultat obtenu sera OK, ce qui veut dire que la connexion a bien été effectué et celle ci retournera la page de profil. 
 <br>
-Cependant, s'il échoue parce qu'un des champs ou les deux sont vides ou incorrects, des erreurs seront déclenchés. KO est renvoyé si il est impossible de se connecter suite au manque d'une valeur dans les champs et renvoie error=2 en cas de champs incorrect. 
+Cependant, s'il échoue parce qu'un des champs ou les deux sont vides ou incorrects, des erreurs seront déclenchés. KO est renvoyé si il est impossible de se connecter suite au manque d'une valeur dans les champs et renvoie id=2 en cas de champs incorrect. 
 
 ### Conception des tests
 
@@ -69,9 +69,9 @@ Cependant, s'il échoue parce qu'un des champs ou les deux sont vides ou incorre
 | P1  | Correct                      | Correct                   | OK | OK | $login et $mdp sont corrects                     |
 | P2  | Correct                   | Vide                      | KO | KO | $login correct et $mdp vide                     |
 | P3  | Vide                   | Correct                      | KO | KO | $login vide et $mdp correct                     |
-| P4  | Correct                   | Incorrect                      | error=2 | error=2 | $login vide et $mdp incorrect                     |
-| P5  | Incorrect                   | Correct                      | error=2 | error=2 | $login incorrect et $mdp correct                     |
-| P6  | Incorrect                   | Incorrect                      | error=2 | error=2 | $login et $mdp sont incorrectes                     |
+| P4  | Correct                   | Incorrect                      | id=2 | id=2 | $login vide et $mdp incorrect                     |
+| P5  | Incorrect                   | Correct                      | id=2 | id=2 | $login incorrect et $mdp correct                     |
+| P6  | Incorrect                   | Incorrect                      | id=2 | id=2 | $login et $mdp sont incorrectes                     |
 | P7  | Vide                   | Vide                      | KO | KO | $login et $mdp sont vides                     |
 
 
@@ -82,7 +82,7 @@ Cependant, s'il échoue parce qu'un des champs ou les deux sont vides ou incorre
 | P1      | e        | e  | OK | OK |
 | P2      | e      | " "              | KO | KO |
 | P3      | " "        | e              | KO | KO |
-| P4      | e      | adqi    | error=2      |error=2           |
-| P5      | eevf      | e  | error=2       | error=2          |
-| P6      | eere      | reer  | error=2     | error=2          |
+| P4      | e      | adqi    | id=2      |id=2           |
+| P5      | eevf      | e  | id=2       | id=2          |
+| P6      | eere      | reer  | id=2     | id=2          |
 | P7      | " "      | " "  | KO     | KO          |
