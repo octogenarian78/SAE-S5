@@ -29,40 +29,34 @@ if (isset($_SESSION["util_id"])) {
     <link rel="stylesheet" href="../ressources/style.css">
     <style>
         body{
-            overflow-x: hidden;
-            overflow-y: hidden;
+            overflow: hidden;
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.2.2/dist/echarts.min.js"></script>
+    <script src="../ressources/script/graphique.js"></script>
 </head>
 <body>
-<?php
+    <?php
 
-$menuButtons = ["Accueil", "Modules"];
-$menuLinks = ["../index.php", "../modules/index.php"];
+    $menuButtons = ["Accueil", "Modules"];
+    $menuLinks = ["../index.php", "../modules/index.php"];
 
-$logoLink = "../";
+    $logoLink = "../";
 
-$loginButtons = ["Profil"];
-$loginLinks = ["../profile/index.php"];
+    $loginButtons = ["Profil"];
+    $loginLinks = ["../profile/index.php"];
 
-echo genererHeader('../ressources/img/logo.png', $menuButtons, $menuLinks, $loginButtons, $loginLinks, $logoLink);
-?>
-<div class="chartContainer">
-    <div class="prime">
-        <div id="ScalaFortePrime" class="forte" style="width: 975px; height: 420px;"></div>
-        <div id="ScalaFaiblePrime" class="faible" style="width: 975px; height: 420px;"></div>
+    echo genererHeader('../ressources/img/logo.png', $menuButtons, $menuLinks, $loginButtons, $loginLinks, $logoLink);
+    ?>
+    <div id="chartContainer" class="chartContainer">
+        <div class="prime">
+            <div id="ScalaFortePrime" class="forte"></div>
+            <div id="ScalaFaiblePrime" class="faible"></div>
+        </div>
+        <div class="montecarlo">
+            <div id="ScalaForteMonte" class="forte"></div>
+            <div id="ScalaFaibleMonte" class="faible"></div>
+        </div>
     </div>
-    <div class="montecarlo">
-        <div id="ScalaForteMonte" class="forte" style="width: 975px; height: 420px;"></div>
-        <div id="ScalaFaibleMonte" class="faible" style="width: 975px; height: 420px;"></div>
-    </div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/echarts@5.2.2/dist/echarts.min.js"></script>
-<script src="../ressources/script/graphique.js"></script>
-
-<footer>
-
-</footer>
 </body>
 </html>

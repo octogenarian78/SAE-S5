@@ -1,94 +1,127 @@
 window.onload = init;
+window.onresize = resizeCharts;
+
+let MCForte, MCFaible;
 
 function init() {
     diagrammeMonteCarlo();
+    resizeCharts();
 }
 
-function resizeContainers() {
-    // Cette fonction peut être utilisée pour gérer les redimensionnements de vos containers, si nécessaire.
+function resizeCharts() {
+    // Redimensionner les graphiques ECharts
+    if (MCForte) {
+        MCForte.resize();
+    }
+    if (MCFaible) {
+        MCFaible.resize();
+    }
 }
 
 function diagrammeMonteCarlo() {
-    let MCForte = echarts.init(document.getElementById('ScalaForteMonte'));
+    MCForte = echarts.init(document.getElementById('ScalaForteMonte'));
+    MCFaible = echarts.init(document.getElementById('ScalaFaibleMonte'));
 
-    
-    fetch('../ressources/fonction/get_data_forte_MC.php')  
-        .then(response => response.json())
-        .then(option => {
-            let dates = option.data.xAxis.data;
-            let moyennes = option.data.series[0].data; 
-            
-            let options = {
-                title: {
-                    text: 'Évolution des Moyennes et Points'
+    fetch('../ressources/fonction/get_data_forte_MC.php')
+    .then(response => response.json())
+    .then(option => {
+        let dates = option.data.xAxis.data;
+        let moyennes = option.data.series[0].data;
+
+        let options = {
+            title: { 
+                text: 'Évolution du SpeedUp \nen fonction du nombre de processus' 
+            },
+            tooltip: { 
+                trigger: 'item' 
+            },
+            legend: { 
+                data: ['Moyennes', 'y = x'],
+                textStyle: { 
+                    color: 'black'  // La couleur du texte de la légende (vous pouvez la personnaliser si nécessaire)
+                }
+            },
+            xAxis: { 
+                type: 'category', 
+                data: dates 
+            },
+            yAxis: { 
+                type: 'value' 
+            },
+            series: [ 
+                { 
+                    name: 'Courbe de SpeedUP', 
+                    data: moyennes, 
+                    type: 'line' 
                 },
-                tooltip: {
-                    trigger: 'item'
-                },
-                legend: {
-                    data: ['Moyennes']
-                },
-                xAxis: {
-                    type: 'category',
-                    data: dates, // Assurez-vous que 'dates' contient les points distincts ou les valeurs pour l'axe X
-                },
-                yAxis: {
-                    type: 'value'
-                },
-                series: [
-                    {
-                        name: 'Moyennes',
-                        data: moyennes, // Assurez-vous que 'moyennes' contient les valeurs pour l'axe Y
-                        type: 'line',    
+                { 
+                    name: 'Courbe optimal', 
+                    data: dates.map(date => parseFloat(date)), 
+                    type: 'line', 
+                    lineStyle: { 
+                        type: 'dashed',  
+                        color: 'red' 
+                    }, itemStyle: {
+                        color: 'red'  // Applique également la couleur rouge aux points de la courbe
                     }
-                ]
-            };
-            
+                }
+            ]
+        };
+        
 
-            // Appliquer les options au graphique
-            MCForte.setOption(options);
-        })
-        .catch(error => console.error('Erreur lors de la récupération des données :', error));
+        MCForte.setOption(options);
+    })
+    .catch(error => console.error('Erreur lors de la récupération des données :', error));
 
+fetch('../ressources/fonction/get_data_faible_MC.php')
+    .then(response => response.json())
+    .then(option => {
+        let dates = option.data.xAxis.data;
+        let moyennes = option.data.series[0].data;
 
-        let MCFaible = echarts.init(document.getElementById('ScalaFaibleMonte'));
+        let options = {
+            title: { 
+                text: 'Évolution des SpeedUp \nen fonction du nombre de points' 
+            },
+            tooltip: { 
+                trigger: 'item' 
+            },
+            legend: {
+                data: ['Moyennes', 'y = 1']  // Ajout de 'y = 1' à la légende
+            },
+            xAxis: { 
+                type: 'category', 
+                data: dates 
+            },
+            yAxis: { 
+                type: 'value' 
+            },
+            series: [ 
+                { 
+                    name: 'Courbe de SpeedUp',
+                    data: moyennes, 
+                    type: 'line' 
+                },
+                { 
+                    name: 'Courbe optimal', 
+                    data: new Array(dates.length).fill(1),  // Crée une série avec la valeur constante y = 1
+                    type: 'line', 
+                    lineStyle: { 
+                        type: 'dashed',  // Ligne continue
+                        color: 'red'    // Courbe y = 1 en rouge
+                    },
+                    itemStyle: {
+                        color: 'red'  // Applique également la couleur rouge aux points de la courbe
+                    }
+                }
+            ]
+        };
+        
 
-    
-        fetch('../ressources/fonction/get_data_faible_MC.php')  
-            .then(response => response.json())
-            .then(option => {
-                let dates = option.data.xAxis.data;
-                let moyennes = option.data.series[0].data; 
-                
-                let options = {
-                    title: {
-                        text: 'Évolution des Moyennes et Points'
-                    },
-                    tooltip: {
-                        trigger: 'item'
-                    },
-                    legend: {
-                        data: ['Moyennes']
-                    },
-                    xAxis: {
-                        type: 'category',
-                        data: dates, // Assurez-vous que 'dates' contient les points distincts ou les valeurs pour l'axe X
-                    },
-                    yAxis: {
-                        type: 'value'
-                    },
-                    series: [
-                        {
-                            name: 'Moyennes',
-                            data: moyennes, // Assurez-vous que 'moyennes' contient les valeurs pour l'axe Y
-                            type: 'line',    
-                        }
-                    ]
-                };
-                
-    
-                // Appliquer les options au graphique
-                MCFaible.setOption(options);
-            })
-            .catch(error => console.error('Erreur lors de la récupération des données :', error));
+        MCFaible.setOption(options);
+    })
+    .catch(error => console.error('Erreur lors de la récupération des données :', error));
+    // Redimensionner les graphiques après avoir défini les options
+    MCForte.resize();
+    MCFaible.resize();
 }

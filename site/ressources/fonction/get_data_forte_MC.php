@@ -37,7 +37,7 @@ function get_data_forte_MC() {
     if (!empty($moyennes)) {
         $referenceTime = $moyennes[0]; // Utiliser la première moyenne comme référence
         foreach ($moyennes as $moyenne) {
-            $speedup[] = $referenceTime / $moyenne;
+            $speedup[] = round($referenceTime / $moyenne, 2);
         }
     }
 
