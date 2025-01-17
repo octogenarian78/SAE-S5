@@ -619,3 +619,20 @@ Graphique
   width: 100%;
   height: 50%; /* Chaque graphique prend 50% de la hauteur de son conteneur parent */
 }
+
+/* Style pour les messages d'erreur */
+.erreur {
+  background-color: #ffdddd; 
+  color: #a00; 
+  border: 1px solid #a00; 
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  text-align: center;
+}
+
+.erreur p {
+  margin: 0;
+  font-weight: bold;
+}
