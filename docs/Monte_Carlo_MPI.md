@@ -55,8 +55,8 @@ Pour réaliser une implémentation de l'algorithme de Monte Carlo en Python avec
 
 ### <a name="p3.1"></a> **Paradigme Master-Worker**  
 1. **Rôle du processus Master (rank 0)** :  
-   - Il ne participe pas aux calculs directs, mais collecte les résultats des processus **Workers**.  
-   - Il agit comme un coordinateur pour centraliser et agréger les résultats.  
+   - Il participe aux calculs directs et collecte les résultats des processus **Workers**.  
+   - Il agit comme un coordinateur pour centraliser les résultats.  
 
 2. **Rôle des processus Workers (rank > 0)** :  
    - Ils effectuent le calcul principal, ici le comptage des points à l'intérieur du cercle unité pour une approximation de $\pi$.  
@@ -84,9 +84,9 @@ Cette partie explique le code Python de l'algorithme de Monte Carlo avec MPI4PY.
    - Si `rank != 0`, alors le processus est un **Worker**, il réalisera les lancés des points et enverra ses résultats au processus **Master**.  
    - Si `rank == 0`, alors le processus est le **Master**, il récupérera les résultats des lancés des processus **Workers** et calculera une valeur approchée de $\pi$.  
 
-3. **Réalisation des épreuves de Monte Carlo (si rank != 0)** :  
-   - Les épreuves de Monte Carlo sont effectuées par les processus **Workers** comme évoqué dans [la partie 2](#p2). Le nombre d'épreuves est défini par la variable `numIter`. Pour générer des coordonnées aléatoires, on utilise `random.random()` pour obtenir une valeur entre 0 et 1 pour $x$ et pour $y$.  
-   - Une fois les épreuves réalisées, le processus **Worker** envoie le nombre de points dans le quart de disque au processus **Master** avec `comm.send(cpt, dest=0, tag=rank)`, ici `cpt` représente le nombre de points dans le quart de disque, `dest` représente le `rank` du processus destinataire, et `tag` un tag ajouté au message.  
+3. **Réalisation des épreuves de Monte Carlo** :  
+   - Les épreuves de Monte Carlo sont effectuées par les processus **Workers** et le processus **Master** comme évoqué dans [la partie 2](#p2). Le nombre d'épreuves est défini par la variable `numIter`. Pour générer des coordonnées aléatoires, on utilise `random.random()` pour obtenir une valeur entre 0 et 1 pour $x$ et pour $y$.  
+   - Une fois les épreuves réalisées, le processus envoie le nombre de points dans le quart de disque au processus **Master** avec `comm.send(cpt, dest=0, tag=rank)`, ici `cpt` représente le nombre de points dans le quart de disque, `dest` représente le `rank` du processus destinataire, et `tag` un tag ajouté au message.  
 
 4. **Récupération des résultats et calcul de $\pi$ (si rank == 0)** :  
    - Le processus **Master** reçoit les résultats des processus **Workers** avec :  

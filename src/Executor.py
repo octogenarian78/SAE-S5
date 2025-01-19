@@ -100,14 +100,14 @@ def measure_scalability(folder, file, args_list, processors_list, iterations, ou
     for processors in processors_list:
         for iteration in range(1, iterations + 1):
             args = args_list[-1]
-            process_scalability(processors, args, iteration, "Forte")
+            process_scalability(processors, args, iteration, "Faible")
 
     # Ensuite, executer la scalabilité faible
     for processors in processors_list:
         for iteration in range(1, iterations + 1):
             args_index = processors_list.index(processors)
             args = args_list[args_index]
-            process_scalability(processors, args, iteration, "Faible")
+            process_scalability(processors, args, iteration, "Forte")
 
 
 def main():
