@@ -440,6 +440,11 @@ h1 {
   color: #284843;
 }
 
+.profile-item a{
+  text-decoration: none;
+  color: white;
+}
+
 .profile-item span {
   font-size: 18px;
   color: #333;
