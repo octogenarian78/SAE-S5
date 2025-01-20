@@ -120,9 +120,9 @@ Par ordre alphabétique.
 | Mots             | Définition                                                                                                                                                                                                                              |
 |:-----------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Kit Cluster Hat  | Accessoire pour Raspberry Pi permettant de créer un mini-cluster de Pi Zeros connectés via USB. Il est utilisé pour tester des concepts de calcul distribué, d'orchestration de conteneurs et de clustering à faible coût.              |
-| Calcul distribué |                                                                                                                                                                                                                                         |
-| Calcul pallèle   |                                                                                                                                                                                                                                         |
-| Carte micro SD   |                                                                                                                                                                                                                                         |
+| Calcul distribué | Calcul partagé entre plusieurs processeurs possédant une mémoire commune.                                                                                                                                                                                                                                        |
+| Calcul parallèle | Calcul partagé entre plusieurs processeurs possédant leur propre mémoire.                                                                                                                                                                                                                                      |
+| Carte micro SD   | Carte permettant l'extension de la mémoire de stockage.                                                                                                                                                                                                                                        |
 | Injection SQL    | Technique permettant d’injecter des éléments de type SQL dans les champs des formulaires web ou dans les liens des pages afin de les envoyer au serveur web dans l'objectif de modifier des éléments présents dans une base de données. |
 | Pi Zero          | Raspberry Pi 4 un ordinateur monocarte de petite taille développé par la Fondation Raspberry Pi.                                                                                                                                        |
 | SGBD             | Système de Gestion de Base de Données.                                                                                                                                                                                                  |
@@ -136,6 +136,7 @@ Par ordre alphabétique.
 
 - <b>a) Les acteurs principaux et leurs objectifs généraux.</b><br>
   <br>
+  Les acteurs sont les utilisateurs, leur objectif est de calculer Pi via une application web.
 
 - <b>b) <a name="p3b"></a> Les cas d’utilisation métier (concepts opérationnels).</b>
 
@@ -162,7 +163,8 @@ Par ordre alphabétique.
 - Carte SD 5
 <br><br>
 - <b><a name="p4b"></a>b) Avec quels systèmes ce système s’interfacera-t-il et avec quelles exigences ?</b>
-
+<br>
+Ce système n'est pas prévu pour s'interfacer avec d'autres systèmes.
 
 <br><br><br><br><br><br><br>
 ------------------------------------------------------------------------------------------------------------------------
@@ -237,11 +239,14 @@ Par ordre alphabétique.
   <br>
 - <b><a name="p6b"></a>b) Quelles sont les exigences juridiques et politiques ?</b><br>
   <br>
+  Il n'y a pas d'exigence juridique ou politique.
+
 - <b><a name="p6c"></a>c) Quelles sont les conséquences humaines de la réalisation du système ?</b><br>
   <br>
 
 - <b><a name="p6d"></a>d) Quels sont les besoins en formation ?</b><br>
 <br>
+  Les besoins en formation nécessaires sont des connaissances en développement parallèle et distribué, ainsi que des connaissances en développement web.
 
 - <b><a name="p6e"></a>e) Quelles sont les hypothèses et les dépendances affectant l’environnement humain ?</b><br>
   <br>
