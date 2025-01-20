@@ -5,6 +5,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     error_log(print_r($_POST, true));
     include "db_connect.php";
 
+    error_log("Nombre de RPI utilisé " . $_POST['nbRPI']);
+
     $conn = connectDB();
     $programme = $_POST['programme'] ?? '';
     $number = $_POST['number'] ?? '';
@@ -31,8 +33,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute();
 
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        error_log("Nombre de RPI utilisé " . $nbRPI);
 
         if ($result) {
             $cheminAcces = "../../../" . $result['chemin_acces'];
