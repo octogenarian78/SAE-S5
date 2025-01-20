@@ -32,6 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
+        error_log("Nombre de RPI utilisé " . $nbRPI);
+
         if ($result) {
             $cheminAcces = "../../../" . $result['chemin_acces'];
             $command = "mpiexec -n " . escapeshellarg($nbRPI) . " python3 " . escapeshellcmd($cheminAcces) . " " . escapeshellarg($number) . " 2>&1";
