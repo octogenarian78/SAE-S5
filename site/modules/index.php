@@ -73,7 +73,7 @@ echo genererHeader('../ressources/img/logo.png',$menuButtons, $menuLinks, $login
             <tr>
                 <td id="result">Aucun calcul n'a été lancé</td>
                 <td id="temps"></td>
-                <td id="nbRPI"></td>
+                <td id="tab_nbRPI"></td>
             </tr>
             </tbody>
         </table>
@@ -151,7 +151,7 @@ foreach ($programmes as $programme) {
                         row_result.textContent = "Calcul en cours...";
                         const row_time = document.getElementById("temps")
                         row_time.textContent = "Calcul en cours...";
-                        const rowrpi = document.getElementById("nbRPI")
+                        const rowrpi = document.getElementById("tab_nbRPI")
                         rowrpi.textContent = "Calcul en cours...";
 
                         const number = document.getElementById('number');
