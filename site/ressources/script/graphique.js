@@ -1,7 +1,7 @@
 window.onload = init;
 window.onresize = resizeCharts;
 
-let MCForte, MCFaible;
+let MCForte, MCFaible, PrimeForte, PrimeFaible;
 
 function init() {
     diagrammeMonteCarlo();
@@ -17,6 +17,12 @@ function resizeCharts() {
     if (MCFaible) {
         MCFaible.resize();
     }
+    if (PrimeForte) {
+        PrimeForte.resize();
+    }
+    if (PrimeFaible) {
+        PrimeFaible.resize();
+    }
 }
 
 function diagrammeMonteCarlo() {
@@ -24,71 +30,23 @@ function diagrammeMonteCarlo() {
     MCFaible = echarts.init(document.getElementById('ScalaFaibleMonte'));
 
     fetch('../ressources/fonction/get_data_forte_MC.php')
-    .then(response => response.json())
-    .then(option => {
-        let dates = option.data.xAxis.data;
-        let moyennes = option.data.series[0].data;
-
-        let options = {
-            title: { 
-                text: 'Évolution du SpeedUp \nen fonction du nombre de processus' 
-            },
-            tooltip: { 
-                trigger: 'item' 
-            },
-            legend: { 
-                data: ['Moyennes', 'y = x'],
-                textStyle: { 
-                    color: 'black'  // La couleur du texte de la légende (vous pouvez la personnaliser si nécessaire)
-                }
-            },
-            xAxis: { 
-                type: 'category', 
-                data: dates 
-            },
-            yAxis: { 
-                type: 'value' 
-            },
-            series: [ 
-                { 
-                    name: 'Courbe de SpeedUP', 
-                    data: moyennes, 
-                    type: 'line' 
-                },
-                { 
-                    name: 'Courbe optimal', 
-                    data: dates.map(date => parseFloat(date)), 
-                    type: 'line', 
-                    lineStyle: { 
-                        type: 'dashed',  
-                        color: 'red' 
-                    }, itemStyle: {
-                        color: 'red'  // Applique également la couleur rouge aux points de la courbe
-                    }
-                }
-            ]
-        };
-        
-
-        MCForte.setOption(options);
-    })
-    .catch(error => console.error('Erreur lors de la récupération des données :', error));
-
-    fetch('../ressources/fonction/get_data_faible_MC.php')
         .then(response => response.json())
         .then(option => {
+            console.log(option); // Vérification des données reçues
+
             let dates = option.data.xAxis.data;
             let moyennes = option.data.series[0].data;
 
             let options = {
                 title: { 
-                    text: 'Évolution des SpeedUp \nen fonction du nombre de points' 
+                    text: 'Monte Carlo: Évolution du SpeedUp \nen fonction du nombre de processus' 
                 },
                 tooltip: { 
                     trigger: 'item' 
                 },
-                legend: {
-                    data: ['Moyennes', 'y = 1']  // Ajout de 'y = 1' à la légende
+                legend: { 
+                    data: ['Moyennes', 'y = x'],
+                    textStyle: { color: 'black' }
                 },
                 xAxis: { 
                     type: 'category', 
@@ -99,32 +57,64 @@ function diagrammeMonteCarlo() {
                 },
                 series: [ 
                     { 
+                        name: 'Courbe de SpeedUP', 
+                        data: moyennes, 
+                        type: 'line' 
+                    },
+                    { 
+                        name: 'Courbe optimal', 
+                        data: dates.map(date => parseFloat(date)), 
+                        type: 'line', 
+                        lineStyle: { type: 'dashed', color: 'red' }, 
+                        itemStyle: { color: 'red' }
+                    }
+                ]
+            };
+
+            MCForte.clear();
+            MCForte.setOption(options);
+        })
+        .catch(error => console.error('Erreur lors de la récupération des données :', error));
+
+    fetch('../ressources/fonction/get_data_faible_MC.php')
+        .then(response => response.json())
+        .then(option => {
+            console.log(option); // Vérification des données reçues
+
+            let dates = option.data.xAxis.data;
+            let moyennes = option.data.series[0].data;
+
+            let options = {
+                title: { 
+                    text: 'Monte Carlo: Évolution des SpeedUp \nen fonction du nombre de points' 
+                },
+                tooltip: { trigger: 'item' },
+                legend: { data: ['Moyennes', 'y = 1'] },
+                xAxis: { type: 'category', data: dates },
+                yAxis: { type: 'value' },
+                series: [
+                    { 
                         name: 'Courbe de SpeedUp',
                         data: moyennes, 
                         type: 'line' 
                     },
                     { 
                         name: 'Courbe optimal', 
-                        data: new Array(dates.length).fill(1),  // Crée une série avec la valeur constante y = 1
+                        data: new Array(dates.length).fill(1), 
                         type: 'line', 
-                        lineStyle: { 
-                            type: 'dashed',  // Ligne continue
-                            color: 'red'    // Courbe y = 1 en rouge
-                        },
-                        itemStyle: {
-                            color: 'red'  // Applique également la couleur rouge aux points de la courbe
-                        }
+                        lineStyle: { type: 'dashed', color: 'red' }, 
+                        itemStyle: { color: 'red' }
                     }
                 ]
             };
-            
 
+            MCFaible.clear();
             MCFaible.setOption(options);
         })
         .catch(error => console.error('Erreur lors de la récupération des données :', error));
-        // Redimensionner les graphiques après avoir défini les options
-        MCForte.resize();
-        MCFaible.resize();
+
+    MCForte.resize();
+    MCFaible.resize();
 }
 
 function diagrammePrime() {
@@ -132,105 +122,82 @@ function diagrammePrime() {
     PrimeFaible = echarts.init(document.getElementById('ScalaFaiblePrime'));
 
     fetch('../ressources/fonction/get_data_forte_prime.php')
-    .then(response => response.json())
-    .then(option => {
-        let dates = option.data.xAxis.data;
-        let moyennes = option.data.series[0].data;
-
-        let options = {
-            title: { 
-                text: 'Évolution du SpeedUp \nen fonction du nombre de processus' 
-            },
-            tooltip: { 
-                trigger: 'item' 
-            },
-            legend: { 
-                data: ['Moyennes', 'y = x'],
-                textStyle: { 
-                    color: 'black'  // La couleur du texte de la légende (vous pouvez la personnaliser si nécessaire)
-                }
-            },
-            xAxis: { 
-                type: 'category', 
-                data: dates 
-            },
-            yAxis: { 
-                type: 'value' 
-            },
-            series: [ 
-                { 
-                    name: 'Courbe de SpeedUP', 
-                    data: moyennes, 
-                    type: 'line' 
-                },
-                { 
-                    name: 'Courbe optimal', 
-                    data: dates.map(date => parseFloat(date)), 
-                    type: 'line', 
-                    lineStyle: { 
-                        type: 'dashed',  
-                        color: 'red' 
-                    }, itemStyle: {
-                        color: 'red'  // Applique également la couleur rouge aux points de la courbe
-                    }
-                }
-            ]
-        };
-        
-
-        PrimeForte.setOption(options);
-    })
-    .catch(error => console.error('Erreur lors de la récupération des données :', error));
-
-    fetch('../ressources/fonction/get_data_faible_prime.php')
         .then(response => response.json())
         .then(option => {
+            console.log(option); // Vérification des données reçues
+
             let dates = option.data.xAxis.data;
             let moyennes = option.data.series[0].data;
 
             let options = {
                 title: { 
-                    text: 'Évolution des SpeedUp \nen fonction du nombre de points' 
+                    text: 'Prime: Évolution du SpeedUp \nen fonction du nombre de processus' 
                 },
-                tooltip: { 
-                    trigger: 'item' 
+                tooltip: { trigger: 'item' },
+                legend: { 
+                    data: ['Moyennes', 'y = x'],
+                    textStyle: { color: 'black' }
                 },
-                legend: {
-                    data: ['Moyennes', 'y = 1']  // Ajout de 'y = 1' à la légende
-                },
-                xAxis: { 
-                    type: 'category', 
-                    data: dates 
-                },
-                yAxis: { 
-                    type: 'value' 
-                },
-                series: [ 
+                xAxis: { type: 'category', data: dates },
+                yAxis: { type: 'value' },
+                series: [
                     { 
-                        name: 'Courbe de SpeedUp',
+                        name: 'Courbe de SpeedUP', 
                         data: moyennes, 
                         type: 'line' 
                     },
                     { 
                         name: 'Courbe optimal', 
-                        data: new Array(dates.length).fill(1),  // Crée une série avec la valeur constante y = 1
+                        data: dates.map(date => parseFloat(date)), 
                         type: 'line', 
-                        lineStyle: { 
-                            type: 'dashed',  // Ligne continue
-                            color: 'red'    // Courbe y = 1 en rouge
-                        },
-                        itemStyle: {
-                            color: 'red'  // Applique également la couleur rouge aux points de la courbe
-                        }
+                        lineStyle: { type: 'dashed', color: 'red' }, 
+                        itemStyle: { color: 'red' }
                     }
                 ]
             };
-            
 
+            PrimeForte.clear();
+            PrimeForte.setOption(options);
+        })
+        .catch(error => console.error('Erreur lors de la récupération des données :', error));
+
+    fetch('../ressources/fonction/get_data_faible_prime.php')
+        .then(response => response.json())
+        .then(option => {
+            console.log(option); // Vérification des données reçues
+
+            let dates = option.data.xAxis.data;
+            let moyennes = option.data.series[0].data;
+
+            let options = {
+                title: { 
+                    text: 'Prime: Évolution des SpeedUp \nen fonction du nombre de points' 
+                },
+                tooltip: { trigger: 'item' },
+                legend: { data: ['Moyennes', 'y = 1'] },
+                xAxis: { type: 'category', data: dates },
+                yAxis: { type: 'value' },
+                series: [
+                    { 
+                        name: 'Courbe de SpeedUp', 
+                        data: moyennes, 
+                        type: 'line' 
+                    },
+                    { 
+                        name: 'Courbe optimal', 
+                        data: new Array(dates.length).fill(1), 
+                        type: 'line', 
+                        lineStyle: { type: 'dashed', color: 'red' }, 
+                        itemStyle: { color: 'red' }
+                    }
+                ]
+            };
+
+            PrimeFaible.clear();
             PrimeFaible.setOption(options);
         })
         .catch(error => console.error('Erreur lors de la récupération des données :', error));
-    // Redimensionner les graphiques après avoir défini les options
+
     PrimeForte.resize();
     PrimeFaible.resize();
 }
