@@ -111,7 +111,6 @@ if ($used_percentage >= 90){
             <?= round($used_percentage, 2) ?>%
         </div>
     </div>
-    <a href="#">Supprimer</a>
 </div>
 </body>
 </html>
