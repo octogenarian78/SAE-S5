@@ -64,7 +64,6 @@ Ce document rassemble toutes les informations importantes que nous devrons respe
 
 ------------------------------------------------------------------------------------------------------------------------
 ### <a name="p1"></a>I – Objectif et portée
-
 - <b><a name="p1a"></a>a) Quels sont la portée et les objectifs généraux ?</b><br>
 
 La portée de l'utilisation de l'application s'arrête au réseau internet de l'IUT. Aucun utilisateur ne peut l'utiliser en dehors de ce réseau. Le projet vise à concevoir et développer une application web permettant de réaliser des calculs des décimales du nombre Pi grâce à la méthode de Monte-Carlo en calcul partagé et distribué. Cette application sera hébergée sur un Raspberry Pi 4, connecté à un Kit Cluster Hat, permettant d'utiliser 4 Raspberry Pi Zero pour les calculs de Pi.
@@ -111,6 +110,9 @@ La portée de l'utilisation de l'application s'arrête au réseau internet de l'
 <br>
 
 - - <a name="p1biii"></a>iii) Un schéma descriptif des niveaux
+    - Niveau stratégique : Vue d’ensemble, objectifs principaux (calcul distribué, accessibilité).
+    - Niveau utilisateur : Interface utilisateur pour exécuter les calculs et voir les résultats.
+    - Niveau sous-fonctions : Communication entre les Raspberry Pi, gestion des algorithmes de Monte-Carlo, et stockage des résultats.
 
 
 - - <a name="p1biiii"></a>iiii) Le diagramme des cas d'utilisation
@@ -214,7 +216,7 @@ Par ordre alphabétique.
 ### <a name="p4"></a>IV – La technologie employée
 - <b><a name="p4a"></a>a) Quelles sont les exigences technologiques pour ce système ?</b>
 <br><br>
-  Pour mettre en place le système les différentes exigences sont l'utilisation d'un OS linux, Apache, MariaDB, PHP, Python, R, Java, C
+  Pour mettre en place le système les différentes exigences sont l'utilisation d'un OS linux, Apache, MariaDB, PHP, Python, JavaScript.
 <br><br>
     Le matériel mis à disposition : 
 - RPI 4 : 1
@@ -272,26 +274,37 @@ Ce système n'est pas prévu pour s'interfacer avec d'autres systèmes.
 <br>
 
 - <b><a name="p5c"></a>c) Performances</b><br>
-
+Le système doit permettre des calculs rapides et fiables, avec une capacité de gestion des tâches réparties sur les Raspberry Pi Zero. Il faut rédiger des tests de performances, dont des tests de scalabilité et sur les erreurs.
 
 <br>
 
 - <b><a name="p5d"></a>d) Opérations, sécurité, documentation</b><br>
+
+- Opérations : Le système doit fonctionner 24/7 avec une surveillance continue de l'état des Raspberry Pi pour identifier les pannes ou déconnexions. <br>
+
+- Sécurité : Les données des utilisateurs doivent être protégées contre les attaques (par exemple, injection SQL ou attaque par force brute). <br>
+
+- Documentation : Une documentation technique doit être disponible pour les développeurs et une autre plus simple pour les utilisateurs finaux, expliquant les étapes d’utilisation.
 
 
 
 <br>
 
 - <b><a name="p5e"></a>e) Utilisation et utilisabilité</b><br>
+Le système doit être accessible à tout type d'utilisateur. L'interface utilisateur doit être intuitive, avec des messages d'erreur explicites pour guider l'utilisateur dans ses actions.
+
 
 <br>
 
 - <b><a name="p5f"></a>f) Maintenance et portabilité</b><br>
+Le système doit être conçu pour faciliter les mises à jour logicielles et matérielles, ainsi que la migration vers d'autres plateformes. Les scripts de maintenance automatisée doivent être inclus pour surveiller et mettre à jour le système.
+
+
 
 <br>
 
 - <b><a name="p5g"></a>g) Questions non résolues ou reportées à plus tard</b><br>
-
+  Aucune question n'est non résolue ou reportée à plus tard.
  
   <br><br><br><br><br><br><br>
 ------------------------------------------------------------------------------------------------------------------------
