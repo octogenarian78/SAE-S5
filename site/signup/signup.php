@@ -4,11 +4,12 @@ include "../ressources/fonction/db_connect.php";
 session_start();
 $conn = connectDB();
 
-// Générer les deux nombres aléatoires pour l'addition
-if (!isset($_SESSION['captcha_num1']) || !isset($_SESSION['captcha_num2'])) {
-    $_SESSION['captcha_num1'] = rand(1, 10);
-    $_SESSION['captcha_num2'] = rand(1, 10);
-    $_SESSION['captcha_result'] = $_SESSION['captcha_num1'] + $_SESSION['captcha_num2'];
+if (!isset($_SESSION['captcha_result'])) {
+    $num1 = rand(1, 10); 
+    $num2 = rand(1, 10);  
+    $_SESSION['captcha_num1'] = $num1;
+    $_SESSION['captcha_num2'] = $num2;
+    $_SESSION['captcha_result'] = $num1 + $num2;  
 }
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {

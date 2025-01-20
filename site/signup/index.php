@@ -61,7 +61,7 @@
         </div>
 
         <div class="input-group captcha-group">
-            <label for="captcha">Captcha : <?php echo $_SESSION['captcha_num1'] . " + " . $_SESSION['captcha_num2']; ?> = ?</label>
+            <label for="captcha">Captcha : <?php echo $num1 . " + " . $num2; ?> = ?</label>
             <input type="text" id="captcha" name="captcha" required>
         </div>
 
