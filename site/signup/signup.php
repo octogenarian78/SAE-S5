@@ -4,8 +4,20 @@ include "../ressources/fonction/db_connect.php";
 session_start();
 $conn = connectDB();
 
-// Traitement du formulaire
+// Générer les deux nombres aléatoires pour l'addition
+if (!isset($_SESSION['captcha_num1']) || !isset($_SESSION['captcha_num2'])) {
+    $_SESSION['captcha_num1'] = rand(1, 10);
+    $_SESSION['captcha_num2'] = rand(1, 10);
+    $_SESSION['captcha_result'] = $_SESSION['captcha_num1'] + $_SESSION['captcha_num2'];
+}
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $captcha_answer = $_POST["captcha"];
+    if ($captcha_answer != $_SESSION['captcha_result']) {
+        header("Location: index.php?id=5"); // Erreur si le captcha est incorrect
+        exit;
+    }
+
     $login = htmlspecialchars($_POST["username"]);
     $mdp = $_POST["password"];
     $confirm_mdp = $_POST["confirm-password"];
@@ -56,3 +68,4 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit;
     }
 }
+?>
