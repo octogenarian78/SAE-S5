@@ -64,6 +64,7 @@ if my_rank == 0:
     data = {"message": "Résultat du lancement de prime.py", 
             "value": len(merged_primes), 
             "liste" : merged_primes, 
-            "temps": end }
+            "temps": end ,
+            "size": cluster_size}
     print(json.dumps(data))
 

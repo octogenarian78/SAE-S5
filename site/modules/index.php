@@ -45,8 +45,8 @@ $logoLink = "../";
 if (isset($_SESSION["util_id"])){
     $menuButtons[] = "Accueil";
     $menuLinks[] = "../index.php";
-    $loginButtons = ["Profil", "Graphique"];
-    $loginLinks = ["../profile/", "../graphique/"];
+    $loginButtons = ["Profil"];
+    $loginLinks = ["../profile/index.php"];
 }else{
     $loginButtons = ["Connexion"];
     $loginLinks = ["../signin/index.html"];
@@ -63,10 +63,18 @@ echo genererHeader('../ressources/img/logo.png',$menuButtons, $menuLinks, $login
     <div name="calcul-result" class="calcul-result">
         <table>
             <thead>
-            <tr><th>Résultat du Calcul</th></tr>
+            <tr>
+                <th>Résultat du Calcul</th>
+                <th>Temps</th>
+                <th>Nombre de processeur utilisé</th>
+            </tr>
             </thead>
             <tbody>
-            <tr><td id="result">123456.789</td></tr>
+            <tr>
+                <td id="result">Aucun calcul n'a été lancé</td>
+                <td id="temps"></td>
+                <td id="nbRPI"></td>
+            </tr>
             </tbody>
         </table>
     </div>
@@ -138,8 +146,13 @@ foreach ($programmes as $programme) {
                     btnOk.addEventListener('click', () => {
                         popup.style.display = 'none';
                         popupOverlay.style.display = 'none';
+
                         const row_result = document.getElementById("result")
                         row_result.textContent = "Calcul en cours...";
+                        const row_time = document.getElementById("temps")
+                        row_time.textContent = "Calcul en cours...";
+                        const rowrpi = document.getElementById("nbRPI")
+                        rowrpi.textContent = "Calcul en cours...";
 
                         const number = document.getElementById('number');
                         const nbRPI = document.getElementById('nbRPI');
@@ -154,7 +167,9 @@ foreach ($programmes as $programme) {
                             .then(response => response.json())
                             .then(data => {
                                 if (data.success) {
-                                    row_result.textContent = JSON.stringify(data.output, null, 2);
+                                    row_result.textContent = JSON.stringify(data.output.value, null, 2);
+                                    row_time.textContent = JSON.stringify(data.output.temps, null, 2);
+                                    rowrpi.textContent = JSON.stringify(data.output.size, null, 2);
                                 } else {
                                     row_result.textContent = data.message;
                                 }
