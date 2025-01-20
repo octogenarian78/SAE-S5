@@ -82,9 +82,17 @@ La portée de l'utilisation de l'application s'arrête au réseau internet de l'
 
 </colgroup>
 <tr>
-    <th>Objets</th>
-    <th>Acteurs</th>
-    <th>Actions</th>
+    
+| **Objets**             | **Acteurs**                    | **Actions**                                                                |
+|-------------------------|-------------------------------|----------------------------------------------------------------------------|
+| Application web         | Utilisateurs                  | S’inscrire, se connecter, calculer Pi, consulter les résultats             |
+| Raspberry Pi 4          | Système                       | Centraliser les calculs, répartir les tâches vers les Raspberry Pi Zero    |
+| Raspberry Pi Zero (x4)  | Système                       | Effectuer les calculs distribués                                           |
+| Cluster Hat             | Système                       | Faciliter la communication entre les Raspberry Pi                          |
+| Base de données         | Système                       | Stocker les résultats des calculs, gérer les comptes utilisateurs          |
+| Interface utilisateur   | Utilisateurs                  | Naviguer, lancer des calculs, visualiser les résultats                     |
+| Interface administrateur| Administrateurs               | Gérer les utilisateurs, monitorer les Raspberry Pi                         |
+| Algorithmes de calcul   | Système                       | Calculer Pi avec la méthode Monte-Carlo                                    |
 </tr>
 
 </table>
@@ -93,12 +101,11 @@ La portée de l'utilisation de l'application s'arrête au réseau internet de l'
 - - <a name="p1bii"></a>ii) Les différents niveaux
 
 
-| Niveau stratégique (au-dessus de la mer) | Niveau utilisateur (de la mer) | Niveau sous-fonctions (en-dessous de la mer) |
-|------------------------------------------|--------------------------------|----------------------------------------------|
-|                                          |                                |                                              |
-|                                          |                                |                                              |
-|                                          |                                |                                              |
-|                                          |                                |                                              |
+| Niveau stratégique (au-dessus de la mer) | Niveau utilisateur (de la mer) | Niveau sous-fonctions (en-dessous de la mer) | 
+|-------------------------------------------|---------------------------------------|----------------------------------------------| 
+| Calcul distribué sur un cluster Raspberry | Interface web simple pour calculer Pi | Algorithmes de Monte-Carlo, gestion des tâches sur les Pi Zero | 
+| Disponibilité et simplicité d’accès | Visualisation des résultats | Communication entre Raspberry Pi via Cluster Hat | 
+| Sécurité des données | Gestion des utilisateurs | Stockage des résultats dans la base de données |
 
 
 <br>
@@ -138,13 +145,68 @@ Par ordre alphabétique.
   <br>
   Les acteurs sont les utilisateurs, leur objectif est de calculer Pi via une application web.
 
-- <b>b) <a name="p3b"></a> Les cas d’utilisation métier (concepts opérationnels).</b>
+- <b>b) Les cas d’utilisation métier (concepts opérationnels). </b> <br>
+<br>
 
-- <b>c) <a name="p3c"></a> Les cas d'utilisation stratégique <b>
+1. **Inscription d’un utilisateur** :  
+   Permet à un utilisateur de créer un compte pour accéder à la plateforme.
+   - **Acteur principal** : Utilisateur
+   - **Objectif** : Donner accès aux fonctionnalités de calcul et suivi des résultats.
 
+2. **Connexion d’un utilisateur** :  
+   L’utilisateur se connecte pour accéder à ses ressources et effectuer des calculs.
+   - **Acteur principal** : Utilisateur
+   - **Objectif** : Accéder à son profil et à ses données.
 
-- <b>d) <a name="p3d"></a> Les cas d’utilisation utilisateur et système.</b>
+3. **Production de calculs** :  
+   Permet de réaliser des calculs sur le système en utilisant l’algorithme de Monte-Carlo.
+   - **Acteur principal** : Utilisateur
+   - **Objectif** : Effectuer des calculs de Pi.
 
+---
+
+- <b> c) Les cas d’utilisation stratégique </b> <br>
+<br>
+
+1. **Accès à l’interface administrateur** :  
+   Permet aux administrateurs de superviser le fonctionnement du système, gérer les utilisateurs, et surveiller les Raspberry Pi Zero.
+   - **Acteur principal** : Administrateur
+   - **Objectif** : Superviser les calculs et assurer la disponibilité du système.
+
+2. **Modification du profil utilisateur** :  
+   Permet à un utilisateur de mettre à jour ses informations personnelles sur le système.
+   - **Acteur principal** : Utilisateur
+   - **Objectif** : Maintenir les données utilisateur à jour.
+
+3. **Accès aux calculs réalisés** :  
+   Permet à un utilisateur de consulter l’historique de ses calculs.
+   - **Acteur principal** : Utilisateur
+   - **Objectif** : Fournir un suivi des calculs réalisés.
+
+---
+
+- <b> d) Les cas d’utilisation utilisateur et système </b> <br>
+<br>
+
+1. **Affichage de calculs** :  
+   L’utilisateur accède à ses calculs via l’interface.  
+   - **Acteur principal** : Utilisateur 
+   - **Objectif** : Affiche les résultats stockés dans la base de données.
+
+2. **Se déconnecter** :  
+   Permet à l’utilisateur de mettre fin à sa session.  
+   - **Acteur principal** : Utilisateur 
+   - **Objectif** : Supprime le cookie de session et redirige vers la page d’accueil.
+
+3. **Accès à la vidéo de présentation** :  
+   Permet à l’utilisateur d’accéder à une vidéo explicative sur l’utilisation de la plateforme.  
+   - **Acteur principal** : Utilisateur  
+   - **Objectif** : Charge et affiche la vidéo.
+
+4. **Accès au manuel utilisateur** :  
+   Fournit des instructions sur l’utilisation de l’application.  
+   - **Acteur principal** : Utilisateur  
+   - **Objectif** : Affiche le manuel utilisateur.
 
 <br><br><br><br><br><br><br>
 ------------------------------------------------------------------------------------------------------------------------
