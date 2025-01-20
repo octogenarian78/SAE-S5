@@ -17,6 +17,7 @@
             if ($_GET['id'] == "1") { echo "ERREUR : Les champs mot de passe et confirmation du mot de passe sont différents"; }
             else if ($_GET['id'] == "2") { echo "ERREUR : L'utilisateur est déjà présent dans la base de données'"; }
             else if ($_GET['id'] == "4") { echo "ERREUR : Une erreur est survenue dans la base de données"; }
+            else if ($_GET['id'] == "5") { echo "ERREUR : Le captcha est incorrect"; }
             else { echo "ERREUR : Une erreur est survenue"; }
             echo '</p>';
             echo '</div>';
@@ -60,10 +61,8 @@
         </div>
 
         <div class="input-group captcha-group">
-            <label for="captcha">Captcha :</label>
-            <div class="captcha-container">
-                <input type="text" id="captcha" name="captcha">
-            </div>
+            <label for="captcha">Captcha : <?php echo $_SESSION['captcha_num1'] . " + " . $_SESSION['captcha_num2']; ?> = ?</label>
+            <input type="text" id="captcha" name="captcha" required>
         </div>
 
         <br>
