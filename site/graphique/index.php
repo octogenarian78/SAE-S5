@@ -29,7 +29,7 @@ if (isset($_SESSION["util_id"])) {
     <link rel="stylesheet" href="../ressources/style.css">
     <style>
         body{
-            overflow: hidden;
+            overflow-x: hidden;
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.2.2/dist/echarts.min.js"></script>
@@ -52,6 +52,8 @@ if (isset($_SESSION["util_id"])) {
         <div class="prime">
             <div id="ScalaFortePrime" class="forte"></div>
             <div id="ScalaFaiblePrime" class="faible"></div>
+            <div id="ScalaFortePrimePlus" class="forte"></div>
+            <div id="ScalaFaiblePrimePlus" class="faible"></div>
         </div>
         <div class="montecarlo">
             <div id="ScalaForteMonte" class="forte"></div>
