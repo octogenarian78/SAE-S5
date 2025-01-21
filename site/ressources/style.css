@@ -607,7 +607,7 @@ Graphique
   display: flex;
   flex-direction: row;
   width: 100%;
-  height: 110vh; /* Prend toute la hauteur de la fenêtre */
+  height: 220vh; /* Prend toute la hauteur de la fenêtre */
   padding: 10px 0 0 0;
 
   background-color: rgb(196, 195, 195);
@@ -620,10 +620,19 @@ Graphique
   flex-direction: column;
 }
 
-.forte, .faible {
+.prime > .forte, 
+.prime > .faible {
+  width: 100%;
+  height: 25%; /* Chaque graphique prend 50% de la hauteur de son conteneur parent */
+}
+
+
+.montecarlo > .forte, 
+.montecarlo > .faible {
   width: 100%;
   height: 50%; /* Chaque graphique prend 50% de la hauteur de son conteneur parent */
 }
+
 
 .erreur{
   background: transparent;
