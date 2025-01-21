@@ -1,3 +1,19 @@
+<?php
+session_start(); // Démarrer la session tout en haut du fichier
+
+include "../ressources/fonction/db_connect.php";
+
+$conn = connectDB();
+
+// Générer le captcha si ce n'est pas déjà fait ou si la page a été rechargée
+if (!isset($_SESSION['captcha_result']) || isset($_GET['refresh_captcha'])) {
+    $num1 = rand(1, 10); 
+    $num2 = rand(1, 10);  
+    $_SESSION['captcha_num1'] = $num1;
+    $_SESSION['captcha_num2'] = $num2;
+    $_SESSION['captcha_result'] = $num1 + $num2;
+}
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -61,10 +77,11 @@
         </div>
 
         <div class="input-group captcha-group">
-            <label for="captcha">Captcha : <?php echo $num1 . " + " . $num2; ?> = ?</label>
+            <label for="captcha">Captcha : <?php echo $_SESSION['captcha_num1'] . " + " . $_SESSION['captcha_num2']; ?> = ?</label>
+
             <input type="text" id="captcha" name="captcha" required>
         </div>
-
+        
         <br>
         <button type="submit" class="btn-signup">S'inscrire</button>
 

@@ -1,16 +1,9 @@
 <?php
+
+session_start(); 
+
 include "../ressources/fonction/db_connect.php";
-
-session_start();
 $conn = connectDB();
-
-if (!isset($_SESSION['captcha_result'])) {
-    $num1 = rand(1, 10); 
-    $num2 = rand(1, 10);  
-    $_SESSION['captcha_num1'] = $num1;
-    $_SESSION['captcha_num2'] = $num2;
-    $_SESSION['captcha_result'] = $num1 + $num2;  
-}
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $captcha_answer = $_POST["captcha"];
