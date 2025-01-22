@@ -8,7 +8,12 @@ $conn = connectDB();
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $password = htmlspecialchars($_POST["password"]);
     $confirmed_password = htmlspecialchars($_POST["confirmed_password"]);
+    $ancien_password = htmlspecialchars($_POST["ancien_password"]);
 
+    if (empty($ancien_password)){
+        header("Location: update_password.php?id=1d");
+        exit;
+    }
     if (empty($password)){
         header("Location: update_password.php?id=1a");
         exit;
@@ -20,6 +25,24 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if ($password !== $confirmed_password){
         header("Location: update_password.php?id=1c");
+        exit;
+    }
+
+    // Vérifier que l'ancien mot de passe est correct
+    $login = $_SESSION['login'];
+    $stmt = $conn->prepare("SELECT mdp FROM Utilisateurs WHERE login = :login");
+    $stmt->bindParam(":login", $login);
+    $stmt->execute();
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!$user || sha1($ancien_password) !== $user['mdp']) {
+        header("Location: update_password.php?id=3");
+        exit;
+    }
+
+    // Vérifier que le nouveau mot de passe est différent de l'ancien
+    if (sha1($ancien_password) === sha1($password)) {
+        header("Location: update_password.php?id=2");
         exit;
     }
 
