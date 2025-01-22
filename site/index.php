@@ -39,8 +39,8 @@ $logoLink = "#";
 if (isset($_SESSION["util_id"])){
     $menuButtons[] = "Modules";
     $menuLinks[] = "modules/index.php";
-    $loginButtons = ["Profil"];
-    $loginLinks = ["profile/index.php"];
+    $loginButtons = ["Profil", "Déconnexion"];
+    $loginLinks = ["profile/index.php", "signout/index.php"];
 }else{
     $loginButtons = ["Connexion"];
     $loginLinks = ["login/index.php"];
