@@ -213,7 +213,7 @@ Pour verifier si le serveur est bien installé, il suffit de s'y connecter en pa
 
 ### <a name="p4b"></a> b) installation de MariaDB
 
-On va maintenant installé MariaDB qui sera notre Système de Gestion de Base de Donnée (ou SGBD), on utilise la commande suivante `sudo apt install mariadb`.
+On va maintenant installé MariaDB qui sera notre Système de Gestion de Base de Donnée (ou SGBD), on utilise la commande suivante `sudo apt install mariadb-server`.
 
 ### <a name="p4c"></a> c) installation de PHP
 
@@ -234,5 +234,12 @@ on obtient ensuit la page suivante :
 
 PhpMyAdmin est une interface pour gérer les SGBD MariaDB ou MySQL.
 Pour installer PhpMyAdmin, on va utiliser la commande `sudo apt install phpmyadmin`.<br>
-Ensuite on va tester le bon fonctionement de PhpMyAdmin en se connectant au rpi via l'adresse ip et en rajoutant derriere l'adresse ip `/phpmyadmin` (l'adresse internet à rentrer dans notre navigateur est `<adresse ip du rpi>/phpmyadmin`), si tout fonctionne bien on devrait se trouver sur la pagede connection de PhpMyAdmin <br>
-*capture d'écran de la page de connection de PhpMyAdmin*
+Ensuite on va tester le bon fonctionement de PhpMyAdmin en se connectant au rpi via l'adresse ip et en rajoutant derriere l'adresse ip `/phpmyadmin` (l'adresse internet à rentrer dans notre navigateur est `<adresse ip du rpi>/phpmyadmin`). 
+
+Pour pouvoir y accéder à cette page, il faut d'abord que l'on exécute cette commande pour achever la configuration de PhpMyAdmin : `sudo ln -s /usr/share/phpmyadmin /var/www/html/phpmyadmin`. Faites ensuite un `sudo systemctl restart apache2` par précaution.
+
+Il faut ensuite que l'on change le mot de passe de root. Pour cela, on exécute la commande `sudo mariadb` pour aller dans l'invite de commandes de MariaDB, dans lequel on lance `ALTER USER 'root'@'localhost' IDENTIFIED BY 'nouveau_mot_de_passe';` (remplacez par le mot de passe de votre choix). Vous pouvez ensuite sortir de l'invite de commande avec `exit`.
+
+Si tout fonctionne bien on devrait se trouver sur la page de connection de PhpMyAdmin <br>
+
+![Capture d'écran de la page de connection](../img/PageConnectionPhpMyAdmin.png)
