@@ -127,14 +127,18 @@ Pour s'authentifier au Raspberry Pi on a comme information :
 Nom d'utilisateur : pi <br>
 Mot de passe : clusterctrl
 
-Pour mettre en marche les Pi Zeros : ```sudo clusterhate on```
+Pour mettre en marche les Pi Zeros : ```sudo clusterhat on```
 
-Pour les éteindre : ```sudo clusterhate off```
+Pour les éteindre : ```sudo clusterhat off```
+
+On génère la clé SSH avec la commande suivante : 
+
+`` ssh-keygen -t rsa -b 4093``
 
 Dans un fichier /.ssh/config, nous allons configurer les 4 Raspberry Pi Zero : 
 
 ```
-  Host p1
+Host p1
   HostName 172.19.181.1
   User pi
 
@@ -151,10 +155,6 @@ Host p4
   User pi
 ````
 Pour chaque Pi zero, on définit un nom d'alias qui sera utilisé lors de la connexion SSH (p1,p2,p3,p4). On spécifie l'adresse IP de l'hôte distant et enfin, on indique à SSH quel nom d'utilisateur est utilisé lors de la connexion.  
-
-On génère la clé SSH avec la commande suivante : 
-
-`` ssh-keygen -t rsa -b 4093``
 
 Pour copier la clé publique SSH sur chaque Pi Zero : 
 
