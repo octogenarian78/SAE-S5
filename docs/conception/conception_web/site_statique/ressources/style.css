@@ -582,3 +582,52 @@ h1 {
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 999;
 }
+
+.erreur{
+  background: transparent;
+  color: #f62828;
+  border-radius: 10px;
+  padding: 4px;
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 18px;
+}
+
+/* CSS pour le bouton de retour */
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 20px;
+}
+
+.back-button a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  padding: 10px 20px;
+  background-color: #f1f1f1;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.back-button a:hover {
+  background-color: #ddd;
+}
+.button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.button a {
+  color: white;
+  text-decoration: none;
+}
