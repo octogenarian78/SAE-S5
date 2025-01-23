@@ -643,5 +643,27 @@ Graphique
   text-align: center;
   font-size: 18px; 
 }
+/* CSS pour le bouton de retour */
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 20px; 
+}
+
+.back-button a {
+  text-decoration: none; 
+  color: #333; 
+  font-weight: bold;
+  padding: 10px 20px; 
+  background-color: #f1f1f1; 
+  border: 2px solid #ccc; 
+  border-radius: 5px;
+  transition: background-color 0.3s ease; 
+}
+
+.back-button a:hover {
+  background-color: #ddd; 
+}
 
 
