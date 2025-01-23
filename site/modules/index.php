@@ -124,6 +124,7 @@ foreach ($programmes as $programme) {
                 popup.style.display = 'block';
                 popupOverlay.style.display = 'block';
                 const btnOk = popup.querySelector('.btn-ok');
+                const btnCancel = popup.querySelector('.btn-cancel');
 
                 // Ajouter un gestionnaire d'événements pour la touche "Entrée"
                 document.addEventListener('keydown', function enterHandler(event) {
@@ -140,6 +141,14 @@ foreach ($programmes as $programme) {
                     popup.style.display = 'none';
                     popupOverlay.style.display = 'none';
                 });
+
+                // Fermer les popups au clic sur le bouton Annuler
+                if (btnCancel) {
+                    btnCancel.addEventListener('click', () => {
+                        popup.style.display = 'none';
+                        popupOverlay.style.display = 'none';
+                    });
+                }
 
                 if (btnOk) {
                     // Bouton OK : envoyer la requête AJAX
