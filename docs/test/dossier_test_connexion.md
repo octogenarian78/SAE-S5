@@ -67,8 +67,8 @@ Cependant, s'il échoue parce qu'un des champs ou les deux sont vides ou incorre
 | Cas | $login                | $mdp               | Résultat attendu   | Résultat obtenu    | Commentaires                                               |
 |:----|---------------------------|---------------------------|--------------------|--------------------|------------------------------------------------------------|
 | P1  | Correct                      | Correct                   | OK | OK | $login et $mdp sont corrects                     |
-| P2  | Correct                   | Vide                      | KO | KO | $login correct et $mdp vide                     |
-| P3  | Vide                   | Correct                      | KO | KO | $login vide et $mdp correct                     |
+| P2  | Correct                   | Vide                      | id=1b | id=1b | $login correct et $mdp vide                     |
+| P3  | Vide                   | Correct                      | id=1a | id=1a | $login vide et $mdp correct                     |
 | P4  | Correct                   | Incorrect                      | id=2 | id=2 | $login vide et $mdp incorrect                     |
 | P5  | Incorrect                   | Correct                      | id=2 | id=2 | $login incorrect et $mdp correct                     |
 | P6  | Incorrect                   | Incorrect                      | id=2 | id=2 | $login et $mdp sont incorrectes                     |
@@ -80,8 +80,8 @@ Cependant, s'il échoue parce qu'un des champs ou les deux sont vides ou incorre
 | Cas n° | $login | $mdp      | Résultat attendu   | Résultat obtenu    |
 |:-------|------------|------------------|--------------------|--------------------|
 | P1      | e        | e  | OK | OK |
-| P2      | e      | " "              | KO | KO |
-| P3      | " "        | e              | KO | KO |
+| P2      | e      | " "              | id=1b | id=1b |
+| P3      | " "        | e              | id=1a | id=1a |
 | P4      | e      | adqi    | id=2      |id=2           |
 | P5      | eevf      | e  | id=2       | id=2          |
 | P6      | eere      | reer  | id=2     | id=2          |
