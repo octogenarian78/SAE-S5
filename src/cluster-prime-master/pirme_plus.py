@@ -1,7 +1,7 @@
-import json
 from mpi4py import MPI
 import time
 import sys
+import math
 
 # Attach to the cluster and find out who I am and how big it is
 comm = MPI.COMM_WORLD
@@ -15,7 +15,7 @@ start_number = (my_rank * 2) + 1
 end_number = int(sys.argv[1])
 
 # Make a note of the start time
-start = time.time()
+start = time.time() * 1000
 
 # List of discovered primes for this node
 primes = []
@@ -31,7 +31,7 @@ for candidate_number in range(start_number,
     found_prime = True
 
     # Go through all previous numbers and see if any divide without remainder
-    for div_number in range(2, candidate_number):
+    for div_number in range(2, int(math.sqrt(candidate_number))+1):
         if candidate_number % div_number == 0:
             found_prime = False
             break
@@ -49,22 +49,15 @@ results = comm.gather(primes, root=0)
 if my_rank == 0:
 
     # How long did it take?
-    end = round(time.time() - start, 2)
+    end = round((time.time() * 1000) - start, 2)
 
-    # print('Find all primes up to: ' + str(end_number))
-    # print('Nodes: ' + str(cluster_size))
-    # print('Time elasped: ' + str(end) + ' seconds')
+    print(f"Argument: {end_number}")
+    print(f"Nodes: {cluster_size}")
+    print(f"Time: {end}")
 
     # Each process returned an array, so lets merge them
     merged_primes = [item for sublist in results for item in sublist]
     merged_primes.sort()
-    # print('Primes discovered: ' + str(len(merged_primes)))
+    print(f"Primes: {len(merged_primes)}")
     # Uncomment the next line to see all the prime numbers
     # print(merged_primes)
-    data = {"message": "Résultat du lancement de prime.py", 
-            "value": len(merged_primes), 
-            "liste" : merged_primes, 
-            "temps": end ,
-            "size": cluster_size}
-    print(json.dumps(data))
-

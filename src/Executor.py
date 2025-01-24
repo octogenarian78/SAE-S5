@@ -5,14 +5,15 @@ import sys
 from typing import List, Optional
 
 
-def call_python(folder: str, file: str, args: Optional[List[str]] = None) -> Optional[str]:
+def call_python(folder: str, file: str, args: List[str], processors: int) -> Optional[str]:
     """
-        Exécute un script Python et capture sa sortie.
+    Exécute un script Python et capture sa sortie.
 
-        :param folder: Le dossier contenant le script.
-        :param file: Le nom du fichier du script Python.
-        :param args: Liste optionnelle d'arguments à passer au script.
-        :return: La sortie standard capturée sous forme de chaîne de caractères, ou None en cas d'erreur.
+    :param folder: Le dossier contenant le script.
+    :param file: Le nom du fichier du script Python.
+    :param args: Liste d'arguments à passer au script.
+    :param processors: Nombre de processeurs à utiliser avec MPI.
+    :return: La sortie standard capturée sous forme de chaîne de caractères, ou None en cas d'erreur.
     """
     script_path = os.path.join(folder, file)
 
@@ -20,9 +21,7 @@ def call_python(folder: str, file: str, args: Optional[List[str]] = None) -> Opt
         print(f"Fichier Python non trouvé : {script_path}")
         return None
 
-    command = ["mpirun", "-np", "4", "python3", script_path]
-    if args:
-        command.extend(args)
+    command = ["mpirun", "-np", str(processors), "python3", script_path] + args
 
     try:
         print(f"Exécution de : {' '.join(command)}")
@@ -74,27 +73,56 @@ def write_to_file(output_file: str, output_lines: List[str]):
         print(f"Résultat écrit dans : {output_file}")
 
 
+def measure_scalability(folder, file, args_list, processors_list, iterations, output_file):
+    """
+    Mesure la scalabilité forte puis faible.
+
+    :param folder: Chemin vers le dossier du script.
+    :param file: Nom du fichier du script Python.
+    :param args_list: Liste des tailles de problèmes.
+    :param processors_list: Liste des configurations de processeurs.
+    :param iterations: Nombre d'itérations par configuration.
+    :param output_file: Nom du fichier de sortie.
+    """
+
+    def process_scalability(processors, args, iteration, mode_suffix):
+        specific_output_file = f"{output_file}_{mode_suffix}.csv"
+
+        print(f"--- Processeurs : {processors}, Arguments ({mode_suffix}) : {args}, Itération : {iteration} ---")
+        script_output = call_python(folder, file, [args], processors)
+        if script_output:
+            output_lines = script_output.splitlines()
+            write_to_file(specific_output_file, output_lines)
+        else:
+            print("Aucune sortie à écrire.")
+
+    # Executer la scalabilité forte en premier
+    for processors in processors_list:
+        for iteration in range(1, iterations + 1):
+            args = args_list[-1]
+            process_scalability(processors, args, iteration, "Faible")
+
+    # Ensuite, executer la scalabilité faible
+    for processors in processors_list:
+        for iteration in range(1, iterations + 1):
+            args_index = processors_list.index(processors)
+            args = args_list[args_index]
+            process_scalability(processors, args, iteration, "Forte")
+
+
 def main():
-    if len(sys.argv) != 6:
-        print("Usage : script.py <folder> <file> <args> <iterations> <output_file>")
+    if len(sys.argv) != 7:
+        print("Usage : Executor.py <folder> <file> <args> <processors> <iterations> <output_file>")
         sys.exit(1)
 
     folder = sys.argv[1]
     file = sys.argv[2]
-    args = sys.argv[3].split(",")
-    iterations = int(sys.argv[4])
-    output_file = sys.argv[5]
+    args_list = sys.argv[3].split(";")
+    processors_list = [int(p) for p in sys.argv[4].split(";")]
+    iterations = int(sys.argv[5])
+    output_file = sys.argv[6]
 
-    for i in range(1, iterations + 1):
-        print(f"Exécution de l'itération {i}...")
-        script_output = call_python(folder, file, args)
-
-        if script_output:
-            output_lines = script_output.splitlines()
-            output_file = f"{output_file}.csv"
-            write_to_file(output_file, output_lines)
-        else:
-            print("Aucune sortie à écrire.")
+    measure_scalability(folder, file, args_list, processors_list, iterations, output_file)
 
 
 if __name__ == "__main__":

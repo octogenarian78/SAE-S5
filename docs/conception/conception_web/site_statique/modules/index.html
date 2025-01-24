@@ -27,10 +27,10 @@
     <div class="calcul-result">
         <table>
             <thead>
-                <tr><th>Résultat du Calcul</th></tr>
+            <tr><th>Résultat du Calcul</th></tr>
             </thead>
             <tbody>
-                <tr><td>123456.789</td></tr>
+            <tr><td>123456.789</td></tr>
             </tbody>
         </table>
     </div>
@@ -42,6 +42,54 @@
     <a href="#" class="btn-module-select">Module 3</a>
     <a href="#" class="btn-module-select">Module 4</a>
 </div>
+
+<!-- Popup et overlay -->
+<div class="popup-overlay"></div>
+<div class="popup">
+    <div class="popup-title">Entrée(s) du programme</div>
+    <p>Entrez un chiffre :</p>
+    <input type="number" placeholder="Exemple : 42">
+    <div class="popup-buttons">
+        <a href="#" class="btn-ok">OK</a>
+        <a href="#" class="btn-cancel">Annuler</a>
+    </div>
+</div>
+
+<script>
+    // Sélection des éléments
+    const moduleButtons = document.querySelectorAll('.btn-module-select');
+    const popup = document.querySelector('.popup');
+    const popupOverlay = document.querySelector('.popup-overlay');
+    const btnOk = document.querySelector('.btn-ok');
+    const btnCancel = document.querySelector('.btn-cancel');
+
+    // Fonction pour ouvrir le popup
+    const openPopup = () => {
+        popup.style.display = 'block';
+        popupOverlay.style.display = 'block';
+    };
+
+    // Fonction pour fermer le popup
+    const closePopup = () => {
+        popup.style.display = 'none';
+        popupOverlay.style.display = 'none';
+    };
+
+    // Attacher les événements d'ouverture aux boutons module
+    moduleButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault(); // Empêche la redirection
+            openPopup();
+        });
+    });
+
+    // Attacher les événements de fermeture aux boutons OK et Annuler
+    btnOk.addEventListener('click', closePopup);
+    btnCancel.addEventListener('click', closePopup);
+
+    // Fermer le popup si on clique en dehors
+    popupOverlay.addEventListener('click', closePopup);
+</script>
 
 </body>
 </html>

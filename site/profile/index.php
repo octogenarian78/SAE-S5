@@ -1,29 +1,20 @@
 <?php
+include "../ressources/fonction/header.php";
+include "../ressources/fonction/db_connect.php";
+
 session_start();
+$conn = connectDB();
 
 // Vérification si l'utilisateur est connecté
 if (!isset($_SESSION["util_id"])) {
     // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
-    header("Location: ../login/index.html");
+    header("Location: ../login/index.php");
     exit;
-}
-
-// Connexion à la base de données
-$host = "localhost";
-$dbname = "GestionCalculs";
-$username = "root"; // Remplace par ton utilisateur MySQL si nécessaire
-$password = ""; // Remplace par ton mot de passe MySQL
-
-try {
-    $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Erreur de connexion : " . $e->getMessage());
 }
 
 // Récupération des informations utilisateur depuis la base de données
 $util_id = $_SESSION["util_id"];
-$stmt = $conn->prepare("SELECT login, mdp FROM Utilisateurs WHERE util_id = :util_id");
+$stmt = $conn->prepare("SELECT login, mdp, admin FROM Utilisateurs WHERE util_id = :util_id");
 $stmt->bindParam(":util_id", $util_id, PDO::PARAM_INT);
 $stmt->execute();
 
@@ -45,22 +36,30 @@ $login = htmlspecialchars($user["login"]); // Le login de l'utilisateur
     <link rel="stylesheet" href="../ressources/style.css">
 </head>
 <body class="profil">
-<header>
-    <nav class="nav">
-        <a href="../index.php">
-            <div name="logo" class="logo">
-                <img src="../ressources/img/logo.png" alt="logo du site">
-            </div>
-        </a>
-        <div name="menu" class="menu">
-            <a href="../administration/index.html">Administration</a>
-            <a href="../modules/index.html">Modules</a>
-        </div>
-        <div name="login" class="login">
-            <a href="../index.php">Accueil</a>
-        </div>
-    </nav>
-</header>
+<?php 
+
+$menuButtons = [];
+$menuLinks = [];
+
+$logoLink = "../";
+
+if (isset($_SESSION["util_id"])){
+    $menuButtons[] = "Modules";
+    $menuLinks[] = "../modules/index.php";
+    $loginButtons = ["Accueil", "Déconnexion"];
+    $loginLinks = ["../index.php", "../signout/index.php"];
+}else{
+    $loginButtons = ["Connexion"];
+    $loginLinks = ["../signin/index.html"];
+}
+
+if (isset($_SESSION["util_id"]) && $user['admin']){
+    $menuButtons[] = "Administration";
+    $menuLinks[] = "../administration/index.php";
+}
+
+echo genererHeader('../ressources/img/logo.png', $menuButtons, $menuLinks, $loginButtons, $loginLinks, $logoLink);
+?>
 <div class="container-profil">
     <div class="profile-item">
         <span class="label">Nom d'utilisateur:</span>
@@ -69,7 +68,7 @@ $login = htmlspecialchars($user["login"]); // Le login de l'utilisateur
     <div class="profile-item">
         <span class="label">Mot de passe:</span>
         <span id="mdp">******</span>
-        <button class="button">Modifier</button>
+        <button class="button"><a href="update_password.php">Modifier</a></button>
     </div>
 </div>
 <div name="ten_last_calcul" class="ten_last_calcul">
@@ -84,7 +83,7 @@ $login = htmlspecialchars($user["login"]); // Le login de l'utilisateur
         <tbody>
         <?php
         // Récupérer les 10 derniers calculs de l'utilisateur
-        $stmt = $conn->prepare("SELECT programme, entree, sortie FROM Calculs WHERE util_id = :util_id ORDER BY calc_id DESC LIMIT 10");
+        $stmt = $conn->prepare("SELECT c.entree, c.sortie, p.nom_programme FROM Calculs c, Programmes p WHERE c.prog_id = p.prog_id AND c.util_id = :util_id ORDER BY c.calc_id DESC LIMIT 10");
         $stmt->bindParam(":util_id", $util_id, PDO::PARAM_INT);
         $stmt->execute();
 
@@ -93,7 +92,7 @@ $login = htmlspecialchars($user["login"]); // Le login de l'utilisateur
         // Remplissage dynamique des lignes du tableau
         foreach ($calculs as $calcul) {
             echo "<tr>";
-            echo "<td>" . htmlspecialchars($calcul["programme"]) . "</td>";
+            echo "<td>" . htmlspecialchars($calcul["nom_programme"]) . "</td>";
             echo "<td>" . htmlspecialchars($calcul["entree"]) . "</td>";
             echo "<td>" . htmlspecialchars($calcul["sortie"]) . "</td>";
             echo "</tr>";

@@ -1,23 +1,17 @@
 <?php
-// Démarrer la session PHP
-session_start();
 
-// Configuration de la base de données
-$host = "localhost";
-$dbname = "GestionCalculs";
-$username = "root"; // Remplace par ton utilisateur MySQL si nécessaire
-$password = ""; // Remplace par ton mot de passe MySQL
+session_start(); 
 
-// Connexion à la base de données
-try {
-    $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Erreur de connexion : " . $e->getMessage());
-}
+include "../ressources/fonction/db_connect.php";
+$conn = connectDB();
 
-// Traitement du formulaire
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $captcha_answer = $_POST["captcha"];
+    if ($captcha_answer != $_SESSION['captcha_result']) {
+        header("Location: index.php?id=5"); // Erreur si le captcha est incorrect
+        exit;
+    }
+
     $login = htmlspecialchars($_POST["username"]);
     $mdp = $_POST["password"];
     $confirm_mdp = $_POST["confirm-password"];
@@ -27,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     // Vérification des champs
     if ($mdp !== $confirm_mdp) {
-        echo "Les mots de passe ne correspondent pas.";
+        header("Location: index.php?id=1");
         exit;
     }
 
@@ -37,12 +31,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt->execute();
 
     if ($stmt->rowCount() > 0) {
-        echo "Ce login est déjà utilisé. Veuillez en choisir un autre.";
+        header("Location: index.php?id=2");
         exit;
     }
 
     // Hachage du mot de passe
-    $hashed_password = password_hash($mdp, PASSWORD_BCRYPT);
+    $hashed_password = sha1($mdp);
 
     // Insertion dans la base de données
     $stmt = $conn->prepare("INSERT INTO Utilisateurs (login, mdp) VALUES (:login, :mdp)");
@@ -64,6 +58,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit;
 
     } catch (PDOException $e) {
-        echo "Erreur lors de l'inscription : " . $e->getMessage();
+        header("Location: index.php?id=4");
+        exit;
     }
 }
+?>

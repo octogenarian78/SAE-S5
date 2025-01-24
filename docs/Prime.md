@@ -8,11 +8,13 @@
     - #### [Paradigme Master-Worker](#p3.1)
     - #### [Modèle MPI](#p3.2)
     - #### [Explication du code Python](#p3.3)
+- ### [Amélioration de la recherche de nombres premiers](#p4)
 
 ## <a name="p1"></a> MPI (Message Passing Interface) :
 
 MPI est une bibliothèque de communication pour les programmes parallèles. Elle permet de créer des programmes parallèles dans lesquels les processus peuvent communiquer entre eux.<br>
-Dans une approche de type Master-Worker, le processus **Master** envoie des tâches aux processus **Workers**, qui les exécutent et renvoient les résultats au **Master**.<br>
+Dans une approche de type Master-Worker, le processus **Master** envoie des tâches aux processus **Workers**, qui les exécutent et renvoient les résultats au **Master**, bien souvent le processus **Master** peut agir comme un processus **Worker** et donc réaliser des tâches.<br>
+
 Pour différencier les processus, MPI attribue un **rank** à chaque processus. Le **Master** a toujours le **rank 0**, et les **Workers** ont des **ranks supérieurs à 0**.<br>
 
 ## <a name="p2"></a> Recherche de nombres premiers :
@@ -66,7 +68,7 @@ Pour réaliser cette implémentation, on utilise le paradigme de programmation p
      ```
 
 2. **Recherche des nombres premiers** :
-   - Chaque processus teste les nombres attribués pour savoir s'ils sont premiers :
+   - Chaque processus teste les nombres attribués et les compare à tous les nombres inférieur pour savoir s'ils sont premiers :
      ```python
      for candidate_number in range(start_number, end_number, cluster_size * 2):
          found_prime = True
@@ -98,6 +100,18 @@ Pour réaliser cette implémentation, on utilise le paradigme de programmation p
      print('Time elasped: ' + str(end) + ' seconds')
      print('Primes discovered: ' + str(len(merged_primes)))
      ```
+
+## <a name="p4"></a> Amélioration de la recherche de nombres premiers :
+
+Bien que le programme fourni donne des résultats corrects, il n'est pas très efficace pour trouver des nombres premiers. Une amélioration possible serait de changer la ligne suivante :
+```python
+for div_number in range(2, candidate_number):
+```
+par :
+```python
+for div_number in range(2, int(math.sqrt(candidate_number)) + 1):
+```
+Cela permet de réduire le nombre de divisions nécessaires pour déterminer si un nombre est premier. En effet, si un nombre `n` n'est pas premier, il doit avoir un diviseur inférieur ou égal à sa racine carrée. En conséquence, on peut diviser par tous les nombres inférieurs à la racine carrée de `n` pour vérifier s'il est premier. Ce changement nous évite de diviser par des nombres inutiles et améliore les performances de l'algorithme.
 
 ## Conclusion :
 

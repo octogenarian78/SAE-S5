@@ -1,19 +1,11 @@
 <?php
+include "ressources/fonction/header.php";
+include "ressources/fonction/db_connect.php";
 
 session_start();
-if (isset($_SESSION["util_id"])) {
-    // Connexion à la base de données
-    $host = "localhost";
-    $dbname = "GestionCalculs";
-    $username = "root"; // Remplace par ton utilisateur MySQL si nécessaire
-    $password = ""; // Remplace par ton mot de passe MySQL
+$conn = connectDB();
 
-    try {
-        $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    } catch (PDOException $e) {
-        die("Erreur de connexion : " . $e->getMessage());
-    }
+if (isset($_SESSION["util_id"])) {
     $util_id = $_SESSION["util_id"];
     $stmt = $conn->prepare("SELECT admin FROM Utilisateurs WHERE util_id = :util_id");
     $stmt->bindParam(":util_id", $util_id, PDO::PARAM_INT);
@@ -37,39 +29,34 @@ if (isset($_SESSION["util_id"])) {
     <link rel="stylesheet" href="ressources/style.css">
 </head>
 <body>
-<header>
-    <nav class="nav">
-        <a href="#">
-            <div name="logo" class="logo">
-                <img src="ressources/img/logo.png" alt="logo du site">
-            </div>
-        </a>
-        <div name="menu" class="menu">
-            <a href="#">Accueil</a>
-            <a href="modules/index.html">Modules</a>
-            <?php
-            if ($user && isset($user["admin"]) && $user["admin"] == 1) {
-                echo ('<a href="administration/index.html">Administration</a>');
-            }
-            
-            ?>
-        </div>
-        <div name="login" class="login">
-            <?php
-            if (isset($_SESSION["util_id"])) {
-                echo ('<a href="./profile/index.php">Profil</a>');
-            }else{
-                echo ('<a href="signup/index.html">Connexion</a>');
-            }
-            ?>
-        </div>
-    </nav>
-</header>
+<?php 
 
+$menuButtons = [];
+$menuLinks = [];
+
+$logoLink = "#";
+
+if (isset($_SESSION["util_id"])){
+    $menuButtons[] = "Modules";
+    $menuLinks[] = "modules/index.php";
+    $loginButtons = ["Profil", "Déconnexion"];
+    $loginLinks = ["profile/index.php", "signout/index.php"];
+}else{
+    $loginButtons = ["Connexion"];
+    $loginLinks = ["login/index.php"];
+}
+
+if (isset($_SESSION["util_id"]) && $user['admin']){
+    $menuButtons[] = "Administration";
+    $menuLinks[] = "administration/index.php";
+}
+
+echo genererHeader('ressources/img/logo.png',$menuButtons, $menuLinks, $loginButtons, $loginLinks, $logoLink);
+?>
 <div class="content">
     <div class="video-description">
         <div class="description">
-            Description du site
+            <p>Ce site offre une solution rapide et efficace pour le calcul de certains modules mathématiques, notamment la détermination des nombres premiers d'un nombre donné. <br><br> Grâce à une infrastructure distribuée reposant sur un réseau de plusieurs Raspberry Pi (RPI), le site permet de répartir les calculs entre différents nœuds, optimisant ainsi la vitesse et la précision des résultats. <br><br> Lorsqu'une requête est soumise, les calculs sont divisés et traités simultanément par plusieurs Raspberry Pi, offrant ainsi des réponses en un temps réduit, même pour des nombres de grande taille. Cette approche garantit des performances exceptionnelles tout en simplifiant l'accès à des résultats mathématiques complexes.</p>
         </div>
         <div class="video">
             <iframe width="560" height="315" src="https://www.youtube.com/embed/UKRYHQALlAI?si=RteuZWQKMDy-d63F" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -80,7 +67,7 @@ if (isset($_SESSION["util_id"])) {
 if (!isset($_SESSION["util_id"])){
     echo ('
         <div class="signup-button">
-            <a href="signup/index.html" class="btn-inscription">S\'inscrire</a>
+            <a href="signup/index.php" class="btn-inscription">S\'inscrire</a>
         </div>'
     );
 }
@@ -97,7 +84,7 @@ if (!isset($_SESSION["util_id"])){
         <tbody>
         <?php
         // Récupérer les 10 derniers calculs de l'utilisateur
-        $stmt = $conn->prepare("SELECT programme, entree, sortie FROM Calculs ORDER BY calc_id DESC LIMIT 10");
+        $stmt = $conn->prepare("SELECT c.entree, c.sortie, p.nom_programme FROM Calculs c, Programmes p WHERE c.prog_id = p.prog_id ORDER BY c.calc_id DESC LIMIT 10");
         $stmt->execute();
 
         $calculs = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -105,7 +92,7 @@ if (!isset($_SESSION["util_id"])){
         // Remplissage dynamique des lignes du tableau
         foreach ($calculs as $calcul) {
             echo "<tr>";
-            echo "<td>" . htmlspecialchars($calcul["programme"]) . "</td>";
+            echo "<td>" . htmlspecialchars($calcul["nom_programme"]) . "</td>";
             echo "<td>" . htmlspecialchars($calcul["entree"]) . "</td>";
             echo "<td>" . htmlspecialchars($calcul["sortie"]) . "</td>";
             echo "</tr>";

@@ -29,6 +29,7 @@ Ce document décrit en détail les étapes d'installation<br>
     - [**b) Activation et Connexion au SSH**](#p3b)
     - [**c) Installation de python et ses modules**](#p3c)
     - [**d) Test du module "Nombre premier"**](#p3d)
+    - [**Problème d'installation rencontré**](#a-namep3prob-problème-dinstallation-rencontré)
 
 - ### [IV - Mise en place d'une pile LAMP](#p4)
 
@@ -199,8 +200,26 @@ Une fois la copie effectuée, nous avons testé le script prime-blinkt.py avec l
 
 On obtient le nombre de nombres premiers inférieur à 20. Il y en a 8 (2,3,5,7,11,13,17,19)
 
+### <a name="p3prob"></a> Problème d'installation rencontré
+
+Lors de l’installation du cluster, nous avons rencontré de nombreuses difficultés à effectuer un premier test des images installées, en raison d’un problème avec l’adaptateur VGA. 
+Nous avons ainsi passé plus d’une journée à essayer de comprendre l’origine de l’écran noir qui apparaissait après l’image d’initialisation lors du démarrage du Raspberry Pi 4. 
+Pensant initialement que le problème provenait des images utilisées, nous avons envisagé que celles-ci, bien qu’obtenues à partir d’un guide en ligne et non via Pi Imager, puissent être corrompues ou incorrectes. 
+Cependant, après vérification, il s’est avéré que ces images correspondaient aux mêmes fichiers disponibles sur le site clusterhat.com. 
+Finalement, nous avons découvert que la source du problème résidait dans l’adaptateur VGA défectueux. Après avoir remplacé cet adaptateur, nous avons pu avancer dans la configuration.
 <br>
 
+Une fois cette étape franchie, nous avons créé un fichier de configuration comme indiqué dans au-dessus, puis généré une clé SSH. Cependant, nous avons rencontré un autre problème, le Raspberry Pi 4 ne parvenait pas à détecter les interfaces USB des Raspberry Pi Zero. 
+Nous avons alors suivi plusieurs guides d’installation trouvés en ligne, sans succès.
+Enfin, nous sommes tombés sur le guide d'installation qui recommandait d’ajouter un répertoire vide nommé "ssh" à la racine de chaque image après leur installation. 
+Après avoir appliqué cette solution, en recréant et en modifiant les images pour inclure ce répertoire, le Raspberry Pi 4 a finalement été capable de détecter les interfaces USB des Raspberry Pi Zero.
+<br>
+
+Lorsque on installe une image sur les Raspberry Pi Zero, le service SSH est désactivé par défaut pour des raisons de sécurité.
+Si ce service n’est pas activé, le Pi Zero ne peut pas répondre aux requêtes de connexion, que ce soit via USB ou via un réseau. 
+En ajoutant un répertoire vide nommé ssh dans à la racine de chaque images, on active automatiquement le service SSH lors du premier démarrage des Raspberry Pi.
+Cela semble également déclencher la configuration correcte des interfaces USB, permettant ainsi au Raspberry Pi4 de detecter les Raspberry Pi Zero 
+<br>
 ## <a name="p4"></a> IV - Mise en place d'une pile LAMP 
 
 Cette partie est dédiée à l'installation d'une pile LAMP sur le Raspberry PI.
