@@ -108,7 +108,7 @@ if (!isset($_SESSION["util_id"])){
 </div>
 
 <div class="manual-button">
-    <a href="#" class="btn-manual">Manuel Utilisateur</a>
+    <a onclick="window.open('Manuel utilisateur.pdf', '_blank')" class="btn-manual">Manuel Utilisateur</a>
 </div>
 <footer>
 
