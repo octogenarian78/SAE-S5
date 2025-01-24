@@ -14,6 +14,7 @@
 
 MPI est une bibliothèque de communication pour les programmes parallèles. Elle permet de créer des programmes parallèles dans lesquels les processus peuvent communiquer entre eux.<br>
 Dans une approche de type Master-Worker, le processus **Master** envoie des tâches aux processus **Workers**, qui les exécutent et renvoient les résultats au **Master**, bien souvent le processus **Master** peut agir comme un processus **Worker** et donc réaliser des tâches.<br>
+
 Pour différencier les processus, MPI attribue un **rank** à chaque processus. Le **Master** a toujours le **rank 0**, et les **Workers** ont des **ranks supérieurs à 0**.<br>
 
 ## <a name="p2"></a> Recherche de nombres premiers :

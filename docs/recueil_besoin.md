@@ -64,7 +64,6 @@ Ce document rassemble toutes les informations importantes que nous devrons respe
 
 ------------------------------------------------------------------------------------------------------------------------
 ### <a name="p1"></a>I – Objectif et portée
-
 - <b><a name="p1a"></a>a) Quels sont la portée et les objectifs généraux ?</b><br>
 
 La portée de l'utilisation de l'application s'arrête au réseau internet de l'IUT. Aucun utilisateur ne peut l'utiliser en dehors de ce réseau. Le projet vise à concevoir et développer une application web permettant de réaliser des calculs des décimales du nombre Pi grâce à la méthode de Monte-Carlo en calcul partagé et distribué. Cette application sera hébergée sur un Raspberry Pi 4, connecté à un Kit Cluster Hat, permettant d'utiliser 4 Raspberry Pi Zero pour les calculs de Pi.
@@ -82,9 +81,17 @@ La portée de l'utilisation de l'application s'arrête au réseau internet de l'
 
 </colgroup>
 <tr>
-    <th>Objets</th>
-    <th>Acteurs</th>
-    <th>Actions</th>
+    
+| **Objets**             | **Acteurs**                    | **Actions**                                                                |
+|-------------------------|-------------------------------|----------------------------------------------------------------------------|
+| Application web         | Utilisateurs                  | S’inscrire, se connecter, calculer Pi, consulter les résultats             |
+| Raspberry Pi 4          | Système                       | Centraliser les calculs, répartir les tâches vers les Raspberry Pi Zero    |
+| Raspberry Pi Zero (x4)  | Système                       | Effectuer les calculs distribués                                           |
+| Cluster Hat             | Système                       | Faciliter la communication entre les Raspberry Pi                          |
+| Base de données         | Système                       | Stocker les résultats des calculs, gérer les comptes utilisateurs          |
+| Interface utilisateur   | Utilisateurs                  | Naviguer, lancer des calculs, visualiser les résultats                     |
+| Interface administrateur| Administrateurs               | Gérer les utilisateurs, monitorer les Raspberry Pi                         |
+| Algorithmes de calcul   | Système                       | Calculer Pi avec la méthode Monte-Carlo                                    |
 </tr>
 
 </table>
@@ -93,17 +100,19 @@ La portée de l'utilisation de l'application s'arrête au réseau internet de l'
 - - <a name="p1bii"></a>ii) Les différents niveaux
 
 
-| Niveau stratégique (au-dessus de la mer) | Niveau utilisateur (de la mer) | Niveau sous-fonctions (en-dessous de la mer) |
-|------------------------------------------|--------------------------------|----------------------------------------------|
-|                                          |                                |                                              |
-|                                          |                                |                                              |
-|                                          |                                |                                              |
-|                                          |                                |                                              |
+| Niveau stratégique (au-dessus de la mer) | Niveau utilisateur (de la mer) | Niveau sous-fonctions (en-dessous de la mer) | 
+|-------------------------------------------|---------------------------------------|----------------------------------------------| 
+| Calcul distribué sur un cluster Raspberry | Interface web simple pour calculer Pi | Algorithmes de Monte-Carlo, gestion des tâches sur les Pi Zero | 
+| Disponibilité et simplicité d’accès | Visualisation des résultats | Communication entre Raspberry Pi via Cluster Hat | 
+| Sécurité des données | Gestion des utilisateurs | Stockage des résultats dans la base de données |
 
 
 <br>
 
 - - <a name="p1biii"></a>iii) Un schéma descriptif des niveaux
+    - Niveau stratégique : Vue d’ensemble, objectifs principaux (calcul distribué, accessibilité).
+    - Niveau utilisateur : Interface utilisateur pour exécuter les calculs et voir les résultats.
+    - Niveau sous-fonctions : Communication entre les Raspberry Pi, gestion des algorithmes de Monte-Carlo, et stockage des résultats.
 
 
 - - <a name="p1biiii"></a>iiii) Le diagramme des cas d'utilisation
@@ -138,13 +147,68 @@ Par ordre alphabétique.
   <br>
   Les acteurs sont les utilisateurs, leur objectif est de calculer Pi via une application web.
 
-- <b>b) <a name="p3b"></a> Les cas d’utilisation métier (concepts opérationnels).</b>
+- <b>b) Les cas d’utilisation métier (concepts opérationnels). </b> <br>
+<br>
 
-- <b>c) <a name="p3c"></a> Les cas d'utilisation stratégique <b>
+1. **Inscription d’un utilisateur** :  
+   Permet à un utilisateur de créer un compte pour accéder à la plateforme.
+   - **Acteur principal** : Utilisateur
+   - **Objectif** : Donner accès aux fonctionnalités de calcul et suivi des résultats.
 
+2. **Connexion d’un utilisateur** :  
+   L’utilisateur se connecte pour accéder à ses ressources et effectuer des calculs.
+   - **Acteur principal** : Utilisateur
+   - **Objectif** : Accéder à son profil et à ses données.
 
-- <b>d) <a name="p3d"></a> Les cas d’utilisation utilisateur et système.</b>
+3. **Production de calculs** :  
+   Permet de réaliser des calculs sur le système en utilisant l’algorithme de Monte-Carlo.
+   - **Acteur principal** : Utilisateur
+   - **Objectif** : Effectuer des calculs de Pi.
 
+---
+
+- <b> c) Les cas d’utilisation stratégique </b> <br>
+<br>
+
+1. **Accès à l’interface administrateur** :  
+   Permet aux administrateurs de superviser le fonctionnement du système, gérer les utilisateurs, et surveiller les Raspberry Pi Zero.
+   - **Acteur principal** : Administrateur
+   - **Objectif** : Superviser les calculs et assurer la disponibilité du système.
+
+2. **Modification du profil utilisateur** :  
+   Permet à un utilisateur de mettre à jour ses informations personnelles sur le système.
+   - **Acteur principal** : Utilisateur
+   - **Objectif** : Maintenir les données utilisateur à jour.
+
+3. **Accès aux calculs réalisés** :  
+   Permet à un utilisateur de consulter l’historique de ses calculs.
+   - **Acteur principal** : Utilisateur
+   - **Objectif** : Fournir un suivi des calculs réalisés.
+
+---
+
+- <b> d) Les cas d’utilisation utilisateur et système </b> <br>
+<br>
+
+1. **Affichage de calculs** :  
+   L’utilisateur accède à ses calculs via l’interface.  
+   - **Acteur principal** : Utilisateur 
+   - **Objectif** : Affiche les résultats stockés dans la base de données.
+
+2. **Se déconnecter** :  
+   Permet à l’utilisateur de mettre fin à sa session.  
+   - **Acteur principal** : Utilisateur 
+   - **Objectif** : Supprime le cookie de session et redirige vers la page d’accueil.
+
+3. **Accès à la vidéo de présentation** :  
+   Permet à l’utilisateur d’accéder à une vidéo explicative sur l’utilisation de la plateforme.  
+   - **Acteur principal** : Utilisateur  
+   - **Objectif** : Charge et affiche la vidéo.
+
+4. **Accès au manuel utilisateur** :  
+   Fournit des instructions sur l’utilisation de l’application.  
+   - **Acteur principal** : Utilisateur  
+   - **Objectif** : Affiche le manuel utilisateur.
 
 <br><br><br><br><br><br><br>
 ------------------------------------------------------------------------------------------------------------------------
@@ -152,7 +216,7 @@ Par ordre alphabétique.
 ### <a name="p4"></a>IV – La technologie employée
 - <b><a name="p4a"></a>a) Quelles sont les exigences technologiques pour ce système ?</b>
 <br><br>
-  Pour mettre en place le système les différentes exigences sont l'utilisation d'un OS linux, Apache, MariaDB, PHP, Python, R, Java, C
+  Pour mettre en place le système les différentes exigences sont l'utilisation d'un OS linux, Apache, MariaDB, PHP, Python, JavaScript.
 <br><br>
     Le matériel mis à disposition : 
 - RPI 4 : 1
@@ -210,37 +274,67 @@ Ce système n'est pas prévu pour s'interfacer avec d'autres systèmes.
 <br>
 
 - <b><a name="p5c"></a>c) Performances</b><br>
-
+Le système doit permettre des calculs rapides et fiables, avec une capacité de gestion des tâches réparties sur les Raspberry Pi Zero. Il faut rédiger des tests de performances, dont des tests de scalabilité et sur les erreurs.
 
 <br>
 
 - <b><a name="p5d"></a>d) Opérations, sécurité, documentation</b><br>
+
+- Opérations : Le système doit fonctionner 24/7 avec une surveillance continue de l'état des Raspberry Pi pour identifier les pannes ou déconnexions. <br>
+
+- Sécurité : Les données des utilisateurs doivent être protégées contre les attaques (par exemple, injection SQL ou attaque par force brute). <br>
+
+- Documentation : Une documentation technique doit être disponible pour les développeurs et une autre plus simple pour les utilisateurs finaux, expliquant les étapes d’utilisation.
 
 
 
 <br>
 
 - <b><a name="p5e"></a>e) Utilisation et utilisabilité</b><br>
+Le système doit être accessible à tout type d'utilisateur. L'interface utilisateur doit être intuitive, avec des messages d'erreur explicites pour guider l'utilisateur dans ses actions.
+
 
 <br>
 
 - <b><a name="p5f"></a>f) Maintenance et portabilité</b><br>
+Le système doit être conçu pour faciliter les mises à jour logicielles et matérielles, ainsi que la migration vers d'autres plateformes. Les scripts de maintenance automatisée doivent être inclus pour surveiller et mettre à jour le système.
+
+
 
 <br>
 
 - <b><a name="p5g"></a>g) Questions non résolues ou reportées à plus tard</b><br>
-
+  Aucune question n'est non résolue ou reportée à plus tard.
  
   <br><br><br><br><br><br><br>
 ------------------------------------------------------------------------------------------------------------------------
 
 ### <a name="p6"></a>VI – Recours humain, questions juridiques, politiques, organisationnelles.
 - <b><a name="p6a"></a>a) Quel est le recours humain au fonctionnement du système ?</b><br>
+
+Le fonctionnement du système repose sur les actions humaines suivantes :
+
+  - Administrateurs système :
+
+    - Supervision des Raspberry Pi pour assurer leur connectivité et leur bon fonctionnement.
+    - Maintenance et mise à jour du système (logiciels et matériel).
+    - Surveillance des performances et gestion des pannes éventuelles.
+
+  - Utilisateurs :
+
+    - Création de comptes, connexion à l'application, et lancement des calculs.
+    - Consultation des résultats et utilisation des fonctionnalités offertes par la plateforme.
+
+  - Développeurs/Équipe projet :
+
+    - Développement continu de nouvelles fonctionnalités.
+    - Correction des bugs signalés par les utilisateurs ou détectés lors de tests.
+Mise à jour et amélioration des algorithmes de calcul distribué.
   <br>
 - <b><a name="p6b"></a>b) Quelles sont les exigences juridiques et politiques ?</b><br>
   <br>
   Il n'y a pas d'exigence juridique ou politique.
-
+  <br>
 - <b><a name="p6c"></a>c) Quelles sont les conséquences humaines de la réalisation du système ?</b><br>
   <br>
 

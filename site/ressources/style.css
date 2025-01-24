@@ -447,7 +447,6 @@ h1 {
   text-decoration: none;
   color: white;
 }
-
 .profile-item span {
   font-size: 18px;
   color: #333;
@@ -523,7 +522,6 @@ h1 {
   font-size: 14px; /* Ajustez la taille du texte si nécessaire */
   padding: 0 10px; /* Un peu d'espace à gauche du texte */
 }
-
 
 .stockage a{
   text-decoration: none;
@@ -668,5 +666,3 @@ Graphique
 .back-button a:hover {
   background-color: #ddd; 
 }
-
-

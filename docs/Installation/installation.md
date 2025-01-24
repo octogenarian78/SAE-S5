@@ -128,14 +128,18 @@ Pour s'authentifier au Raspberry Pi on a comme information :
 Nom d'utilisateur : pi <br>
 Mot de passe : clusterctrl
 
-Pour mettre en marche les Pi Zeros : ```sudo clusterhate on```
+Pour mettre en marche les Pi Zeros : ```sudo clusterhat on```
 
-Pour les éteindre : ```sudo clusterhate off```
+Pour les éteindre : ```sudo clusterhat off```
+
+On génère la clé SSH avec la commande suivante : 
+
+`` ssh-keygen -t rsa -b 4093``
 
 Dans un fichier /.ssh/config, nous allons configurer les 4 Raspberry Pi Zero : 
 
 ```
-  Host p1
+Host p1
   HostName 172.19.181.1
   User pi
 
@@ -152,10 +156,6 @@ Host p4
   User pi
 ````
 Pour chaque Pi zero, on définit un nom d'alias qui sera utilisé lors de la connexion SSH (p1,p2,p3,p4). On spécifie l'adresse IP de l'hôte distant et enfin, on indique à SSH quel nom d'utilisateur est utilisé lors de la connexion.  
-
-On génère la clé SSH avec la commande suivante : 
-
-`` ssh-keygen -t rsa -b 4093``
 
 Pour copier la clé publique SSH sur chaque Pi Zero : 
 
@@ -232,7 +232,7 @@ Pour verifier si le serveur est bien installé, il suffit de s'y connecter en pa
 
 ### <a name="p4b"></a> b) installation de MariaDB
 
-On va maintenant installé MariaDB qui sera notre Système de Gestion de Base de Donnée (ou SGBD), on utilise la commande suivante `sudo apt install mariadb`.
+On va maintenant installé MariaDB qui sera notre Système de Gestion de Base de Donnée (ou SGBD), on utilise la commande suivante `sudo apt install mariadb-server`.
 
 ### <a name="p4c"></a> c) installation de PHP
 
@@ -253,5 +253,60 @@ on obtient ensuit la page suivante :
 
 PhpMyAdmin est une interface pour gérer les SGBD MariaDB ou MySQL.
 Pour installer PhpMyAdmin, on va utiliser la commande `sudo apt install phpmyadmin`.<br>
-Ensuite on va tester le bon fonctionement de PhpMyAdmin en se connectant au rpi via l'adresse ip et en rajoutant derriere l'adresse ip `/phpmyadmin` (l'adresse internet à rentrer dans notre navigateur est `<adresse ip du rpi>/phpmyadmin`), si tout fonctionne bien on devrait se trouver sur la pagede connection de PhpMyAdmin <br>
-*capture d'écran de la page de connection de PhpMyAdmin*
+Ensuite on va tester le bon fonctionement de PhpMyAdmin en se connectant au rpi via l'adresse ip et en rajoutant derriere l'adresse ip `/phpmyadmin` (l'adresse internet à rentrer dans notre navigateur est `<adresse ip du rpi>/phpmyadmin`). 
+
+Pour pouvoir y accéder à cette page, il faut d'abord que l'on exécute cette commande pour achever la configuration de PhpMyAdmin : `sudo ln -s /usr/share/phpmyadmin /var/www/html/phpmyadmin`. Faites ensuite un `sudo systemctl restart apache2` par précaution.
+
+Il faut ensuite que l'on change le mot de passe de root. Pour cela, on exécute la commande `sudo mariadb` pour aller dans l'invite de commandes de MariaDB, dans lequel on lance `ALTER USER 'root'@'localhost' IDENTIFIED BY 'nouveau_mot_de_passe';` (remplacez par le mot de passe de votre choix). Vous pouvez ensuite sortir de l'invite de commande avec `exit`.
+
+Si tout fonctionne bien on devrait se trouver sur la page de connection de PhpMyAdmin <br>
+
+![Capture d'écran de la page de connection](../img/PageConnectionPhpMyAdmin.png)
+
+### <a name="p4e"></a> e) Installation de la base de données
+
+Maintenant que PhpMyAdmin fonctionne, il ne reste qu'à mettre en place la base de données du site. Voilà un exemple de script pour la générer :
+
+```sql
+DROP DATABASE GestionCalculs;
+CREATE DATABASE IF NOT EXISTS GestionCalculs;
+USE GestionCalculs;
+
+-- Création de la table Utilisateurs
+CREATE TABLE Utilisateurs (
+    util_id INT AUTO_INCREMENT PRIMARY KEY,
+    login VARCHAR(255) NOT NULL,
+    mdp VARCHAR(255) NOT NULL,
+    admin BOOLEAN NOT NULL DEFAULT FALSE
+);
+
+-- Création de la table Programmes
+CREATE TABLE Programmes (
+    prog_id INT AUTO_INCREMENT PRIMARY KEY,
+    nom_programme TEXT NOT NULL,
+    chemin_acces TEXT NOT NULL,
+    fonction_entree TEXT NOT NULL -- Chemin d'accès à la fonction de lancement
+);
+
+-- Création de la table Calculs
+CREATE TABLE Calculs (
+    calc_id INT AUTO_INCREMENT PRIMARY KEY,
+    util_id INT NOT NULL,
+    prog_id INT NOT NULL,
+    epingle BOOLEAN NOT NULL DEFAULT FALSE,
+    entree TEXT,
+    sortie TEXT,
+    tps_calcul VARCHAR(20), 
+    date DATE NOT NULL DEFAULT CURRENT_DATE,
+    FOREIGN KEY (util_id) REFERENCES Utilisateurs(util_id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+    FOREIGN KEY (prog_id) REFERENCES Programmes(prog_id)
+        ON UPDATE CASCADE
+);
+
+INSERT INTO `Programmes` (`prog_id`, `nom_programme`, `chemin_acces`, `fonction_entree`) 
+VALUES (NULL, 'Nombres Premiers', 'src/cluster-prime-master/prime.py', ''), (NULL, 'Monte Carlo', 'src/MPI_MC/MonteCarlo.py', '');
+```
+
+(ce script est également trouvable dans le dossier `site/ressources/db.sql`)
