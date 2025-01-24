@@ -35,8 +35,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($result) {
-            $cheminAcces = "../../../" . $result['chemin_acces'];
-            $command = "mpiexec -n " . escapeshellarg($nbRPI) . " python3 " . escapeshellcmd($cheminAcces) . " " . escapeshellarg($number) . " 2>&1";
+            $cheminAcces = "/home/pi/" . $result['chemin_acces'];
+            $command = "sudo -u pi mpiexec -n " . escapeshellarg($nbRPI) . " --hostfile /home/pi/src/hosts python3 " . escapeshellcmd($cheminAcces) . " " . escapeshellarg($number) . " 2>&1";
 
             error_log("Executing command: $command");
             $output = shell_exec($command);
@@ -49,8 +49,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $insertStmt = $conn->prepare("INSERT INTO Calculs (util_id, prog_id, entree, sortie, tps_calcul) VALUES (:util_id, :programme, :entree, :sortie, :tps_calcul)");
                     $insertStmt->bindParam(':util_id', $util_id, PDO::PARAM_INT);
                     $insertStmt->bindParam(':programme', $programme, PDO::PARAM_INT);
-                    $insertStmt->bindParam(':entree', $number, PDO::PARAM_INT);
-                    $insertStmt->bindParam(':sortie', $data["value"], PDO::PARAM_INT);
+                    $insertStmt->bindParam(':entree', $number, PDO::PARAM_STR);
+                    $insertStmt->bindParam(':sortie', $data["value"], PDO::PARAM_STR);
                     $insertStmt->bindParam(':tps_calcul', $data["temps"], PDO::PARAM_STR);
                     $insertStmt->execute();
 

@@ -83,7 +83,7 @@ echo genererHeader('../ressources/img/logo.png', $menuButtons, $menuLinks, $logi
         <tbody>
         <?php
         // Récupérer les 10 derniers calculs de l'utilisateur
-        $stmt = $conn->prepare("SELECT entree, sortie FROM Calculs WHERE util_id = :util_id ORDER BY calc_id DESC LIMIT 10");
+        $stmt = $conn->prepare("SELECT c.entree, c.sortie, p.nom_programme FROM Calculs c, Programmes p WHERE c.prog_id = p.prog_id AND c.util_id = :util_id ORDER BY c.calc_id DESC LIMIT 10");
         $stmt->bindParam(":util_id", $util_id, PDO::PARAM_INT);
         $stmt->execute();
 
@@ -92,7 +92,7 @@ echo genererHeader('../ressources/img/logo.png', $menuButtons, $menuLinks, $logi
         // Remplissage dynamique des lignes du tableau
         foreach ($calculs as $calcul) {
             echo "<tr>";
-            echo "<td>" . htmlspecialchars($calcul["programme"]) . "</td>";
+            echo "<td>" . htmlspecialchars($calcul["nom_programme"]) . "</td>";
             echo "<td>" . htmlspecialchars($calcul["entree"]) . "</td>";
             echo "<td>" . htmlspecialchars($calcul["sortie"]) . "</td>";
             echo "</tr>";

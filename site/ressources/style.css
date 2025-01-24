@@ -85,11 +85,13 @@ body{
 table, th, td{
   border: 2px solid black;
   border-collapse: collapse;
-  
+  text-align: center; /* Centre le texte horizontalement dans les cellules */
+  vertical-align: middle; /* Centre le texte verticalement dans les cellules */
 }
 
 table{
   border-radius: 15px;
+  table-layout: fixed;
 }
 
 td, th{
@@ -100,6 +102,7 @@ td, th{
 th{
   background-color: #284843;
   color: white;
+  text-align: center;  /* Assure que l'entête est centré */
 }
 
 tbody tr:nth-child(odd) {

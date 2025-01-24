@@ -111,87 +111,74 @@ foreach ($programmes as $programme) {
 
 ?>
 <script>
-    const moduleButtons = document.querySelectorAll('.btn-module-select');
+const moduleButtons = document.querySelectorAll('.btn-module-select');
+const popupOverlay = document.querySelector('.popup-overlay');
 
-    moduleButtons.forEach(button => {
-        button.addEventListener('click', (e) => {
-            e.preventDefault();
-            const programme = button.getAttribute('data-programme');
-            const popup = document.getElementById(`popup-${programme}`);
-            const popupOverlay = document.querySelector('.popup-overlay');
+moduleButtons.forEach(button => {
+    button.addEventListener('click', (e) => {
+        e.preventDefault();
+        const programme = button.getAttribute('data-programme');
+        const popup = document.getElementById(`popup-${programme}`);
 
-            if (popup) {
-                popup.style.display = 'block';
-                popupOverlay.style.display = 'block';
-                const btnOk = popup.querySelector('.btn-ok');
-                const btnCancel = popup.querySelector('.btn-cancel');
+        if (popup) {
+            popup.style.display = 'block';
+            popupOverlay.style.display = 'block';
+            const btnOk = popup.querySelector('.btn-ok');
+            const btnCancel = popup.querySelector('.btn-cancel');
+            
+            const numberInput = document.getElementById(`number-${programme}`);
+            const nbRPIInput = document.getElementById(`nbRPI-${programme}`);
 
-                // Ajouter un gestionnaire d'événements pour la touche "Entrée"
-                document.addEventListener('keydown', function enterHandler(event) {
-                    if (event.keyCode === 13) { // 13 est le code pour "Entrée"
-                        event.preventDefault();
-                        if (popup.style.display === 'block') {
-                            btnOk.click();
-                        }
-                    }
-                });
+            // Fermer les popups au clic sur Annuler ou Overlay
+            btnCancel.addEventListener('click', () => {
+                popup.style.display = 'none';
+                popupOverlay.style.display = 'none';
+            });
+            popupOverlay.addEventListener('click', () => {
+                popup.style.display = 'none';
+                popupOverlay.style.display = 'none';
+            });
 
-                // Fermer les popups au clic sur l'overlay
-                popupOverlay.addEventListener('click', () => {
+            if (btnOk && numberInput && nbRPIInput) {
+                btnOk.addEventListener('click', () => {
                     popup.style.display = 'none';
                     popupOverlay.style.display = 'none';
-                });
 
-                // Fermer les popups au clic sur le bouton Annuler
-                if (btnCancel) {
-                    btnCancel.addEventListener('click', () => {
-                        popup.style.display = 'none';
-                        popupOverlay.style.display = 'none';
-                    });
-                }
+                    const row_result = document.getElementById("result");
+                    const row_time = document.getElementById("temps");
+                    const row_rpi = document.getElementById("tab_nbRPI");
 
-                if (btnOk) {
-                    // Bouton OK : envoyer la requête AJAX
-                    btnOk.addEventListener('click', () => {
-                        popup.style.display = 'none';
-                        popupOverlay.style.display = 'none';
+                    row_result.textContent = "Calcul en cours...";
+                    row_time.textContent = "Calcul en cours...";
+                    row_rpi.textContent = "Calcul en cours...";
 
-                        const row_result = document.getElementById("result")
-                        row_result.textContent = "Calcul en cours...";
-                        const row_time = document.getElementById("temps")
-                        row_time.textContent = "Calcul en cours...";
-                        const rowrpi = document.getElementById("tab_nbRPI")
-                        rowrpi.textContent = "Calcul en cours...";
-
-                        const number = document.getElementById('number');
-                        const nbRPI = document.getElementById('nbRPI');
-
-                        fetch('../ressources/fonction/exec_module.php', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/x-www-form-urlencoded',
-                            },
-                            body: `programme=${encodeURIComponent(button.getAttribute("id"))}&number=${encodeURIComponent(number.value)}&nbRPI=${encodeURIComponent(nbRPI.value)}`
+                    fetch('../ressources/fonction/exec_module.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: `programme=${encodeURIComponent(button.getAttribute("id"))}&number=${encodeURIComponent(numberInput.value)}&nbRPI=${encodeURIComponent(nbRPIInput.value)}`
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                row_result.textContent = JSON.stringify(data.output.value, null, 2);
+                                row_time.textContent = parseFloat(data.output.temps);
+                                row_rpi.textContent = JSON.stringify(data.output.size, null, 2);
+                            } else {
+                                row_result.textContent = data.message;
+                            }
                         })
-                            .then(response => response.json())
-                            .then(data => {
-                                if (data.success) {
-                                    row_result.textContent = JSON.stringify(data.output.value, null, 2);
-                                    row_time.textContent = JSON.stringify(data.output.temps, null, 2);
-                                    rowrpi.textContent = JSON.stringify(data.output.size, null, 2);
-                                } else {
-                                    row_result.textContent = data.message;
-                                }
-                            })
-                            .catch(error => {
-                                console.error('Erreur lors de l\'exécution :', error);
-                                alert('Une erreur est survenue.');
-                            });
-                    });
-                }
+                        .catch(error => {
+                            console.error('Erreur lors de l\'exécution :', error);
+                            alert('Une erreur est survenue.');
+                        });
+                });
             }
-        });
+        }
     });
+});
+
 </script>
 
 </body>
