@@ -162,7 +162,7 @@ moduleButtons.forEach(button => {
                         .then(response => response.json())
                         .then(data => {
                             if (data.success) {
-                                row_result.textContent = JSON.stringify(data.output.value, null, 2);
+                                row_result.textContent = parseFloat(data.output.value);
                                 row_time.textContent = parseFloat(data.output.temps);
                                 row_rpi.textContent = JSON.stringify(data.output.size, null, 2);
                             } else {
