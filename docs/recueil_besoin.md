@@ -311,11 +311,30 @@ Le système doit être conçu pour faciliter les mises à jour logicielles et ma
 
 ### <a name="p6"></a>VI – Recours humain, questions juridiques, politiques, organisationnelles.
 - <b><a name="p6a"></a>a) Quel est le recours humain au fonctionnement du système ?</b><br>
+
+Le fonctionnement du système repose sur les actions humaines suivantes :
+
+  - Administrateurs système :
+
+    - Supervision des Raspberry Pi pour assurer leur connectivité et leur bon fonctionnement.
+    - Maintenance et mise à jour du système (logiciels et matériel).
+    - Surveillance des performances et gestion des pannes éventuelles.
+
+  - Utilisateurs :
+
+    - Création de comptes, connexion à l'application, et lancement des calculs.
+    - Consultation des résultats et utilisation des fonctionnalités offertes par la plateforme.
+
+  - Développeurs/Équipe projet :
+
+    - Développement continu de nouvelles fonctionnalités.
+    - Correction des bugs signalés par les utilisateurs ou détectés lors de tests.
+Mise à jour et amélioration des algorithmes de calcul distribué.
   <br>
 - <b><a name="p6b"></a>b) Quelles sont les exigences juridiques et politiques ?</b><br>
   <br>
   Il n'y a pas d'exigence juridique ou politique.
-
+  <br>
 - <b><a name="p6c"></a>c) Quelles sont les conséquences humaines de la réalisation du système ?</b><br>
   <br>
 
