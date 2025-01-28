@@ -68,7 +68,7 @@ echo genererHeader('../ressources/img/logo.png', $menuButtons, $menuLinks, $logi
     <div class="profile-item">
         <span class="label">Mot de passe:</span>
         <span id="mdp">******</span>
-        <button class="button"><a href="update_password.php">Modifier</a></button>
+        <a href="update_password.php"><button class="button">Modifier</button></a>
     </div>
 </div>
 <div name="ten_last_calcul" class="ten_last_calcul">

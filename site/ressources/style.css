@@ -143,6 +143,10 @@ tbody tr:nth-child(even) {
   margin-top: 50px;
 }
 
+.ten_last_calcul table{
+  width: 80%;
+}
+
 /* Vidéo et la description */
 .content {
   display: flex;

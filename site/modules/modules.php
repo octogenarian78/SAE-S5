@@ -4,8 +4,9 @@ function popupNombresPremiers() {
         <div class="popup" id="popup-NombresPremiers">
             <form method="post" action="">
                 <div class="popup-title">Entrée(s) du programme</div>
-                <p>Entrez un nombre sous lequel calculer tous les nombres premiers :</p>
+                <label for="number-NombresPremiers">Entrez un nombre sous lequel calculer tous les nombres premiers :</label>
                 <input type="number" id="number-NombresPremiers" placeholder="Exemple : 42069">
+                <label for="nbRPI-NombresPremiers">Nombre de RPI à utiliser :</label>
                 <input type="number" id="nbRPI-NombresPremiers" placeholder="Entre 1 et 4" max="4" min="1">
                 <div class="popup-buttons">
                     <a href="#" class="btn-ok">OK</a>
@@ -21,8 +22,9 @@ function popupMonteCarlo() {
         <div class="popup" id="popup-MonteCarlo">
             <form method="post" action="">
                 <div class="popup-title">Entrée(s) du programme</div>
-                <p>Entrez un texte :</p>
+                <label for="number-MonteCarlo">Nombre de points :</label>
                 <input type="text" id="number-MonteCarlo" placeholder="Exemple : 1000000">
+                <label for="nbRPI-MonteCarlo">Nombre de RPI à utiliser :</label>
                 <input type="number" id="nbRPI-MonteCarlo" placeholder="Entre 1 et 4" max="4" min="1">
                 <div class="popup-buttons">
                     <a href="#" class="btn-ok">OK</a>

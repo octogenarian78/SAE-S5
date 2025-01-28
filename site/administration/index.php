@@ -122,7 +122,7 @@ function getStatusColor($status) {
         case "Déconnecté":
             return "red"; // Rouge
         case "Connecté":
-            return "green"; // Vert
+            return "lightgreen"; // Vert
         case "En cours d'utilisation":
             return "yellow"; // Jaune
         case "Usage incertain":
