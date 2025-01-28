@@ -18,6 +18,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
+    if($nbRPI < 1 || $nbRPI > 4){
+        echo json_encode(['success' => false, 'message' => "Le nombre de RPI est invalide"]);
+        exit;
+    }
+
     try {
         $conn->beginTransaction();
 
