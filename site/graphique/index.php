@@ -25,7 +25,7 @@ if (isset($_SESSION["util_id"])) {
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Graphiques de performance</title>
     <link rel="stylesheet" href="../ressources/style.css">
     <style>
         body{

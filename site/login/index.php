@@ -36,7 +36,7 @@
                 <input type="password" id="password" name="password" placeholder="Entrez votre mot de passe" required>
             </div>
             <div class="forgot-password">
-                <a href="erreur.html">Mot de passe oublié ?</a>
+                <a href="maintenance.html">Mot de passe oublié ?</a>
             </div>
 
             <br>

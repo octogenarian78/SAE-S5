@@ -26,7 +26,7 @@ $statuses = getRpiStatus();
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Page d'administration</title>
     <link rel="stylesheet" href="../ressources/style.css">
 </head>
 <body>
