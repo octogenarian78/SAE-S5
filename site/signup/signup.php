@@ -19,7 +19,32 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $nom = htmlspecialchars($_POST["last-name"]);
     $email = htmlspecialchars($_POST["email"]);
 
-    // Vérification des champs
+    // Vérification des longueurs pour login, prénom, nom
+    if (strlen($login) < 5 || strlen($login) > 12) {
+        header("Location: index.php?id=6"); // Erreur si login n'est pas entre 5 et 12 caractères
+        exit;
+    }
+    if (strlen($prenom) < 5 || strlen($prenom) > 12) {
+        header("Location: index.php?id=7"); // Erreur si prénom n'est pas entre 5 et 12 caractères
+        exit;
+    }
+    if (strlen($nom) < 5 || strlen($nom) > 12) {
+        header("Location: index.php?id=8"); // Erreur si nom n'est pas entre 5 et 12 caractères
+        exit;
+    }
+
+    if (!preg_match('/^[\w\.-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', $email) || strlen(substr(strrchr($email, '@'), 1)) < 4 || strlen(substr(strrchr($email, '.'), 1)) < 2) {
+        header("Location: index.php?id=10"); // Erreur si l'email ne respecte pas les critères
+        exit;
+    }
+    
+   // Vérification du mot de passe (doit contenir 1 minuscule, 1 majuscule, 1 caractère spécial, 1 chiffre et entre 12 et 32 caractères)
+    if (strlen($mdp) < 12 || strlen($mdp) > 32 || !preg_match('/[a-z]/', $mdp) || !preg_match('/[A-Z]/', $mdp) || !preg_match('/[\W_]/', $mdp) || !preg_match('/\d/', $mdp)) {
+        header("Location: index.php?id=9"); // Erreur si mot de passe ne respecte pas les critères
+        exit;
+    }
+
+    // Vérification que le mot de passe et la confirmation sont identiques
     if ($mdp !== $confirm_mdp) {
         header("Location: index.php?id=1");
         exit;

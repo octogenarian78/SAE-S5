@@ -38,6 +38,11 @@ if (!isset($_SESSION['captcha_result']) || isset($_GET['refresh_captcha'])) {
                 else if ($_GET['id'] == "2") { echo "ERREUR : L'utilisateur est déjà présent dans la base de données'"; }
                 else if ($_GET['id'] == "4") { echo "ERREUR : Une erreur est survenue dans la base de données"; }
                 else if ($_GET['id'] == "5") { echo "ERREUR : Le captcha est incorrect"; }
+                else if ($_GET['id'] == "6") { echo "ERREUR : Le login doit avoir entre 5 et 12 caractères"; }
+                else if ($_GET['id'] == "7") { echo "ERREUR : Le prénom doit avoir entre 5 et 12 caractères"; }
+                else if ($_GET['id'] == "8") { echo "ERREUR : Le nom doit avoir entre 5 et 12 caractères"; }
+                else if ($_GET['id'] == "9") { echo "ERREUR : 12 caractères minimum et 32 maximum sont attendus pour le mot de passe dont un caractère spécial, une minuscule, une majuscule et un chiffre"; }
+                else if ($_GET['id'] == "10") { echo "ERREUR : Le format de l'email est incorrect (il doit contenir minimum 4 caractères après @ et 2 après le .)"; }
                 else { echo "ERREUR : Une erreur est survenue"; }
                 echo '</p>';
                 echo '</div>';
