@@ -39,7 +39,7 @@ if rank == 0:  # Collecte des résultats par le processus maître (rang 0)
     error = math.pi - pi
     
 
-    data = {"message" : "Résultat du lancement de MonteCarlo.py", "value" : error, "pi" : round(pi,5), "temps" : time, "size" : size}
+    data = {"message" : "Résultat du lancement de MonteCarlo.py", "value" : round(pi,5), "error" : error, "temps" : time, "size" : size}
 
     #print(f"Processus: {size}")
     #print(f"Points: {total_points}")
