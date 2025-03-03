@@ -125,7 +125,7 @@ moduleButtons.forEach(button => {
             popupOverlay.style.display = 'block';
             const btnOk = popup.querySelector('.btn-ok');
             const btnCancel = popup.querySelector('.btn-cancel');
-            
+
             const numberInput = document.getElementById(`number-${programme}`);
             const nbRPIInput = document.getElementById(`nbRPI-${programme}`);
 
@@ -140,44 +140,55 @@ moduleButtons.forEach(button => {
             });
 
             if (btnOk && numberInput && nbRPIInput) {
-                btnOk.addEventListener('click', () => {
-                    popup.style.display = 'none';
-                    popupOverlay.style.display = 'none';
+                // Vérifier si l'eventListener est déjà attaché
+                if (!btnOk._hasClickListener) {
+                    // Si non, ajouter l'eventListener et marquer qu'il a été ajouté
+                    const onOkClick = () => {
+                        popup.style.display = 'none';
+                        popupOverlay.style.display = 'none';
 
-                    const row_result = document.getElementById("result");
-                    const row_time = document.getElementById("temps");
-                    const row_rpi = document.getElementById("tab_nbRPI");
+                        const row_result = document.getElementById("result");
+                        const row_time = document.getElementById("temps");
+                        const row_rpi = document.getElementById("tab_nbRPI");
 
-                    row_result.textContent = "Calcul en cours...";
-                    row_time.textContent = "Calcul en cours...";
-                    row_rpi.textContent = "Calcul en cours...";
+                        row_result.textContent = "Calcul en cours...";
+                        row_time.textContent = "Calcul en cours...";
+                        row_rpi.textContent = "Calcul en cours...";
 
-                    fetch('../ressources/fonction/exec_module.php', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded',
-                        },
-                        body: `programme=${encodeURIComponent(button.getAttribute("id"))}&number=${encodeURIComponent(numberInput.value)}&nbRPI=${encodeURIComponent(nbRPIInput.value)}`
-                    })
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.success) {
-                                row_result.textContent = parseFloat(data.output.value);
-                                row_time.textContent = parseFloat(data.output.temps);
-                                row_rpi.textContent = JSON.stringify(data.output.size, null, 2);
-                            } else {
-                                row_result.textContent = data.message;
-                            }
+                        fetch('../ressources/fonction/exec_module.php', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded',
+                            },
+                            body: `programme=${encodeURIComponent(button.getAttribute("id"))}&number=${encodeURIComponent(numberInput.value)}&nbRPI=${encodeURIComponent(nbRPIInput.value)}`
                         })
-                        .catch(error => {
-                            console.error('Erreur lors de l\'exécution :', error);
-                            alert('Une erreur est survenue.');
-                        });
-                });
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    row_result.textContent = parseFloat(data.output.value);
+                                    row_time.textContent = parseFloat(data.output.temps);
+                                    row_rpi.textContent = JSON.stringify(data.output.size, null, 2);
+                                } else {
+                                    row_result.textContent = data.message;
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Erreur lors de l\'exécution :', error);
+                                alert('Une erreur est survenue.');
+                            });
+                    };
+
+                    // Ajouter l'eventListener
+                    btnOk.addEventListener('click', onOkClick);
+
+                    // Marquer que l'eventListener a été ajouté
+                    btnOk._hasClickListener = true;
+                }
             }
         }
     });
 });
+
 
 </script>
 
