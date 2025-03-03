@@ -4,7 +4,7 @@ function connectDB(){
     // Connexion à la base de données
     $host = "localhost";
     $dbname = "GestionCalculs";
-    $username = "root"; // Remplace par ton utilisateur MySQL si nécessaire
+    $username = "sae"; // Remplace par ton utilisateur MySQL si nécessaire
     $password = "Fuse_271"; // Remplace par ton mot de passe MySQL
 
     try {
