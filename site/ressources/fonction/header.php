@@ -11,7 +11,7 @@ function genererHeader($img, $menuButtons, $menuLinks, $loginButtons, $loginLink
     if (count($menuButtons) == 0){
         $menuHtml = '';
     } else {
-        $menuHtml = '<div name="menu" class="menu">';
+        $menuHtml = '<div class="menu">';
         foreach ($menuButtons as $index => $title) {
             $menuHtml .= '<a href="' . htmlspecialchars($menuLinks[$index]) . '">' . htmlspecialchars($title) . '</a>';
         }
@@ -19,7 +19,7 @@ function genererHeader($img, $menuButtons, $menuLinks, $loginButtons, $loginLink
     }
 
     // Génération du login
-    $loginHtml = '<div name="login" class="login">';
+    $loginHtml = '<div class="login">';
     foreach ($loginButtons as $index => $title) {
         $loginHtml .= '<a href="' . htmlspecialchars($loginLinks[$index]) . '">' . htmlspecialchars($title) . '</a>';
     }
@@ -30,7 +30,7 @@ function genererHeader($img, $menuButtons, $menuLinks, $loginButtons, $loginLink
 <header>
     <nav class="nav">
         <a href="'.$logoLink.'">
-            <div name="logo" class="logo">
+            <div class="logo">
                 <img src="'. $img .'" alt="logo du site">
             </div>
         </a>
