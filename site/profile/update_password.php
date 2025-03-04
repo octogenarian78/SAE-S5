@@ -29,13 +29,13 @@
             }
             ?>
             <div class="input-group">
-                <label for="password">Ancien mot de passe :</label>
+                <label for="ancien_password">Ancien mot de passe :</label>
                 <input type="password" id="ancien_password" name="ancien_password" placeholder="Entrez l'ancien mot de passe" required>
                 <br><br>
                 <label for="password">Nouveau mot de passe :</label>
                 <input type="password" id="password" name="password" placeholder="Entrez votre mot de passe" required>
                 <br><br>
-                <label for="password">Confimer votre mot de passe :</label>
+                <label for="confirmed_password">Confimer votre mot de passe :</label>
                 <input type="password" id="confirmed_password" name="confirmed_password" placeholder="Confirmer votre mot de passe" required>
             </div>
             <button type="submit" class="btn-login">Modifier</button>
