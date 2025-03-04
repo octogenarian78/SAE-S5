@@ -234,7 +234,7 @@ Pour verifier si le serveur est bien installé, il suffit de s'y connecter en pa
 
 On va maintenant installé MariaDB qui sera notre Système de Gestion de Base de Donnée (ou SGBD), on utilise la commande suivante `sudo apt install mariadb-server`.
 
-Le Login et le mot de passe pour l'interface phpmyadmin est : (root,Fuse_271)
+
 
 ### <a name="p4c"></a> c) installation de PHP
 
@@ -266,6 +266,8 @@ Si tout fonctionne bien on devrait se trouver sur la page de connection de PhpMy
 ![Capture d'écran de la page de connection](../img/PageConnectionPhpMyAdmin.png)
 
 ### <a name="p4e"></a> e) Installation de la base de données
+
+Le Login et le mot de passe pour l'interface phpmyadmin est : (root,Fuse_271)
 
 Maintenant que PhpMyAdmin fonctionne, il ne reste qu'à mettre en place la base de données du site. Voilà un exemple de script pour la générer :
 
