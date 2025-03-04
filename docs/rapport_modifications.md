@@ -46,3 +46,8 @@ Il faut minimum 12 caractères et maximum 32 pour valider l'inscription
 Pour corriger ce bug, nous avons simplement fait en sorte que le programme n'ajoute un EventListener au bouton uniquement si ce dernier n'en possède déjà un.
 
 - MonteCarlo affiche maintenant la valeur de Pi au lieu de l'Erreur, et affiche le nombre de RPI utilisés.
+
+- Correction des problèmes d'accessibilité sur la page modification de mot de passe 
+- Correction des problèmes de div name avec W3C 
+
+- Résolution des problèmes de redirection pour le manuel utilisateur 
