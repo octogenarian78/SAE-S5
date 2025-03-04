@@ -74,7 +74,7 @@ if (!isset($_SESSION["util_id"])){
 
 ?>
 <br><br>
-<div name="ten_last_calcul" class="ten_last_calcul">
+<div class="ten_last_calcul">
     <table>
         <thead>
         <th>Nom Calcul</th>

@@ -71,7 +71,7 @@ echo genererHeader('../ressources/img/logo.png', $menuButtons, $menuLinks, $logi
         <a href="update_password.php"><button class="button">Modifier</button></a>
     </div>
 </div>
-<div name="ten_last_calcul" class="ten_last_calcul">
+<div class="ten_last_calcul">
     <table>
         <thead>
             <tr>

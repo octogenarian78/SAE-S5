@@ -42,7 +42,7 @@ $loginLinks = ["../profile/index.php"];
 
 echo genererHeader('../ressources/img/logo.png', $menuButtons, $menuLinks, $loginButtons, $loginLinks, $logoLink);
 ?>
-<div name="connexion-state" class="connexion-state">
+<div class="connexion-state">
     <h3>Statut de connexion</h3>
     <div class="table">
         <table>
@@ -103,7 +103,7 @@ if ($used_percentage >= 90){
     $color = "#ad1328";
 }
 ?>
-<div name="stockage-restant" class="stockage">
+<div class="stockage">
     <h3>Stockage disponible</h3>
     <div class="progress-container">
         <div class="progress-bar" id="progressBar" style="width: <?= $used_percentage ?>%; background-color: <?= $color ?>;"></div>
