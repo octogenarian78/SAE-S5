@@ -234,6 +234,8 @@ Pour verifier si le serveur est bien installé, il suffit de s'y connecter en pa
 
 On va maintenant installé MariaDB qui sera notre Système de Gestion de Base de Donnée (ou SGBD), on utilise la commande suivante `sudo apt install mariadb-server`.
 
+Le Login et le mot de passe pour l'interface phpmyadmin est : (root,Fuse_271)
+
 ### <a name="p4c"></a> c) installation de PHP
 
 Pour installer PHP on utilise la commande `sudo apt install php`.
