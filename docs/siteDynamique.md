@@ -100,9 +100,10 @@ Pour tester le module "Monte Carlo", il faut entrer le nombre de points à utili
 
 <img height="350" width="800" src="img/siteDynamique_administration.PNG"/>
 
-
 La page Administration permet simplement d'avoir un aperçu du stockage disponible sur le RPI et de visualiser si les rpi0 sont connectés ou déconnectés. 
 On peut consulter les pages modules et profil. 
+
+L'administrateur web a pour login : **bonjour** et pour mot de passe **bonjour**
 
 ## <a name="III"></a>III - Structure de la base de données
 
