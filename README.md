@@ -8,4 +8,3 @@ Collaborateurs :
 - Teddy DEGAT
 - Assia GOUABI
 
-C'est juste un test
